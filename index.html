@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vision Productions | Produzione Video, CGI e VFX</title>
+<meta name="description" content="Studio di produzione video, CGI e VFX. Video aziendali, eventi, spot pubblicitari, motion design e riprese in drone. Completa per te.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- filtro SVG usado pelo .glass-liquid (refração) -->
+<svg width="0" height="0" style="position:absolute">
+  <filter id="liquid-distort">
+    <feTurbulence type="fractalNoise" baseFrequency="0.008 0.012" numOctaves="2" seed="7" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="18" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<!-- ============ FUNDO VIVO (fixo, atrás de tudo) ============ -->
+<div id="bg-layer" aria-hidden="true">
+  <canvas id="bg-canvas"></canvas>
+  <div id="bg-grain"></div>
+</div>
+
+<!-- ============ NAVBAR ============ -->
+<header class="navbar">
+  <div class="container navbar-inner">
+    <a href="#" class="brand" aria-label="Vision Productions">
+      <img src="assets/images/logo-mark.webp" alt="">
+      <span class="word">Visi<span style="color:var(--cyan);">on</span> <span class="brand-sub" style="font-weight:500;color:var(--ink-muted);font-size:0.66em;">Productions</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#hero" class="nav-link active">Home</a>
+      <a href="#servizi" class="nav-link">Servizi</a>
+      <a href="#cgi" class="nav-link">CGI / VFX</a>
+      <a href="#fotografia" class="nav-link">Fotografia</a>
+      <a href="#chi-siamo" class="nav-link">Chi siamo</a>
+      <a href="#cta" class="nav-link">Contatti</a>
+    </nav>
+    <a href="#cta" class="btn btn-primary">Richiedi un preventivo</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ CENA 01 — HERO ============ -->
+  <section class="hero" id="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy reveal">
+        <span class="eyebrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.8L21 11l-6.8 2.2L12 20l-2.2-6.8L3 11l6.8-2.2L12 2z"/></svg>
+          Produzione Video · CGI · VFX
+        </span>
+        <h1>
+          Diamo vita alla tua visione.<br>
+          <span class="grad-text">Completa per te.</span>
+        </h1>
+        <p class="lead">Video aziendali, eventi dal vivo, CGI 3D e motion design: un unico studio che segue ogni progetto dalla ripresa alla release finale.</p>
+        <div class="hero-ctas">
+          <a href="#cta" class="btn btn-primary">
+            Richiedi un preventivo
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#servizi-lavori" class="btn btn-ghost">Guarda i nostri lavori</a>
+        </div>
+      </div>
+
+      <div class="hero-stage reveal reveal-delay-1">
+        <div class="depth-glow" aria-hidden="true"></div>
+        <div class="hero-particles" aria-hidden="true">
+          <span style="left:10%;top:20%;animation-delay:0s;"></span>
+          <span style="left:80%;top:15%;animation-delay:1.4s;"></span>
+          <span style="left:85%;top:70%;animation-delay:2.6s;"></span>
+          <span style="left:15%;top:78%;animation-delay:0.8s;"></span>
+          <span style="left:50%;top:8%;animation-delay:2s;"></span>
+        </div>
+        <div class="hero-hud hud glass-soft hud-panel" data-hud-cycle='["render.scene    active","camera.track    on","light.volumetric on"]'>
+          <span class="hud-title">Vision / Render</span>frame <span class="accent">24fps</span><span class="hud-cursor"></span>
+        </div>
+        <!-- Robô animado real (vídeo enviado pelo cliente), fundo removido via matte de luma
+             sobre preto puro (não chroma key tradicional — o fundo do render já era preto
+             sólido) com unpremultiply nas bordas pra eliminar qualquer franja escura de
+             recorte. Vídeo WebM/VP9 com canal alpha, 240 frames a 24fps (mesma fluidez do
+             arquivo original do cliente — nada de subamostragem de frames aqui, é isso que
+             fazia parecer "travado" numa tentativa anterior em WebP animado). O <img> dentro
+             do <video> só entra como conteúdo de fallback nativo do HTML5 se o navegador não
+             conseguir tocar o WebM (ex.: Safari mais antigo) — nunca fica sem imagem, e nunca
+             mostra uma caixa preta sólida. initHeroRobotVideo() em main.js só dá play() se
+             prefers-reduced-motion permitir; caso contrário fica parado no poster (pose
+             estática limpa). -->
+        <div class="hero-robot-wrap">
+          <video class="hero-robot-media" id="hero-robot-video" muted loop playsinline
+                 aria-hidden="true" poster="assets/images/robot-hero-fallback.png">
+            <source src="assets/video/robot-hero.webm" type="video/webm">
+            <img src="assets/images/robot-hero-fallback.png" alt="Robot Vision Productions" class="hero-robot-media">
+          </video>
+        </div>
+        <div class="hero-badge b1 glass">
+          <div class="icon-wrap">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.6-2.4h6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.2" r="3.4"/></svg>
+          </div>
+          <p style="font-size:13.5px;font-weight:600;line-height:1.4;margin:0;">Dal concept alla consegna, senza intermediari.</p>
+        </div>
+        <div class="hero-badge b2 glass">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9.5" y="10" width="5" height="4" rx="1"/><line x1="9.5" y1="11" x2="4" y2="6"/><line x1="14.5" y1="11" x2="20" y2="6"/><line x1="9.5" y1="13" x2="4" y2="18"/><line x1="14.5" y1="13" x2="20" y2="18"/><circle cx="4" cy="6" r="2"/><circle cx="20" cy="6" r="2"/><circle cx="4" cy="18" r="2"/><circle cx="20" cy="18" r="2"/></svg>
+          <span style="font-size:13px;font-weight:600;">Riprese anche in drone</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="container hero-pills reveal reveal-delay-2">
+      <span class="pill glass-soft">Produzione Video</span>
+      <span class="pill glass-soft">Video Eventi</span>
+      <span class="pill glass-soft">CGI 3D</span>
+      <span class="pill glass-soft">Motion Design</span>
+      <span class="pill glass-soft">VFX</span>
+      <span class="pill glass-soft">Aftermovie</span>
+    </div>
+  </section>
+
+  <!-- ============ CENA 02 — SERVIZI ============
+       .servizi-code-bg é decorativo, puro CSS (sem canvas/JS): colunas de código
+       falso rolando em loop atrás do grid, esmaecidas nas bordas via mask-image
+       (gradiente CSS, não imagem — não sofre do limite de CORS em file:// que
+       afeta mask-image com PNG/WEBP). prefers-reduced-motion já congela a
+       animação via regra global (seção 18 do CSS). -->
+  <section id="servizi" class="servizi-section">
+    <div class="servizi-code-bg" aria-hidden="true">
+      <div class="code-col code-col-left"><pre><code>timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
+timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
+timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
+<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
+audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
+export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);</code></pre></div>
+      <div class="code-col code-col-right"><pre><code>drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;
+drone.<span class="f">setFlightPath</span>(waypoints);
+gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
+<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
+telemetry.altitude = <span class="n">42</span>m;</code></pre></div>
+    </div>
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Servizi</span>
+        <h2 style="font-size:40px;line-height:1.15;">Un servizio completo, <span class="grad-text">dall'idea alla release.</span></h2>
+        <p>Nove specializzazioni, un solo studio: dalla ripresa alla computer grafica, fino agli effetti visivi.</p>
+      </div>
+
+      <div class="servizi-bento reveal reveal-delay-1">
+        <div class="glass svc-card">
+          <div class="svc-top">
+            <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.6-2.4h6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.2" r="3.4"/></svg></div>
+            <span class="svc-num">01</span>
+          </div>
+          <div><h3>Produzione Video</h3><p>Video di ogni formato, dal concept alla ripresa fino al montaggio finale.</p><span class="svc-hint">clip.ready</span></div>
+        </div>
+        <div class="glass svc-card">
+          <div class="svc-top">
+            <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6"/></svg></div>
+            <span class="svc-num">02</span>
+          </div>
+          <div><h3>Video Eventi</h3><p>Copertura completa di conferenze, fiere e lanci di prodotto dal vivo.</p><span class="svc-hint">multicam.sync</span></div>
+        </div>
+        <div class="glass-premium svc-card svc-featured">
+          <span class="svc-num">07</span>
+          <div>
+            <h3 class="grad-text">CGI 3D</h3>
+            <p>Rendering 3D fotorealistico per prodotti, spazi e visualizzazioni.</p>
+          </div>
+          <div class="hud" data-hud-cycle='["render.engine   path-traced","samples          2048","resolution       4K UHD","output           .exr / .mp4"]'>render.engine&nbsp;&nbsp;&nbsp;path-traced<span class="hud-cursor"></span></div>
+        </div>
+        <div class="glass svc-card">
+          <div class="svc-top">
+            <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M9 7.5V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5"/><line x1="3" y1="12.5" x2="21" y2="12.5"/></svg></div>
+            <span class="svc-num">03</span>
+          </div>
+          <div><h3>Video Aziendali</h3><p>Presentazione di brand, prodotti e cultura aziendale per il tuo pubblico.</p><span class="svc-hint">brand.locked</span></div>
+        </div>
+        <div class="glass svc-card">
+          <div class="svc-top">
+            <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M7 13l3.2-4 2.8 2.5L18 7.5"/><path d="M8 21h8"/></svg></div>
+            <span class="svc-num">04</span>
+          </div>
+          <div><h3>Video Corporate</h3><p>Storytelling istituzionale per stakeholder, investitori e partner.</p><span class="svc-hint">story.arc</span></div>
+        </div>
+        <div class="glass-premium svc-card svc-featured">
+          <span class="svc-num">09</span>
+          <div>
+            <h3 class="grad-text">VFX</h3>
+            <p>Compositing ed effetti visivi integrati perfettamente nelle riprese.</p>
+          </div>
+          <div class="hud" data-hud-cycle='["compositing      multi-pass","tracking         6DOF","roto             frame-accurate","grade            ACES"]'>compositing&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;multi-pass<span class="hud-cursor"></span></div>
+        </div>
+        <div class="glass svc-card">
+          <div class="svc-top">
+            <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5v3a1 1 0 0 0 1 1h1.6l5.4 3.6V5.9L5.6 9.5H4a1 1 0 0 0-1 1z"/><path d="M15.5 9.2a3 3 0 0 1 0 5.6"/><path d="M18 7a6.5 6.5 0 0 1 0 10"/></svg></div>
+            <span class="svc-num">05</span>
+          </div>
+          <div><h3>Video Pubblicitari</h3><p>Spot per TV, social e digital ADV pensati per convertire.</p><span class="svc-hint">adv.optimized</span></div>
+        </div>
+        <div class="glass svc-card">
+          <div class="svc-top">
+            <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="17" x2="5" y2="9"/><line x1="10" y1="19" x2="10" y2="5"/><line x1="15" y1="15" x2="15" y2="11"/><line x1="19" y1="17.5" x2="19" y2="7.5"/></svg></div>
+            <span class="svc-num">06</span>
+          </div>
+          <div><h3>Aftermovie</h3><p>Il racconto emozionale del tuo evento, montato a ritmo di musica.</p><span class="svc-hint">beat.synced</span></div>
+        </div>
+        <div class="glass svc-card">
+          <div class="svc-top">
+            <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="11" height="11" rx="2"/><rect x="9" y="9" width="11" height="11" rx="2"/></svg></div>
+            <span class="svc-num">08</span>
+          </div>
+          <div><h3>Motion Design</h3><p>Grafica animata e tipografia cinetica per contenuti che catturano.</p><span class="svc-hint">kinetic.type</span></div>
+        </div>
+        <a href="#cta" class="glass svc-card svc-cta" aria-label="Vai al modulo di contatto">
+          <div class="icon-wrap svc-cta-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M4 12h16"/></svg></div>
+          <div>
+            <h3>Un progetto su misura?</h3>
+            <p>Raccontaci il formato che hai in mente: troviamo insieme la soluzione giusta.</p>
+            <span class="svc-hint">parliamone <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </div>
+        </a>
+      </div>
+
+      <!-- ---- Mostra vídeos interativos (antes vivia na seção Portfolio) ----
+           Mesmo componente .proj-card/.proj-thumb/.proj-video de antes, só realocado aqui:
+           initPortfolioVideo() no main.js já funciona em qualquer .proj-thumb da página,
+           não precisou de nenhuma mudança de JS. -->
+      <div class="proj-grid-head reveal reveal-delay-2" id="servizi-lavori" style="margin-top:64px;">
+        <div style="display:flex;flex-direction:column;gap:16px;max-width:560px;">
+          <span class="eyebrow">I nostri lavori</span>
+          <h2 style="font-size:32px;line-height:1.15;">Una selezione di produzioni recenti</h2>
+          <p style="font-size:16.5px;color:var(--ink-muted);line-height:1.6;">Le anteprime qui sotto sono segnaposto pronti per essere sostituiti dai video reali di ogni servizio.</p>
+        </div>
+      </div>
+
+      <div class="proj-grid reveal reveal-delay-2">
+        <div class="proj-card">
+          <!-- SOSTITUIRE: al posto di questo div, inserire <video> o <img> reale del progetto -->
+          <div class="proj-thumb" style="background:linear-gradient(150deg,#123049,#0b1016 60%);">
+            <!-- Video reale: preencha o src abaixo e o hover ja aciona o play() automaticamente -->
+            <video class="proj-video" muted loop playsinline preload="none" data-src=""></video>
+            <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 30%, rgba(106,227,240,0.28), transparent 60%);"></div>
+            <div class="play-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="#f5f5f7"><path d="M9 7l9 5-9 5V7z"/></svg></div>
+            <span class="proj-meta">04:12 · 4K</span>
+          </div>
+          <span class="proj-tag">Video Corporate</span>
+          <h3>[Nome progetto 01]</h3>
+          <p>[Breve descrizione del progetto] · [Settore]</p>
+        </div>
+        <div class="proj-card">
+          <!-- SOSTITUIRE: al posto di questo div, inserire <video> o <img> reale del progetto -->
+          <div class="proj-thumb" style="background:linear-gradient(150deg,#0f2d3a,#0b1016 60%);">
+            <!-- Video reale: preencha o src abaixo e o hover ja aciona o play() automaticamente -->
+            <video class="proj-video" muted loop playsinline preload="none" data-src=""></video>
+            <div style="position:absolute;inset:0;background:radial-gradient(circle at 70% 30%, rgba(47,111,237,0.30), transparent 60%);"></div>
+            <div class="play-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="#f5f5f7"><path d="M9 7l9 5-9 5V7z"/></svg></div>
+            <span class="proj-meta">01:48 · 4K</span>
+          </div>
+          <span class="proj-tag">CGI 3D</span>
+          <h3>[Nome progetto 02]</h3>
+          <p>[Breve descrizione del progetto] · [Settore]</p>
+        </div>
+        <div class="proj-card">
+          <!-- SOSTITUIRE: al posto di questo div, inserire <video> o <img> reale del progetto -->
+          <div class="proj-thumb" style="background:linear-gradient(150deg,#1a2540,#0b1016 60%);">
+            <!-- Video reale: preencha o src abaixo e o hover ja aciona o play() automaticamente -->
+            <video class="proj-video" muted loop playsinline preload="none" data-src=""></video>
+            <div style="position:absolute;inset:0;background:radial-gradient(circle at 40% 70%, rgba(106,227,240,0.24), transparent 60%);"></div>
+            <div class="play-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="#f5f5f7"><path d="M9 7l9 5-9 5V7z"/></svg></div>
+            <span class="proj-meta">03:05 · 4K</span>
+          </div>
+          <span class="proj-tag">Aftermovie</span>
+          <h3>[Nome progetto 03]</h3>
+          <p>[Breve descrizione del progetto] · [Settore]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CENA 03 — CGI / VFX ============ -->
+  <section class="cgi-section" id="cgi">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Sala di produzione</span>
+        <h2 style="font-size:40px;line-height:1.15;">CGI &amp; VFX, <span class="grad-text">fase per fase.</span></h2>
+        <p>Dal modello grezzo al frame finale: ogni progetto CGI segue un processo tecnico misurabile.</p>
+      </div>
+
+      <div class="cgi-grid">
+        <div class="cgi-steps reveal reveal-delay-1">
+          <div class="cgi-step">
+            <span class="n">01</span>
+            <div><h4>Model</h4><p>Modellazione 3D di prodotti, ambienti e set virtuali su misura.</p></div>
+          </div>
+          <div class="cgi-step">
+            <span class="n">02</span>
+            <div><h4>Light</h4><p>Illuminazione HDRI e temperatura colore calibrate sul brand.</p></div>
+          </div>
+          <div class="cgi-step">
+            <span class="n">03</span>
+            <div><h4>Animate</h4><p>Animazione di camera, oggetti e particellari con fisica realistica.</p></div>
+          </div>
+          <div class="cgi-step">
+            <span class="n">04</span>
+            <div><h4>Composite</h4><p>Compositing multi-pass e color grading fino al file di consegna.</p></div>
+          </div>
+        </div>
+
+        <div class="cgi-stage reveal reveal-delay-2">
+          <div class="cgi-canvas-wrap" id="cgi-stage">
+            <div class="cgi-fallback-glow" aria-hidden="true"></div>
+          </div>
+          <div class="cgi-hud-overlay hud glass-soft hud-panel">
+            <span class="hud-title">Camera</span>50mm · f/2.8<br>fps <span class="accent">24</span>
+          </div>
+          <div class="cgi-hud-overlay right hud glass-soft hud-panel">
+            <span class="hud-title">Light</span>3200K<br>samples <span class="accent">2048</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CENA 04 — DRONE ============ -->
+  <!-- LOGO 3D STAGE — palco Three.js. Antes tinha o drone procedural/GLB aqui; a pedido do
+       cliente essa cena virou a logo girando em 3D (o drone real, quando o cliente mandar o
+       .glb, vai para o Hero junto do robô — ver initHeroProducts() em main.js). A logo é
+       construída por código (buildLogo3D em main.js), não por um .glb — dois losangos com
+       ExtrudeGeometry + bisel, replicando a marca em vidro/metal. -->
+  <section class="drone-section" id="drone">
+    <div class="container drone-grid">
+      <div class="drone-stage reveal" id="drone-stage">
+        <div class="cgi-fallback-glow" aria-hidden="true"></div>
+        <div class="drone-shadow" aria-hidden="true"></div>
+        <div class="cgi-hud-overlay hud glass-soft hud-panel" id="drone-hud-left">
+          <span class="hud-title">Vision / Signature</span>
+          mark&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="accent">vision.diamond</span><br>
+          material&nbsp;&nbsp;<span class="accent">glass + metal</span><br>
+          render&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="accent">live 3D</span>
+        </div>
+        <div class="cgi-hud-overlay right hud glass-soft hud-panel">
+          <span class="hud-title">Render</span>
+          rotation&nbsp;&nbsp;<span class="accent" style="display:inline-flex;align-items:center;gap:5px;"><span class="signal-dot"></span>live</span>
+        </div>
+      </div>
+      <div class="drone-copy reveal reveal-delay-1">
+        <span class="eyebrow">Riprese aeree</span>
+        <h2>Un altro punto di vista, in volo.</h2>
+        <p>Drone professionale per riprese aeree stabili: eventi, cantieri, immobiliare e produzioni corporate che hanno bisogno di scala e prospettiva.</p>
+        <p class="drone-tag-line">"Riprese aeree che cambiano il punto di vista."</p>
+        <div style="margin-top:8px;"><a href="#servizi" class="btn btn-ghost">Scopri i servizi video</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CENA 04.5 — FOTOGRAFIA ============
+       Nova área de negócio, separada de vídeo/CGI: fotografia profissional (retratos,
+       casais, eventos corporate). Grid simples com 4 fotos reais enviadas pelo cliente —
+       mesmo padrão visual do resto do site (glass, grad-text, reveal on scroll). -->
+  <section class="foto-section" id="fotografia">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Fotografia</span>
+        <h2 style="font-size:40px;line-height:1.15;">Anche fotografia professionale.</h2>
+        <p style="font-size:16.5px;color:var(--ink-muted);line-height:1.6;">Un'altra area di Vision Productions, con lo stesso standard di cura riservato ai video: ritratti, coppie ed eventi, curati dallo scatto alla post-produzione.</p>
+      </div>
+
+      <div class="foto-grid reveal reveal-delay-1">
+        <div class="foto-card">
+          <img src="assets/images/photo-couple-kiss.webp" alt="Servizio fotografico di coppia in centro città" loading="lazy">
+          <span class="foto-card-tag">Coppie</span>
+        </div>
+        <div class="foto-card">
+          <img src="assets/images/photo-portrait-polo.webp" alt="Ritratto fotografico professionale in esterna" loading="lazy">
+          <span class="foto-card-tag">Ritratti</span>
+        </div>
+        <div class="foto-card">
+          <img src="assets/images/photo-couple-scarves.webp" alt="Servizio fotografico di coppia in piazza" loading="lazy">
+          <span class="foto-card-tag">Coppie</span>
+        </div>
+        <div class="foto-card">
+          <img src="assets/images/photo-portrait-courtyard.webp" alt="Ritratto fotografico in un cortile storico" loading="lazy">
+          <span class="foto-card-tag">Ritratti</span>
+        </div>
+      </div>
+
+      <div class="foto-cta reveal reveal-delay-2">
+        <a href="mailto:info@visionproductions.it" class="btn btn-ghost">Richiedi un servizio fotografico</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CENA 05 — PERCHÉ (cena limpa) ============ -->
+  <section class="perche-section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Perché Vision Productions</span>
+        <h2 style="font-size:40px;line-height:1.15;">Un partner, non un fornitore.</h2>
+      </div>
+      <div class="perche-grid reveal reveal-delay-1">
+        <div class="perche-item">
+          <h3>Team interno completo</h3>
+          <p>Ripresa, montaggio, CGI e VFX sotto lo stesso tetto: zero passaggi di mano.</p>
+        </div>
+        <div class="perche-item">
+          <h3>Dal concept alla delivery</h3>
+          <p>Seguiamo ogni fase, fino al file finale pronto per la pubblicazione.</p>
+        </div>
+        <div class="perche-item">
+          <h3>Qualità cinematografica</h3>
+          <p>Attrezzatura professionale, color grading e sound design curati.</p>
+        </div>
+        <div class="perche-item">
+          <h3>Un unico referente</h3>
+          <p>Un project manager dedicato segue il progetto dall'inizio alla fine.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CENA 06 — COME LAVORIAMO ============ -->
+  <section class="processo-section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Il processo</span>
+        <h2 style="font-size:40px;line-height:1.15;">Come lavoriamo</h2>
+      </div>
+      <div class="processo-grid reveal reveal-delay-1">
+        <div class="glass step-card">
+          <span class="num">01</span>
+          <h3>Ideazione e concept</h3>
+          <p>Ascoltiamo l'obiettivo del progetto e costruiamo concept, tono e riferimenti visivi.</p>
+        </div>
+        <div class="glass step-card">
+          <span class="num">02</span>
+          <h3>Pre-produzione</h3>
+          <p>Sceneggiatura, storyboard, location e pianificazione, drone incluso quando serve.</p>
+        </div>
+        <div class="glass step-card">
+          <span class="num">03</span>
+          <h3>Produzione</h3>
+          <p>Riprese sul set o in location con attrezzatura professionale e camera in drone.</p>
+        </div>
+        <div class="glass step-card">
+          <span class="num">04</span>
+          <h3>Post-produzione</h3>
+          <p>Montaggio, color grading, CGI, motion design e VFX fino al file pronto.</p>
+        </div>
+      </div>
+
+      <div class="manifesto reveal reveal-delay-2">
+        <div class="manifesto-stack s1" aria-hidden="true"></div>
+        <div class="manifesto-stack s2" aria-hidden="true"></div>
+        <div class="glass-premium manifesto-front">
+          <span class="watermark" aria-hidden="true">V</span>
+          <div class="manifesto-head">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div class="icon-wrap">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.2 6.8L21 11l-6.8 2.2L12 20l-2.2-6.8L3 11l6.8-2.2L12 2z"/></svg>
+              </div>
+              <span style="font-family:var(--font-display);font-weight:700;font-size:15px;">Vision Productions</span>
+            </div>
+            <span class="glass" style="padding:8px 16px;font-size:12.5px;font-weight:700;color:var(--cyan);display:inline-flex;align-items:center;gap:6px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.8L21 11l-6.8 2.2L12 20l-2.2-6.8L3 11l6.8-2.2L12 2z"/></svg>
+              Il nostro approccio
+            </span>
+          </div>
+          <p class="quote">"Ogni progetto è un film a sé. Ascoltiamo l'obiettivo, costruiamo il concept giusto e curiamo ogni dettaglio — dalla prima ripresa all'ultima esportazione."</p>
+          <div class="manifesto-sig">
+            <div style="width:38px;height:2px;background:linear-gradient(90deg,#6ae3f0,#2f6fed);"></div>
+            <span style="font-size:13.5px;color:var(--ink-muted);font-weight:600;">Il team creativo di Vision Productions</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CENA 07 — CHI SIAMO ============
+       Antes era a seção Portfolio (grid de vídeos). A pedido do cliente, os vídeos foram
+       realocados para dentro de Servizi (#servizi-lavori) e este espaço virou "Chi siamo":
+       identidade/missão do estúdio. Os números com [ ] são placeholder — troque pelos
+       dados reais do cliente antes de publicar. -->
+  <section class="chisiamo-section" id="chi-siamo">
+    <div class="container">
+      <div class="chisiamo-head reveal">
+        <div style="display:flex;flex-direction:column;gap:16px;max-width:640px;">
+          <span class="eyebrow">Chi siamo</span>
+          <h2 style="font-size:40px;line-height:1.15;">Uno studio, una sola squadra: dalla ripresa alla CGI.</h2>
+          <p style="font-size:16.5px;color:var(--ink-muted);line-height:1.6;">Vision Productions nasce dall'incontro tra produzione video tradizionale e computer grafica avanzata. Non lavoriamo come fornitori esterni che si passano il progetto: un unico team segue ogni produzione dalla prima ripresa alla resa finale in CGI e VFX.</p>
+        </div>
+      </div>
+
+      <div class="chisiamo-stats reveal reveal-delay-1">
+        <div class="glass chisiamo-stat">
+          <span class="chisiamo-stat-num grad-text">[X]+</span>
+          <span class="chisiamo-stat-label">Progetti realizzati</span>
+        </div>
+        <div class="glass chisiamo-stat">
+          <span class="chisiamo-stat-num grad-text">[X]</span>
+          <span class="chisiamo-stat-label">Anni di attività</span>
+        </div>
+        <div class="glass chisiamo-stat">
+          <span class="chisiamo-stat-num grad-text">[X]</span>
+          <span class="chisiamo-stat-label">Persone nel team interno</span>
+        </div>
+        <div class="glass chisiamo-stat">
+          <span class="chisiamo-stat-num grad-text">[X]</span>
+          <span class="chisiamo-stat-label">Settori seguiti</span>
+        </div>
+      </div>
+
+      <div class="chisiamo-mission reveal reveal-delay-2">
+        <div class="glass-premium chisiamo-mission-card">
+          <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.2 6.8L21 11l-6.8 2.2L12 20l-2.2-6.8L3 11l6.8-2.2L12 2z"/></svg></div>
+          <h3>La nostra missione</h3>
+          <p>Dare corpo a idee complesse — un prodotto, uno spazio, un evento — con lo stesso livello di cura, dalla ripresa dal vivo alla computer grafica più sofisticata.</p>
+        </div>
+        <div class="glass-premium chisiamo-mission-card">
+          <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6"/></svg></div>
+          <h3>Il nostro approccio</h3>
+          <p>Team interno, non una rete di freelance: chi gira la scena è la stessa squadra che poi la monta, la anima e la finalizza in CGI/VFX. Un solo referente, dall'inizio alla fine.</p>
+        </div>
+      </div>
+
+      <!-- Founder/CEO spotlight — foto real enviada pelo cliente (Pedro + o robô da marca,
+           mesma linguagem visual do Hero). Fecha a seção "Chi siamo" colocando um rosto real
+           por trás do estúdio, depois da missão/abordagem. -->
+      <div class="chisiamo-founder reveal reveal-delay-3">
+        <div class="chisiamo-founder-photo">
+          <img src="assets/images/team-pedro-robot.webp" alt="Pedro Brustolin, CEO di Vision Productions, sul set con il robot del brand">
+        </div>
+        <div class="glass-premium chisiamo-founder-copy">
+          <span class="eyebrow">Chi guida lo studio</span>
+          <h3>Pedro Brustolin</h3>
+          <p class="chisiamo-founder-role">CEO &amp; Founder, Vision Productions</p>
+          <p>Oltre 10 anni di esperienza nel settore audiovisivo, tra riprese sul campo, regia e produzione CGI. Pedro segue personalmente ogni progetto chiave, dal primo brief alla consegna finale: è la garanzia che lo standard raccontato in questa pagina sia quello che il cliente riceve davvero, ogni volta.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CENA 08/09 — END SCENE (CTA → transição → logo) ============
+       Wrapper .end-scene aplica um gradiente único (::before em style.css) que escurece
+       progressivamente por trás do CTA e da logo, criando a transição contínua pedida —
+       sem precisar de uma seção "de transição" separada. -->
+  <div class="end-scene">
+    <section class="cta-section" id="cta">
+      <div class="container">
+        <div class="glass-liquid cta-panel reveal">
+          <div class="cta-glow" aria-hidden="true"></div>
+          <div class="cta-particles" aria-hidden="true">
+            <span style="left:8%;top:22%;animation-delay:0s;"></span>
+            <span style="left:92%;top:18%;animation-delay:1.2s;"></span>
+            <span style="left:85%;top:76%;animation-delay:2.4s;"></span>
+            <span style="left:6%;top:80%;animation-delay:0.6s;"></span>
+          </div>
+          <div class="cta-copy">
+            <span class="eyebrow">Vision Productions</span>
+            <h2>Pronti a dare vita<br>alla tua visione?</h2>
+            <p>Raccontaci cosa stai immaginando: ti rispondiamo con una proposta su misura.</p>
+            <div style="margin-top:8px;"><a href="mailto:info@visionproductions.it" class="btn btn-primary">Inizia un progetto <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</main>
+
+<!-- ============ FOOTER (minimalista) ============ -->
+<footer class="site-footer">
+  <div class="container footer-minimal">
+    <a href="#hero" class="footer-word" aria-label="Vision Productions — torna all'inizio">Visi<span class="cyan">on</span><span class="sub">Productions</span></a>
+    <p class="footer-tagline">Completa per te.</p>
+    <p class="footer-services">Video&nbsp;·&nbsp;CGI&nbsp;·&nbsp;VFX&nbsp;·&nbsp;Motion&nbsp;·&nbsp;Drone</p>
+    <div class="social-row">
+      <a href="#" aria-label="Instagram" class="social-btn glass-soft"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor"/></svg></a>
+      <a href="#" aria-label="LinkedIn" class="social-btn glass-soft"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="8" y1="10.5" x2="8" y2="16.5"/><circle cx="8" cy="7" r="0.6" fill="currentColor"/><path d="M12 16.5v-4a2.2 2.2 0 0 1 4.4 0v4"/></svg></a>
+      <a href="#" aria-label="YouTube" class="social-btn glass-soft"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="6" width="19" height="12" rx="4"/><path d="M10.5 9.5l5 2.5-5 2.5z" fill="currentColor" stroke="none"/></svg></a>
+    </div>
+    <div class="footer-copy-row">
+      <span>© 2026 Vision Productions. Tutti i diritti riservati.</span>
+      <a href="#">Privacy</a>
+      <a href="#">Termini</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/vendor/three.min.js"></script>
+<script src="js/vendor/GLTFLoader.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

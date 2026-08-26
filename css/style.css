@@ -1,0 +1,678 @@
+/* ============================================================
+   VISION PRODUCTIONS — PREMIUM EDITION
+   Direção de arte: cinema + CGI/VFX + tecnologia, tom navy/ciano.
+   Índice:
+   1. Tokens & reset
+   2. Utilitários / scroll-reveal
+   3. Background vivo (canvas)
+   4. Hierarquia de vidro (glass-soft / glass / glass-premium / glass-liquid)
+   5. Botões
+   6. Navbar
+   7. HUD / código
+   8. Hero
+   9. Servizi (bento editorial)
+   10. CGI / VFX
+   11. Drone
+   12. Perché Vision Productions (cena limpa)
+   13. Come lavoriamo + manifesto
+   14. Chi siamo / grid de vídeos
+   15. CTA
+   16. Footer
+   17. Responsivo
+   18. Reduced motion
+   ============================================================ */
+
+/* ---------- 1. TOKENS & RESET ---------- */
+:root{
+  --bg:#05080f;
+  --bg-1:#070c16;
+  --bg-2:#0a1220;
+  --ink:#f5f7fa;
+  --ink-muted:#a7b3c4;
+  --ink-faint:#5f6b7a;
+  --cyan:#6ae3f0;
+  --cyan-deep:#1ec2d6;
+  --blue:#2f6fed;
+  --blue-deep:#12318f;
+  --white-glass:rgba(255,255,255,0.14);
+  --border-soft:rgba(255,255,255,0.13);
+  --border-strong:rgba(255,255,255,0.32);
+  --radius-lg:28px;
+  --radius-md:22px;
+  --radius-sm:14px;
+  --ease:cubic-bezier(.16,.84,.44,1);
+  --font-display:'Space Grotesk', system-ui, sans-serif;
+  --font-body:'Manrope', system-ui, -apple-system, sans-serif;
+  --font-mono:'JetBrains Mono', 'SF Mono', ui-monospace, Menlo, Consolas, monospace;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-body);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3{font-family:var(--font-display);margin:0;letter-spacing:-0.02em;font-weight:800;}
+p{margin:0;}
+a{color:var(--cyan);text-decoration:none;}
+a:hover{color:#8feef8;}
+img{max-width:100%;display:block;}
+section{position:relative;}
+::selection{background:rgba(106,227,240,0.3);color:#fff;}
+
+.container{max-width:1240px;margin:0 auto;padding:0 40px;}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12.5px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--cyan);
+  text-shadow:0 0 16px rgba(106,227,240,0.5);
+}
+.section-head{max-width:640px;margin:0 auto 56px;text-align:center;display:flex;flex-direction:column;gap:16px;align-items:center;}
+.section-head p{font-size:16.5px;color:var(--ink-muted);line-height:1.6;}
+.grad-text{
+  background:linear-gradient(90deg,#ffffff,#bfe9ff 45%,#6ae3f0 75%,#4fa8ea);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 18px rgba(106,227,240,0.35));
+}
+
+/* ---------- 2. UTILITÁRIOS / SCROLL REVEAL ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity 0.9s var(--ease), transform 0.9s var(--ease);}
+.reveal.is-visible{opacity:1;transform:translateY(0);}
+.reveal-delay-1{transition-delay:0.08s;}
+.reveal-delay-2{transition-delay:0.16s;}
+.reveal-delay-3{transition-delay:0.24s;}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;}
+
+/* ---------- 3. BACKGROUND VIVO ---------- */
+#bg-layer{
+  position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none;
+  background:linear-gradient(180deg,#070d19,#04070d 60%,#05080f);
+}
+#bg-canvas{position:absolute;inset:0;width:100%;height:100%;filter:blur(2px);}
+#bg-grain{position:absolute;inset:0;opacity:0.035;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+main{position:relative;z-index:1;}
+
+/* ---------- 4. HIERARQUIA DE VIDRO ---------- */
+/* glass-soft: superfícies discretas (footer, chips) */
+.glass-soft{
+  position:relative;background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);
+  border-radius:var(--radius-sm);
+}
+
+/* glass: card padrão do site, com highlight líquido que segue o mouse */
+.glass{
+  position:relative;overflow:hidden;
+  background:linear-gradient(165deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02) 65%);
+  backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);
+  border:1px solid rgba(255,255,255,0.2);
+  border-radius:var(--radius-md);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.26), 0 18px 40px rgba(3,6,14,0.4);
+  transition:border-color 0.4s var(--ease), box-shadow 0.4s var(--ease), transform 0.4s var(--ease);
+}
+.glass::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;
+  background:radial-gradient(circle 220px at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.38), rgba(106,227,240,0.14) 45%, transparent 72%);
+  transition:opacity 0.45s ease;
+}
+.glass:hover{border-color:rgba(255,255,255,0.4);transform:translateY(-3px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.38), 0 0 34px rgba(106,227,240,0.18), 0 26px 55px rgba(3,6,14,0.48);}
+.glass:hover::before{opacity:1;}
+
+/* glass-premium: elementos de destaque — mais espessura, dupla borda, brilho interno maior */
+.glass-premium{
+  position:relative;overflow:hidden;
+  background:
+    linear-gradient(160deg, rgba(255,255,255,0.16), rgba(255,255,255,0.03) 55%),
+    linear-gradient(200deg, rgba(106,227,240,0.08), transparent 60%);
+  backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur(28px) saturate(180%);
+  border:1px solid rgba(255,255,255,0.26);
+  border-radius:var(--radius-lg);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,0.4),
+    inset 0 0 40px rgba(255,255,255,0.03),
+    0 0 0 1px rgba(106,227,240,0.1),
+    0 30px 70px rgba(3,6,14,0.55);
+  transition:box-shadow 0.5s var(--ease), transform 0.5s var(--ease);
+}
+.glass-premium::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;
+  background:radial-gradient(circle 320px at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.3), rgba(106,227,240,0.16) 45%, transparent 74%);
+  transition:opacity 0.5s ease;
+}
+.glass-premium:hover::before{opacity:1;}
+.glass-premium:hover{box-shadow:inset 0 1.5px 0 rgba(255,255,255,0.5), 0 0 50px rgba(106,227,240,0.22), 0 34px 80px rgba(3,6,14,0.6);}
+
+/* glass-liquid: refração via SVG displacement — reservado para poucos elementos especiais */
+.glass-liquid{
+  position:relative;overflow:hidden;
+  backdrop-filter:blur(6px) saturate(180%) url(#liquid-distort);
+  -webkit-backdrop-filter:blur(6px) saturate(180%);
+  background:linear-gradient(155deg, rgba(255,255,255,0.2), rgba(255,255,255,0.02) 60%);
+  border:1px solid rgba(255,255,255,0.34);
+  border-radius:var(--radius-lg);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.5), inset 0 0 50px rgba(255,255,255,0.05), 0 30px 70px rgba(3,6,14,0.55);
+}
+.glass-liquid::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(120deg, rgba(255,255,255,0.35), transparent 30%, transparent 70%, rgba(106,227,240,0.15));
+  mix-blend-mode:screen;opacity:0.8;
+}
+
+/* ---------- 5. BOTÕES (neon — intensidade reforçada a pedido do cliente) ---------- */
+@keyframes btn-neon-pulse{
+  0%,100%{box-shadow:
+    0 0 0 1.5px rgba(106,227,240,0.75),
+    0 0 20px rgba(106,227,240,0.75),
+    0 0 46px rgba(106,227,240,0.5),
+    0 0 78px rgba(47,111,237,0.5),
+    0 12px 32px rgba(47,111,237,0.5),0 2px 10px rgba(106,227,240,0.4);}
+  50%{box-shadow:
+    0 0 0 2px rgba(106,227,240,1),
+    0 0 32px rgba(106,227,240,1),
+    0 0 68px rgba(106,227,240,0.7),
+    0 0 110px rgba(47,111,237,0.65),
+    0 12px 32px rgba(47,111,237,0.5),0 2px 10px rgba(106,227,240,0.4);}
+}
+@keyframes btn-neon-pulse-ghost{
+  0%,100%{box-shadow:0 0 0 1.5px rgba(106,227,240,0.4), 0 0 16px rgba(106,227,240,0.32), 0 0 34px rgba(106,227,240,0.16);}
+  50%{box-shadow:0 0 0 1.5px rgba(106,227,240,0.7), 0 0 30px rgba(106,227,240,0.55), 0 0 56px rgba(106,227,240,0.3);}
+}
+.btn{
+  position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:8px;
+  padding:15px 28px;border-radius:999px;font-weight:700;font-size:15px;font-family:var(--font-body);
+  cursor:pointer;border:none;transition:transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.btn::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;
+  background:radial-gradient(circle 160px at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.6), transparent 65%);
+  transition:opacity 0.35s ease;
+  z-index:1;
+}
+.btn:hover::before{opacity:1;}
+.btn > *{position:relative;z-index:2;}
+.btn-primary{background:linear-gradient(135deg,#6ae3f0,#2f6fed);color:#06090d;
+  animation:btn-neon-pulse 2.4s ease-in-out infinite;}
+.btn-primary:hover{transform:translateY(-2px) scale(1.04);
+  box-shadow:
+    0 0 0 2px rgba(106,227,240,1),
+    0 0 38px rgba(106,227,240,1),
+    0 0 80px rgba(106,227,240,0.75),
+    0 0 130px rgba(47,111,237,0.7),
+    0 18px 42px rgba(47,111,237,0.6),0 4px 16px rgba(106,227,240,0.5);
+  animation-play-state:paused;}
+.btn-ghost{background:rgba(255,255,255,0.06);border:1px solid rgba(106,227,240,0.7);color:var(--ink);
+  animation:btn-neon-pulse-ghost 2.4s ease-in-out infinite;}
+.btn-ghost:hover{transform:translateY(-2px);border-color:rgba(106,227,240,1);background:rgba(106,227,240,0.12);
+  box-shadow:0 0 0 1.5px rgba(106,227,240,0.85), 0 0 40px rgba(106,227,240,0.7), 0 0 76px rgba(47,111,237,0.4);
+  animation-play-state:paused;}
+
+/* ---------- 6. NAVBAR ---------- */
+.navbar{
+  position:sticky;top:0;z-index:50;width:100%;
+  padding:18px 0;border-bottom:1px solid transparent;
+  background:rgba(7,11,19,0.4);
+  backdrop-filter:blur(14px) saturate(150%);-webkit-backdrop-filter:blur(14px) saturate(150%);
+  transition:padding 0.35s var(--ease), background 0.35s var(--ease), border-color 0.35s var(--ease), backdrop-filter 0.35s var(--ease);
+}
+.navbar.is-scrolled{
+  padding:11px 0;background:rgba(6,10,17,0.78);border-bottom-color:var(--border-soft);
+  backdrop-filter:blur(24px) saturate(190%);-webkit-backdrop-filter:blur(24px) saturate(190%);
+  box-shadow:0 10px 30px rgba(3,6,14,0.35);
+}
+.navbar-inner{display:flex;align-items:center;justify-content:space-between;gap:28px;}
+.brand{display:inline-flex;align-items:center;gap:10px;flex-shrink:0;}
+/* A causa real do corte não era o CSS: o arquivo logo-mark.webp estava exportado com o
+   ícone tocando a borda inferior do canvas (sem padding), então qualquer altura cortava
+   a ponta do losango. Reexportamos o mesmo ícone (da arte original do projeto, em
+   work/logo_unmatted.png) com padding correto — aqui só garantimos que a implementação
+   não introduza um novo corte: display:block remove o espaço fantasma de baseline que
+   <img> inline recebe dentro de contêineres com altura fixa, e a altura tem folga sobre
+   o padding vertical do navbar (18px desktop / 11px com scroll) para nunca encostar. */
+.brand img{display:block;height:34px;width:auto;object-fit:contain;}
+.brand .word{font-family:var(--font-display);font-weight:700;font-size:17px;}
+.nav-links{display:flex;align-items:center;gap:34px;}
+.nav-link{position:relative;color:var(--ink-muted);font-weight:500;font-size:14.5px;transition:color 0.25s ease;}
+.nav-link.active{color:var(--ink);font-weight:700;}
+.nav-link::after{content:"";position:absolute;left:0;right:100%;bottom:-6px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,#6ae3f0,#2f6fed);transition:right 0.3s ease;}
+.nav-link:hover::after{right:0;}
+
+/* ---------- 7. HUD / CÓDIGO ---------- */
+.hud{
+  font-family:var(--font-mono);font-size:12px;line-height:1.9;color:rgba(167,179,196,0.75);
+  white-space:pre;letter-spacing:0.01em;
+}
+.hud .hud-title{color:var(--cyan);font-weight:600;letter-spacing:0.12em;text-transform:uppercase;font-size:10.5px;
+  display:block;margin-bottom:10px;opacity:0.85;}
+.hud .hl{color:#dff6fa;}
+.hud .accent{color:var(--cyan);}
+.hud-cursor{display:inline-block;width:6px;height:12px;background:var(--cyan);margin-left:2px;
+  animation:blink 1.1s steps(1) infinite;vertical-align:-1px;}
+@keyframes blink{0%,49%{opacity:1;}50%,100%{opacity:0;}}
+.hud-panel{padding:20px 22px;min-width:220px;}
+
+/* ---------- 8. HERO ---------- */
+.hero{padding:132px 0 100px;overflow:hidden;}
+.hero-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:40px;align-items:center;}
+.hero-copy{display:flex;flex-direction:column;gap:26px;max-width:600px;}
+.hero-copy h1{font-size:60px;line-height:1.04;}
+.hero-copy p.lead{font-size:18px;line-height:1.65;color:var(--ink-muted);max-width:540px;}
+.hero-ctas{display:flex;align-items:center;gap:16px;margin-top:6px;flex-wrap:wrap;}
+.hero-pills{margin:76px auto 0;display:flex;flex-wrap:wrap;justify-content:center;gap:12px;position:relative;z-index:2;}
+.pill{padding:10px 20px;font-size:13.5px;font-weight:600;color:var(--ink-muted);
+  transition:border-color 0.35s ease, box-shadow 0.35s ease, color 0.35s ease;}
+.pill:hover{border-color:rgba(106,227,240,0.6);color:var(--ink);box-shadow:0 0 22px rgba(106,227,240,0.28);}
+
+.hero-stage{position:relative;min-height:560px;display:flex;align-items:center;justify-content:center;perspective:1200px;}
+.hero-stage .depth-glow{position:absolute;width:440px;height:440px;border-radius:50%;
+  background:radial-gradient(circle, rgba(106,227,240,0.26), transparent 72%);filter:blur(10px);}
+.hero-robot-wrap{position:relative;transform-style:preserve-3d;transition:transform 0.15s linear;}
+.hero-robot-media{width:370px;height:auto;display:block;filter:drop-shadow(0 30px 55px rgba(0,0,0,0.55));}
+.hero-particles,.cta-particles{position:absolute;inset:-40px;pointer-events:none;z-index:1;}
+.hero-particles span,.cta-particles span{position:absolute;width:3px;height:3px;border-radius:50%;background:var(--cyan);opacity:0.5;
+  box-shadow:0 0 8px rgba(106,227,240,0.8);animation:float-particle 7s ease-in-out infinite;}
+/* nota: a deriva flutuante usa a propriedade `translate` (não `transform`) de propósito —
+   assim o parallax por mouse em JS pode escrever em `transform` no mesmo elemento sem conflito. */
+@keyframes float-particle{0%,100%{translate:0 0;}50%{translate:0 -18px;}}
+
+.hero-badge{position:absolute;padding:16px 20px;display:flex;align-items:center;gap:12px;max-width:250px;z-index:3;}
+.hero-badge.b1{left:-24px;bottom:64px;}
+.hero-badge.b2{right:-16px;top:36px;padding:12px 18px;}
+.icon-wrap{width:40px;height:40px;border-radius:11px;flex-shrink:0;
+  background:linear-gradient(155deg, rgba(106,227,240,0.24), rgba(47,111,237,0.15));
+  border:1px solid var(--border-soft);display:flex;align-items:center;justify-content:center;color:var(--cyan);
+  box-shadow:0 0 20px rgba(106,227,240,0.18);}
+.hero-hud{position:absolute;left:-56px;top:-24px;z-index:3;opacity:0.9;}
+
+/* ---------- 9. SERVIZI (bento editorial) ---------- */
+.servizi-section{position:relative;overflow:hidden;padding:40px 0 110px;}
+.servizi-section > .container{position:relative;z-index:1;}
+/* Fundo "código passando" — agora confinado às DUAS BORDAS (esquerda/direita) da
+   seção Servizi, não mais atrás do grid inteiro (o cliente achou cheio demais no
+   centro). Cada faixa tem ~200px, esmaecida só na borda INTERNA (em direção ao
+   centro) via mask-image — isso é diferente do fade vertical que tinha antes:
+   aqui o esmaecimento é proposital, é o que faz a borda se dissolver no fundo
+   liso do meio em vez de cortar seco. Verticalmente continua 100% sem fade e
+   com loop infinito sem costura (mesmo esquema de antes: trecho repetido ~14x +
+   duplicado inteiro, translateY 0 → -50%) — nunca para. */
+.servizi-code-bg{position:absolute;inset:0;z-index:0;opacity:0.6;}
+.code-col{position:absolute;top:0;bottom:0;width:210px;overflow:hidden;
+  font-family:var(--font-mono);font-size:12.5px;line-height:2;
+  color:rgba(167,179,196,0.4);white-space:pre;padding:0 16px;}
+.code-col pre{margin:0;}
+.code-col .k{color:rgba(106,227,240,0.55);}
+.code-col .f{color:rgba(245,247,250,0.4);}
+.code-col .s{color:rgba(30,194,214,0.55);}
+.code-col .n{color:rgba(106,227,240,0.55);}
+.code-col-left{left:0;animation:code-scroll 46s linear infinite;
+  -webkit-mask-image:linear-gradient(90deg, #000 55%, transparent);
+  mask-image:linear-gradient(90deg, #000 55%, transparent);}
+.code-col-right{right:0;animation:code-scroll 54s linear infinite;animation-delay:-20s;
+  -webkit-mask-image:linear-gradient(270deg, #000 55%, transparent);
+  mask-image:linear-gradient(270deg, #000 55%, transparent);}
+@keyframes code-scroll{from{transform:translateY(0);}to{transform:translateY(-50%);}}
+/* grid-auto-flow:dense é o que faz o bento fechar sem buracos: os 2 cards
+   svc-featured (2x2) somados aos 8 cards normais (1x1, incluindo o tile
+   svc-cta) preenchem exatamente 16 células (4 linhas x 4 colunas) — testado
+   posição a posição. Se o número de cards mudar, refazer essa conta. */
+.servizi-bento{display:grid;grid-template-columns:repeat(4, 1fr);grid-auto-rows:200px;grid-auto-flow:dense;gap:18px;perspective:1600px;}
+.svc-card{padding:28px;display:flex;flex-direction:column;justify-content:space-between;gap:14px;
+  transform-style:preserve-3d;will-change:transform;transition:transform 0.25s ease, box-shadow 0.25s ease;}
+.svc-card h3{font-size:18px;font-weight:700;transition:color 0.3s ease;}
+.svc-card p{font-size:13.5px;color:var(--ink-muted);line-height:1.55;}
+.svc-top{display:flex;align-items:flex-start;justify-content:space-between;}
+.svc-card .svc-num{font-family:var(--font-mono);font-size:11px;color:var(--ink-faint);letter-spacing:0.08em;}
+.svc-card .svc-hint{font-family:var(--font-mono);font-size:10px;color:var(--cyan);opacity:0;transform:translateY(4px);
+  display:inline-flex;align-items:center;gap:4px;
+  transition:opacity 0.3s ease, transform 0.3s ease;}
+.svc-card:hover .svc-hint{opacity:0.7;transform:translateY(0);}
+.svc-card .icon-wrap{width:38px;height:38px;transition:box-shadow 0.3s ease, border-color 0.3s ease;}
+.svc-card:hover .icon-wrap{box-shadow:0 0 26px rgba(106,227,240,0.3);border-color:var(--border-strong);}
+.svc-featured{grid-column:span 2;grid-row:span 2;animation:card-neon-pulse 4.5s ease-in-out infinite;}
+.svc-featured h3{font-size:24px;}
+.svc-featured .hud{margin-top:auto;font-size:10.5px;opacity:0.65;}
+@keyframes card-neon-pulse{
+  0%,100%{box-shadow:inset 0 1.5px 0 rgba(255,255,255,0.4),inset 0 0 40px rgba(255,255,255,0.03),0 0 0 1px rgba(106,227,240,0.14),0 30px 70px rgba(3,6,14,0.55);}
+  50%{box-shadow:inset 0 1.5px 0 rgba(255,255,255,0.4),inset 0 0 40px rgba(255,255,255,0.03),0 0 0 1px rgba(106,227,240,0.4),0 0 34px rgba(106,227,240,0.22),0 30px 70px rgba(3,6,14,0.55);}
+}
+.svc-featured:hover{animation-play-state:paused;}
+/* Tile de fechamento do bento: mesma anatomia dos cards de serviço (não é o
+   10º serviço — a seção segue "nove specializzazioni" — é um CTA que também
+   resolve a matemática do grid, span 1x1). */
+.svc-cta{border-color:rgba(106,227,240,0.3);cursor:pointer;color:var(--ink);}
+.svc-cta:hover{border-color:var(--cyan);}
+.svc-cta h3{font-size:17px;color:var(--ink);}
+.svc-cta .icon-wrap{background:linear-gradient(155deg, rgba(106,227,240,0.32), rgba(47,111,237,0.2));}
+
+/* ---------- 10. CGI / VFX ---------- */
+.cgi-section{padding:120px 0;}
+.cgi-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+.cgi-steps{display:flex;flex-direction:column;gap:0;}
+.cgi-step{display:flex;align-items:baseline;gap:18px;padding:22px 0 22px 16px;margin-left:-16px;
+  border-bottom:1px solid rgba(255,255,255,0.08);border-left:2px solid transparent;
+  transition:border-color 0.5s ease, background 0.5s ease;}
+.cgi-step:last-child{border-bottom:none;}
+.cgi-step .n{font-family:var(--font-mono);font-size:13px;color:var(--cyan);opacity:0.7;flex-shrink:0;transition:opacity 0.5s ease;}
+.cgi-step h4{font-size:17px;font-weight:700;margin-bottom:4px;}
+.cgi-step p{font-size:13.5px;color:var(--ink-muted);}
+.cgi-step.is-active{border-left-color:var(--cyan);background:linear-gradient(90deg, rgba(106,227,240,0.06), transparent 70%);}
+.cgi-step.is-active .n{opacity:1;}
+.cgi-stage{position:relative;height:460px;display:flex;align-items:center;justify-content:center;}
+.cgi-canvas-wrap{position:relative;width:100%;height:100%;}
+.cgi-canvas-wrap canvas{width:100%!important;height:100%!important;}
+.cgi-fallback-glow{position:absolute;inset:0;margin:auto;width:260px;height:260px;border-radius:50%;
+  background:radial-gradient(circle, rgba(106,227,240,0.35), rgba(47,111,237,0.15) 55%, transparent 75%);
+  filter:blur(4px);animation:pulse-glow 5s ease-in-out infinite;}
+@keyframes pulse-glow{0%,100%{transform:scale(1);opacity:0.85;}50%{transform:scale(1.06);opacity:1;}}
+.cgi-hud-overlay{position:absolute;bottom:18px;left:18px;z-index:2;}
+.cgi-hud-overlay.right{left:auto;right:18px;bottom:auto;top:18px;text-align:right;}
+
+/* ---------- 11. DRONE ---------- */
+.drone-section{padding:100px 0 130px;}
+.drone-grid{display:grid;grid-template-columns:0.95fr 1.05fr;gap:40px;align-items:center;}
+.drone-stage{position:relative;height:460px;}
+/* Canvas fica em position:relative + z-index próprio para não ser coberto/desfocado
+   pelo backdrop-filter dos painéis HUD (que são position:absolute + z-index:2). */
+.drone-stage canvas{position:relative;z-index:1;width:100%!important;height:100%!important;}
+.drone-copy h2{font-size:36px;line-height:1.18;}
+.drone-copy p{font-size:16px;color:var(--ink-muted);line-height:1.65;max-width:460px;}
+.drone-tag-line{font-family:var(--font-display);font-size:20px;font-weight:600;color:var(--cyan);font-style:italic;}
+.drone-shadow{position:absolute;left:50%;bottom:16%;width:180px;height:26px;border-radius:50%;
+  background:radial-gradient(circle, rgba(106,227,240,0.32), transparent 72%);filter:blur(6px);
+  transform:translateX(-50%);pointer-events:none;transition:opacity 0.4s ease, width 0.4s ease;}
+.signal-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 6px rgba(106,227,240,0.9);
+  animation:blink 1.6s ease-in-out infinite;}
+/* Movido de bottom-left para top-left: nessa posição a logo 3D (maior e mais central
+   que o antigo drone) cobria o painel. Os dois painéis do palco ficam agora lado a
+   lado no topo, longe do centro onde a logo gira. */
+#drone-hud-left{left:18px;top:18px;bottom:auto;}
+/* Painéis do drone mais compactos que o padrão .hud-panel: precisam ficar
+   presos nos cantos sem invadir o centro do palco 3D, onde o drone fica. */
+.drone-stage .hud-panel{min-width:168px;padding:13px 15px;}
+.drone-stage .hud{font-size:11px;line-height:1.75;}
+
+/* ---------- 12. PERCHÉ (cena limpa) ---------- */
+.perche-section{padding:110px 0;}
+.perche-grid{display:grid;grid-template-columns:repeat(4, minmax(0,1fr));gap:1px;background:rgba(255,255,255,0.09);
+  border:1px solid rgba(255,255,255,0.09);border-radius:var(--radius-md);overflow:hidden;}
+.perche-item{background:var(--bg-1);padding:34px 26px;display:flex;flex-direction:column;gap:14px;}
+.perche-item h3{font-size:16.5px;font-weight:700;}
+.perche-item p{font-size:13.5px;color:var(--ink-muted);line-height:1.6;}
+
+/* ---------- 13. COME LAVORIAMO + MANIFESTO ---------- */
+.processo-section{padding:100px 0 120px;}
+.processo-grid{display:grid;grid-template-columns:repeat(4, minmax(0,1fr));gap:20px;}
+.step-card{padding:28px;display:flex;flex-direction:column;gap:14px;}
+.step-card .num{font-family:var(--font-display);font-size:26px;font-weight:800;color:var(--cyan);opacity:0.6;}
+.step-card h3{font-size:17px;font-weight:700;}
+.step-card p{font-size:14px;color:var(--ink-muted);line-height:1.6;}
+
+.manifesto{position:relative;max-width:800px;margin:64px auto 0;}
+.manifesto-stack{position:absolute;border-radius:28px;}
+.manifesto-stack.s1{inset:20px -16px -16px 16px;background:linear-gradient(150deg, rgba(106,227,240,0.05), rgba(8,10,16,0.35));
+  border:1px solid rgba(255,255,255,0.05);transform:rotate(2.4deg);}
+.manifesto-stack.s2{inset:10px -8px -8px 8px;background:linear-gradient(150deg, rgba(106,227,240,0.07), rgba(8,10,16,0.45));
+  border:1px solid rgba(255,255,255,0.08);transform:rotate(1.1deg);}
+.manifesto-front{position:relative;padding:44px 48px;overflow:hidden;}
+.manifesto-front .watermark{position:absolute;top:-46px;right:-6px;font-family:var(--font-display);font-size:260px;
+  font-weight:800;color:rgba(255,255,255,0.035);line-height:1;pointer-events:none;user-select:none;}
+.manifesto-head{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:26px;flex-wrap:wrap;}
+.manifesto-front .quote{position:relative;font-size:22px;font-weight:600;line-height:1.55;color:#f5f5f7;max-width:640px;}
+.manifesto-sig{position:relative;margin-top:28px;display:flex;align-items:center;gap:12px;}
+
+/* ---------- 14. CHI SIAMO / mostra de vídeos (proj-*) ----------
+   .proj-card e companhia eram exclusivos da antiga seção Portfolio; agora vivem também
+   dentro de Servizi (#servizi-lavori), por isso ficaram como classes soltas (não mais
+   prefixadas por .portfolio-*). .chisiamo-* é conteúdo novo: identidade do estúdio. */
+.chisiamo-section{padding:80px 0 130px;}
+.chisiamo-head{margin-bottom:40px;}
+.chisiamo-stats{display:grid;grid-template-columns:repeat(4, minmax(0,1fr));gap:20px;margin-bottom:28px;}
+.chisiamo-stat{padding:26px 22px;display:flex;flex-direction:column;gap:6px;}
+.chisiamo-stat-num{font-family:var(--font-display);font-size:32px;font-weight:800;letter-spacing:-0.02em;}
+.chisiamo-stat-label{font-size:13.5px;color:var(--ink-muted);}
+.chisiamo-mission{display:grid;grid-template-columns:repeat(2, minmax(0,1fr));gap:24px;}
+.chisiamo-mission-card{padding:30px 28px;display:flex;flex-direction:column;gap:12px;}
+.chisiamo-mission-card h3{font-size:19px;}
+.chisiamo-mission-card p{font-size:14.5px;color:var(--ink-muted);line-height:1.6;}
+
+/* Founder spotlight — foto real + bio, fecha a seção Chi siamo. Grid 2 colunas (foto | texto)
+   no desktop; foto com aspect-ratio fixo pra não distorcer o retrato original (1000x1331). */
+.chisiamo-founder{display:grid;grid-template-columns:0.7fr 1fr;gap:32px;align-items:stretch;margin-top:24px;}
+.chisiamo-founder-photo{position:relative;border-radius:24px;overflow:hidden;border:1px solid var(--border-soft);
+  aspect-ratio:3/4;min-height:280px;}
+.chisiamo-founder-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.chisiamo-founder-copy{padding:32px 34px;display:flex;flex-direction:column;gap:10px;justify-content:center;}
+.chisiamo-founder-copy h3{font-family:var(--font-display);font-size:26px;font-weight:700;margin-top:2px;}
+.chisiamo-founder-role{font-size:14px;font-weight:700;color:var(--cyan);letter-spacing:0.01em;margin-bottom:6px;}
+.chisiamo-founder-copy p:not(.chisiamo-founder-role){font-size:15px;color:var(--ink-muted);line-height:1.65;max-width:480px;}
+
+/* ---------- 14b. GRID DE VÍDEOS (proj-*) — usada em Servizi ---------- */
+.proj-grid-head{margin-bottom:32px;}
+.proj-grid{display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:24px;}
+.proj-card{display:flex;flex-direction:column;gap:14px;}
+.proj-thumb{position:relative;aspect-ratio:16/10;border-radius:22px;overflow:hidden;border:1px solid var(--border-soft);
+  display:flex;align-items:center;justify-content:center;transition:transform 0.5s var(--ease);}
+.proj-thumb:hover{transform:scale(1.015);}
+.proj-thumb::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(0deg, rgba(4,6,10,0.55), transparent 45%);}
+.proj-thumb img.thumb-noise{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.9;}
+.proj-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;
+  transition:opacity 0.5s ease;pointer-events:none;}
+.proj-video.is-active{opacity:1;}
+.play-btn{position:relative;z-index:2;width:58px;height:58px;border-radius:50%;
+  background:rgba(245,245,247,0.14);border:1px solid rgba(245,245,247,0.32);
+  display:flex;align-items:center;justify-content:center;box-shadow:0 0 26px rgba(106,227,240,0.22);
+  transition:transform 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;}
+.proj-thumb:hover .play-btn{transform:scale(1.12);background:rgba(245,245,247,0.24);box-shadow:0 0 40px rgba(106,227,240,0.4);}
+.proj-meta{position:absolute;left:16px;bottom:14px;z-index:2;display:flex;align-items:center;gap:8px;font-size:11.5px;
+  color:rgba(245,245,247,0.75);font-family:var(--font-mono);}
+.proj-tag{font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--cyan);}
+.proj-card h3{font-size:18px;font-weight:600;}
+.proj-card p{font-size:14px;color:var(--ink-muted);line-height:1.5;}
+
+/* ---------- 14c. FOTOGRAFIA (nova área de negócio, separada de vídeo/CGI) ----------
+   Grid de 4 fotos reais enviadas pelo cliente. Cartões em aspect-ratio 3/4 (retrato) pra
+   combinar com o enquadramento original das fotos, com zoom leve + tag no hover — mesmo
+   padrão de interação de .proj-thumb, sem o overlay de vídeo. */
+.foto-section{padding:100px 0;}
+.foto-grid{display:grid;grid-template-columns:repeat(4, minmax(0,1fr));gap:20px;}
+.foto-card{position:relative;aspect-ratio:3/4;border-radius:20px;overflow:hidden;
+  border:1px solid var(--border-soft);}
+.foto-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s ease;}
+.foto-card:hover img{transform:scale(1.06);}
+.foto-card::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg, rgba(6,8,14,0) 58%, rgba(6,8,14,0.78) 100%);}
+.foto-card-tag{position:absolute;left:14px;bottom:13px;z-index:2;font-size:11.5px;font-weight:700;
+  letter-spacing:0.06em;text-transform:uppercase;color:var(--cyan);text-shadow:0 2px 10px rgba(0,0,0,0.5);}
+.foto-cta{margin-top:36px;text-align:center;}
+
+/* ---------- 15. CTA ---------- */
+.cta-section{padding:0 0 40px;}
+.cta-panel{max-width:900px;margin:0 auto;padding:68px 60px;display:flex;align-items:center;justify-content:center;
+  text-align:center;position:relative;overflow:hidden;}
+.cta-panel .cta-glow{position:absolute;top:-140px;left:50%;transform:translateX(-50%);width:520px;height:420px;
+  background:radial-gradient(circle, rgba(106,227,240,0.22), transparent 70%);filter:blur(60px);pointer-events:none;}
+.cta-copy{display:flex;flex-direction:column;align-items:center;gap:16px;max-width:560px;position:relative;}
+.cta-copy h2{font-size:34px;line-height:1.2;}
+.cta-copy p{font-size:16px;color:var(--ink-muted);line-height:1.6;}
+
+/* ---------- 15b. END SCENE — transição CTA → logo ----------
+   Um único gradiente por trás de todo o end-scene escurece progressivamente até quase
+   preto: o CTA começa dentro da atmosfera normal do site e, sem corte brusco, o fundo
+   apaga até sobrar só espaço vazio + a logo. */
+.end-scene{position:relative;}
+.end-scene::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(180deg,
+    transparent 0%,
+    rgba(4,7,13,0.5) 32%,
+    rgba(3,5,10,0.86) 58%,
+    #03050a 80%,
+    #020408 100%);
+}
+.end-scene > *{position:relative;z-index:1;}
+
+/* ---------- 15c. LOGO FINALE ----------
+   Sem card, sem glass, sem borda — a logo real do projeto flutua sozinha sobre o fundo
+   quase preto. Tamanho generoso (280–500px na imagem) conforme pedido; o container ao
+   redor é maior para dar espaço ao campo de partículas orbitando/reagindo ao cursor. */
+.logo-scene{min-height:min(88vh,880px);display:flex;align-items:center;justify-content:center;padding:70px 0;}
+.logo-signature{position:relative;width:clamp(360px,48vw,680px);aspect-ratio:1/1;margin:0 auto;
+  display:flex;align-items:center;justify-content:center;}
+.logo-signature canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+.logo-signature img{position:relative;width:clamp(280px,32vw,480px);height:auto;z-index:2;display:block;
+  filter:drop-shadow(0 0 0 rgba(106,227,240,0));
+  transition:filter 0.7s ease, transform 0.9s ease;
+  will-change:transform;}
+.logo-signature.is-active img{
+  filter:url(#liquid-distort) drop-shadow(0 0 36px rgba(106,227,240,0.38));
+  transform:scale(1.022);}
+/* Reflexo de luz (glass/metal, não neon): mascarado na silhueta da própria logo,
+   segue o cursor via --sx/--sy (definidos em main.js) e só aparece perto do mouse. */
+.logo-sweep{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:0;
+  -webkit-mask-image:url(../assets/images/logo-mark.webp);mask-image:url(../assets/images/logo-mark.webp);
+  -webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-position:center;mask-position:center;
+  background:radial-gradient(160px 160px at var(--sx,50%) var(--sy,50%), rgba(255,255,255,0.55), transparent 62%);
+  mix-blend-mode:overlay;
+  transition:opacity 0.5s ease;}
+.logo-signature.is-active .logo-sweep{opacity:0.85;}
+
+/* ---------- 16. FOOTER (minimalista) ---------- */
+.site-footer{position:relative;padding:56px 0 46px;overflow:hidden;background:#03050a;border-top:1px solid var(--border-soft);}
+.footer-minimal{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;}
+.footer-word{font-family:var(--font-display);font-weight:700;font-size:24px;line-height:1;color:var(--ink);}
+.footer-word .cyan{color:var(--cyan);}
+.footer-word .sub{display:block;margin-top:6px;font-weight:500;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-faint);}
+.footer-tagline{font-family:var(--font-display);color:var(--cyan);font-size:14.5px;font-weight:600;font-style:italic;}
+.footer-services{font-family:var(--font-mono);font-size:12px;letter-spacing:0.05em;color:var(--ink-muted);}
+.social-row{display:flex;align-items:center;gap:12px;margin-top:6px;}
+.social-btn{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--ink-muted);
+  transition:transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;}
+.social-btn::before{background:radial-gradient(circle 90px at var(--mx,50%) var(--my,50%), rgba(106,227,240,0.5), transparent 65%);}
+.social-btn:hover{transform:translateY(-3px);box-shadow:0 0 22px rgba(106,227,240,0.25);color:var(--ink);}
+.footer-copy-row{margin-top:14px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center;}
+.footer-copy-row span,.footer-copy-row a{font-size:12.5px;color:var(--ink-faint);}
+.footer-copy-row a:hover{color:var(--ink-muted);}
+
+/* ---------- 17. RESPONSIVO ---------- */
+@media (max-width:1080px){
+  .hero-grid,.cgi-grid,.drone-grid{grid-template-columns:1fr;}
+  .hero-stage{min-height:420px;order:-1;}
+  .servizi-bento{grid-template-columns:repeat(2,1fr);grid-auto-rows:190px;}
+  .svc-featured{grid-column:span 2;grid-row:span 1;}
+  .perche-grid{grid-template-columns:repeat(2,1fr);}
+  .processo-grid{grid-template-columns:repeat(2,1fr);}
+  .proj-grid{grid-template-columns:repeat(2,1fr);}
+  .foto-grid{grid-template-columns:repeat(2,1fr);}
+  .chisiamo-stats{grid-template-columns:repeat(2,1fr);}
+  .chisiamo-mission{grid-template-columns:1fr;}
+  .chisiamo-founder{grid-template-columns:1fr;}
+  .chisiamo-founder-photo{max-width:340px;margin:0 auto;}
+  .hero-hud{display:none;}
+  /* Notebook/tablet (681–1080px): logo + 5 links + botão não cabiam em uma linha —
+     "CGI / VFX" e o botão quebravam em 2-3 linhas. Compacta em vez de esconder o menu. */
+  .navbar-inner{gap:14px;}
+  .nav-links{gap:13px;}
+  .nav-link{font-size:12.5px;}
+  .navbar .btn-primary{padding:10px 14px;font-size:12.5px;}
+}
+@media (max-width:900px){
+  /* Abaixo de ~900px mesmo compacto o menu voltava a quebrar linha — some com
+     "Productions" também aqui (mesmo truque do mobile) pra sobrar espaço real. */
+  .brand-sub{display:none;}
+}
+@media (max-width:790px){
+  /* Com o 6º link (Fotografia) o menu compacto do tablet só cabe em uma linha até
+     ~800px de viewport — abaixo disso ele quebrava em 2-3 linhas mesmo já compacto
+     (mesmo bug que o breakpoint de 1080px acima já corrigia pra 5 links). Adianta
+     aqui o mesmo tratamento que o breakpoint mobile (712px) usa: esconde os links
+     de navegação, mantendo logo + botão CTA. */
+  .nav-links{display:none;}
+}
+@media (max-width:712px){
+  /* 712 (não 680): entre 681–709px, mesmo o navbar compacto do tablet ainda quebrava
+     linha (5 links + botão não cabem). Nessa faixa estreita cai no tratamento mobile
+     abaixo, que já é comprovadamente sólido até 320px. */
+  .container{padding:0 22px;}
+  .hero{padding:110px 0 70px;}
+  .hero-copy h1{font-size:38px;}
+  .hero-copy p.lead{font-size:16px;}
+  .hero-stage{min-height:300px;}
+  .hero-robot-media{width:230px;}
+  .hero-badge{display:none;}
+  .servizi-bento{grid-template-columns:1fr;grid-auto-rows:auto;}
+  .svc-featured{grid-column:span 1;}
+  .cgi-stage,.drone-stage{height:280px;}
+  /* Bug pré-existente: com margin:auto + max-width mas sem width, o palco do drone tinha
+     largura 0 no mobile — todo o conteúdo dele é position:absolute (canvas incluso, via
+     width:100%), então sem um item em fluxo normal o grid item "fit-content" colapsava
+     a zero e o glow/HUD vazavam ~100px para fora da tela. width:100% resolve. */
+  .drone-stage{width:100%;margin:0 auto;max-width:320px;}
+  .drone-shadow{bottom:10%;width:120px;}
+  /* Em telas estreitas os dois painéis HUD (min-width:168px cada) somados passam da
+     largura do palco (320px) e cobrem o drone inteiro. Reduzimos texto/padding para
+     caberem nos cantos sem se tocarem, deixando o drone visível no centro. */
+  #drone-hud-left,.cgi-hud-overlay.right{transform:scale(0.78);transform-origin:bottom left;}
+  .cgi-hud-overlay.right{transform-origin:top right;}
+  .drone-stage .hud-panel{min-width:0;padding:10px 12px;}
+  .drone-stage .hud{font-size:10px;line-height:1.6;white-space:nowrap;}
+  /* Navbar: o botão "Richiedi un preventivo" era espremido pelo flex (clientWidth menor
+     que o texto) e cortado pelo overflow:hidden do .btn. flex-shrink:0 garante que ele
+     nunca encolha abaixo do necessário; escondemos "Productions" (secundário) para abrir
+     espaço em telas muito estreitas em vez de truncar o texto do botão. */
+  .navbar-inner{gap:10px;}
+  .brand-sub{display:none;}
+  .navbar .btn-primary{padding:10px 14px;font-size:12px;white-space:nowrap;gap:0;flex-shrink:0;}
+  .perche-grid{grid-template-columns:1fr;}
+  .processo-grid{grid-template-columns:1fr;}
+  .proj-grid{grid-template-columns:1fr;}
+  .foto-grid{grid-template-columns:1fr 1fr;gap:12px;}
+  .chisiamo-stats{grid-template-columns:1fr 1fr;}
+  /* Faixas de 210px nas bordas comeriam boa parte de uma tela de 320-390px e
+     brigariam com os cards — encolhe bastante em vez de esconder. */
+  .code-col{width:90px;font-size:10.5px;padding:0 8px;}
+  .cta-panel{padding:44px 26px;}
+  .cta-copy h2{font-size:27px;}
+  .manifesto-front{padding:32px 26px;}
+  .manifesto-front .quote{font-size:18px;}
+  .nav-links{display:none;}
+  /* Logo final: clamp() com vw já reduz, mas o piso mínimo (360/280px) ainda é largo
+     demais para telas de celular — redefinimos o piso aqui para caber com folga mesmo
+     em aparelhos de 320px, mantendo a redução proporcional pedida. */
+  .logo-scene{min-height:min(70vh,620px);padding:40px 0;}
+  .logo-signature{width:clamp(240px,72vw,360px);}
+  .logo-signature img{width:clamp(190px,56vw,280px);}
+  .footer-word{font-size:21px;}
+}
+@media (max-width:420px){
+  /* Em telas muito estreitas (<420px) os dois painéis HUD do drone, mesmo compactos,
+     ainda disputam espaço com o modelo 3D — escondemos os painéis e deixamos o drone
+     como único elemento visual do palco (a cópia ao lado já explica os dados). */
+  .drone-stage #drone-hud-left,.drone-stage .cgi-hud-overlay.right{display:none;}
+  /* Em aparelhos muito estreitos (~320px, ex. iPhone SE) o botão do navbar ainda
+     estourava a viewport por ~11px mesmo já compacto — aperta mais um degrau. */
+  .navbar-inner{gap:8px;}
+  .brand .word{font-size:15px;}
+  .navbar .btn-primary{padding:8px 11px;font-size:10.5px;}
+}
+
+/* ---------- 18. REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *{animation-duration:0.001ms !important;animation-iteration-count:1 !important;transition-duration:0.001ms !important;}
+  .reveal{opacity:1;transform:none;}
+  #bg-canvas{display:none;}
+  #bg-layer{background:
+    radial-gradient(900px 680px at 18% -14%, rgba(255,255,255,0.1), transparent 55%),
+    radial-gradient(1150px 900px at 82% 6%, rgba(106,227,240,0.28), transparent 60%),
+    radial-gradient(1000px 820px at 100% 96%, rgba(47,111,237,0.3), transparent 62%),
+    linear-gradient(180deg, #0b1626, #060a12 58%, #070c14);}
+}
