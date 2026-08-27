@@ -257,12 +257,16 @@
     const video = document.getElementById("hero-robot-video");
     if (!video) return;
 
+    video.addEventListener("loadeddata", () => {
+  video.classList.add("is-ready");
+}, { once: true });
+
     function swapToStaticFallback() {
       if (!video.isConnected) return;
       const img = document.createElement("img");
       img.src = "assets/images/robot-hero-fallback.png";
       img.alt = "Robot Vision Productions";
-      img.className = "hero-robot-media";
+      img.className = "hero-robot-media is-ready";
       video.replaceWith(img);
     }
 

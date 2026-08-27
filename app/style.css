@@ -537,7 +537,7 @@ main{position:relative;z-index:1;}
 /* Reflexo de luz (glass/metal, não neon): mascarado na silhueta da própria logo,
    segue o cursor via --sx/--sy (definidos em main.js) e só aparece perto do mouse. */
 .logo-sweep{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:0;
-  -webkit-mask-image:url(../assets/images/logo-mark.webp);mask-image:url(../assets/images/logo-mark.webp);
+  -webkit-mask-image:url(/assets/images/logo-mark.webp);mask-image:url(/assets/images/logo-mark.webp);
   -webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
   -webkit-mask-position:center;mask-position:center;
   background:radial-gradient(160px 160px at var(--sx,50%) var(--sy,50%), rgba(255,255,255,0.55), transparent 62%);
