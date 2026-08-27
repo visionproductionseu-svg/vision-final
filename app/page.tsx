@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import VisionScripts from "./VisionScripts";
+import ChatWidget from "./ChatWidget";
 
 export default function Home() {
   const filePath = path.join(process.cwd(), "app", "page-content.html");
@@ -11,6 +12,7 @@ export default function Home() {
     <>
       <div dangerouslySetInnerHTML={{ __html: html }} />
       <VisionScripts />
+      <ChatWidget />
     </>
   );
 }
