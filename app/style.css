@@ -454,28 +454,126 @@ main{position:relative;z-index:1;}
 .chisiamo-founder-copy p:not(.chisiamo-founder-role){font-size:15px;color:var(--ink-muted);line-height:1.65;max-width:480px;}
 
 /* ---------- 14b. GRID DE VÍDEOS (proj-*) — usada em Servizi ---------- */
-.proj-grid-head{margin-bottom:32px;}
-.proj-grid{display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:24px;}
-.proj-card{display:flex;flex-direction:column;gap:14px;}
-.proj-thumb{position:relative;aspect-ratio:16/10;border-radius:22px;overflow:hidden;border:1px solid var(--border-soft);
-  display:flex;align-items:center;justify-content:center;transition:transform 0.5s var(--ease);}
-.proj-thumb:hover{transform:scale(1.015);}
-.proj-thumb::after{content:"";position:absolute;inset:0;
-  background:linear-gradient(0deg, rgba(4,6,10,0.55), transparent 45%);}
-.proj-thumb img.thumb-noise{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.9;}
-.proj-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;
-  transition:opacity 0.5s ease;pointer-events:none;}
-.proj-video.is-active{opacity:1;}
-.play-btn{position:relative;z-index:2;width:58px;height:58px;border-radius:50%;
-  background:rgba(245,245,247,0.14);border:1px solid rgba(245,245,247,0.32);
-  display:flex;align-items:center;justify-content:center;box-shadow:0 0 26px rgba(106,227,240,0.22);
-  transition:transform 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;}
-.proj-thumb:hover .play-btn{transform:scale(1.12);background:rgba(245,245,247,0.24);box-shadow:0 0 40px rgba(106,227,240,0.4);}
-.proj-meta{position:absolute;left:16px;bottom:14px;z-index:2;display:flex;align-items:center;gap:8px;font-size:11.5px;
-  color:rgba(245,245,247,0.75);font-family:var(--font-mono);}
-.proj-tag{font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--cyan);}
-.proj-card h3{font-size:18px;font-weight:600;}
-.proj-card p{font-size:14px;color:var(--ink-muted);line-height:1.5;}
+.proj-grid-head {
+  margin-bottom: 32px;
+}
+
+.proj-grid {
+  width: 100%;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.proj-card {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.proj-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/10;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid var(--border-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .5s var(--ease);
+}
+
+.proj-thumb:hover {
+  transform: scale(1.015);
+}
+
+.proj-thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(4,6,10,.55), transparent 45%);
+}
+
+.proj-thumb img.thumb-noise {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .9;
+}
+
+.proj-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity .5s ease;
+  pointer-events: none;
+}
+
+.proj-video.is-active {
+  opacity: 1;
+}
+
+.play-btn {
+  position: relative;
+  z-index: 2;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(245,245,247,.14);
+  border: 1px solid rgba(245,245,247,.32);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 26px rgba(106,227,240,.22);
+  transition: transform .35s ease, background .35s ease, box-shadow .35s ease;
+}
+
+.proj-thumb:hover .play-btn {
+  transform: scale(1.12);
+  background: rgba(245,245,247,.24);
+  box-shadow: 0 0 40px rgba(106,227,240,.4);
+}
+
+.proj-meta {
+  position: absolute;
+  left: 16px;
+  bottom: 14px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+  color: rgba(245,245,247,.75);
+  font-family: var(--font-mono);
+}
+
+.proj-tag {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.proj-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.proj-card p {
+  font-size: 14px;
+  color: var(--ink-muted);
+  line-height: 1.5;
+}
 
 /* ---------- 14c. FOTOGRAFIA (nova área de negócio, separada de vídeo/CGI) ----------
    Grid de 4 fotos reais enviadas pelo cliente. Cartões em aspect-ratio 3/4 (retrato) pra
@@ -675,4 +773,154 @@ main{position:relative;z-index:1;}
     radial-gradient(1150px 900px at 82% 6%, rgba(106,227,240,0.28), transparent 60%),
     radial-gradient(1000px 820px at 100% 96%, rgba(47,111,237,0.3), transparent 62%),
     linear-gradient(180deg, #0b1626, #060a12 58%, #070c14);}
+}
+.proj-vimeo {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.proj-vimeo iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 9 / 16;
+  transform: translate(-50%, -50%);
+  border: 0;
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.proj-vimeo::after {
+  pointer-events: none;
+}
+/* ---------- YOUTUBE PROJECT PLAYER ---------- */
+
+.proj-youtube {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  cursor: pointer;
+}
+
+.youtube-thumb {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.proj-youtube:hover .youtube-thumb {
+  transform: scale(1.025);
+}
+
+.youtube-play {
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(10,15,22,0.65);
+  backdrop-filter: blur(10px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.youtube-play:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  background: rgba(10,15,22,0.85);
+  box-shadow: 0 0 35px rgba(106,227,240,0.35);
+}
+
+.proj-youtube iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  z-index: 5;
+}
+/* ---------- YOUTUBE — PLAYER DA VISION ---------- */
+
+.proj-youtube {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  cursor: pointer;
+}
+
+.youtube-thumb {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.proj-youtube:hover .youtube-thumb {
+  transform: scale(1.03);
+}
+
+.youtube-play {
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(10,15,22,0.65);
+  backdrop-filter: blur(10px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.youtube-play:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  background: rgba(10,15,22,0.85);
+  box-shadow: 0 0 35px rgba(106,227,240,0.35);
+}
+
+.proj-youtube iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  z-index: 5;
 }
