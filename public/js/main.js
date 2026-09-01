@@ -1,5 +1,5 @@
 /* ============================================================
-   VISION PRODUCTIONS — PREMIUM EDITION — main.js
+   Alfa Creative Agency — PREMIUM EDITION — main.js
    Índice:
    1. Config / detecção de capacidade
    2. Fundo líquido (canvas 2D, inércia + deriva autônoma)
@@ -269,7 +269,7 @@ const ALLOW_3D =
       if (!video.isConnected) return;
       const img = document.createElement("img");
       img.src = "assets/images/robot-hero-fallback.png";
-      img.alt = "Robot Vision Productions";
+      img.alt = "Robot Alfa Creative Agency";
       img.className = "hero-robot-media is-ready";
       video.replaceWith(img);
     }
@@ -522,7 +522,7 @@ const ALLOW_3D =
     return { THREE, scene, camera, renderer, isVisible: () => visible && !document.hidden };
   }
 
-  // Logo 3D — dois losangos com cantos arredondados (a marca Vision Productions),
+  // Logo 3D — dois losangos com cantos arredondados (a marca Alfa Creative Agency),
   // extrudados com bisel. Construída por código a partir das proporções da logo
   // plana (assets/images/logo-mark.webp), não de um .glb — não precisa de nenhum
   // arquivo externo, sempre funciona (inclusive em file://, sem o aviso de CORS

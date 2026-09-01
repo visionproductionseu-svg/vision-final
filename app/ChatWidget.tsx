@@ -32,7 +32,7 @@ export default function ChatWidget() {
 
             <div>
               <strong>Vision Assistant</strong>
-              <span>Vision Productions</span>
+              <span>Alfa Creative Agency</span>
             </div>
 
             <button
@@ -97,7 +97,7 @@ export default function ChatWidget() {
           </div>
 
           <div className={styles.footer}>
-            Vision Productions
+            Alfa Creative Agency
           </div>
         </div>
       )}
