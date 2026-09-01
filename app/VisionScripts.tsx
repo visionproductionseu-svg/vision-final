@@ -37,8 +37,6 @@ function loadVision() {
       await loadScript("/js/vendor/GLTFLoader.js");
       await loadScript("/js/main.js");
 
-      document.dispatchEvent(new Event("DOMContentLoaded"));
-
       visionInitialized = true;
     } catch (error) {
       console.error("Erro ao carregar scripts do Vision:", error);

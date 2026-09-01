@@ -16,13 +16,17 @@
   "use strict";
 
   /* ---------- 1. CONFIG ---------- */
-  const REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  // "dispositivo fraco" = tela pequena (celular) ou touch + tela estreita (tablet) — não usamos
-  // hardwareConcurrency porque muitos desktops legítimos reportam poucos núcleos.
-  const LOW_POWER =
-    window.innerWidth < 760 ||
-    (window.matchMedia("(pointer: coarse)").matches && window.innerWidth < 1024);
-  const ALLOW_3D = !REDUCED_MOTION && !LOW_POWER && typeof window.THREE !== "undefined";
+
+const REDUCED_MOTION = false;
+
+// "dispositivo fraco" = tela pequena (celular) ou touch + tela estreita (tablet)
+const LOW_POWER =
+  window.innerWidth < 760 ||
+  (window.matchMedia("(pointer: coarse)").matches && window.innerWidth < 1024);
+
+const ALLOW_3D =
+  !LOW_POWER &&
+  typeof window.THREE !== "undefined";
 
   /* ---------- 2. FUNDO LÍQUIDO ---------- */
   function initLiquidBackground() {
@@ -928,18 +932,26 @@
   }
 
   /* ---------- 9. INIT ---------- */
-  document.addEventListener("DOMContentLoaded", () => {
-    initLiquidBackground();
-    initGlassPointer();
-    initNavbar();
-    initScrollReveal();
-    initHudCyclers();
-    initHeroDepth();
-    initHeroRobotVideo();
-    initCardTilt();
-    initPortfolioVideo();
-    initLogoSignature();
-    initLogoScene3D();
-    initCgiScene();
-  });
+
+function initVision() {
+  initLiquidBackground();
+  initGlassPointer();
+  initNavbar();
+  initScrollReveal();
+  initHudCyclers();
+  initHeroDepth();
+  initHeroRobotVideo();
+  initCardTilt();
+  initPortfolioVideo();
+  initLogoSignature();
+  initLogoScene3D();
+  initCgiScene();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initVision, { once: true });
+} else {
+  initVision();
+}
+
 })();
