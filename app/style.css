@@ -601,6 +601,118 @@ main{position:relative;z-index:1;}
 .cta-copy h2{font-size:34px;line-height:1.2;}
 .cta-copy p{font-size:16px;color:var(--ink-muted);line-height:1.6;}
 
+/* ---------- Contact Form ---------- */
+.contact-form{
+  width:100%;
+  margin-top:18px;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  text-align:left;
+}
+
+.contact-form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+
+.form-field{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.form-field label{
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.04em;
+  color:var(--ink);
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea{
+  width:100%;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;
+  background:rgba(255,255,255,.045);
+  color:var(--ink);
+  font:inherit;
+  font-size:14px;
+  padding:13px 14px;
+  outline:none;
+  transition:border-color .2s ease, background .2s ease, box-shadow .2s ease;
+  box-sizing:border-box;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder{
+  color:var(--ink-muted);
+  opacity:.7;
+}
+
+.form-field select{
+  cursor:pointer;
+  appearance:auto;
+}
+
+.form-field select option{
+  background:#11161a;
+  color:#fff;
+}
+
+.form-field textarea{
+  min-height:110px;
+  resize:vertical;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus{
+  border-color:rgba(106,227,240,.65);
+  background:rgba(255,255,255,.065);
+  box-shadow:0 0 0 3px rgba(106,227,240,.08);
+}
+
+.form-consent{
+  display:flex;
+  align-items:flex-start;
+  gap:9px;
+  font-size:12px;
+  line-height:1.5;
+  color:var(--ink-muted);
+  cursor:pointer;
+}
+
+.form-consent input{
+  margin-top:2px;
+  accent-color:var(--cyan);
+  cursor:pointer;
+}
+
+.contact-submit{
+  align-self:center;
+  margin-top:4px;
+  border:0;
+  cursor:pointer;
+}
+
+/* Mobile */
+@media (max-width:700px){
+  .contact-form-row{
+    grid-template-columns:1fr;
+  }
+
+  .cta-panel{
+    padding:48px 24px;
+  }
+
+  .cta-copy{
+    width:100%;
+  }
+}
+
 /* ---------- 15b. END SCENE — transição CTA → logo ----------
    Um único gradiente por trás de todo o end-scene escurece progressivamente até quase
    preto: o CTA começa dentro da atmosfera normal do site e, sem corte brusco, o fundo

@@ -855,15 +855,97 @@ telemetry.altitude = <span class="n">42</span>m;</code></pre></div>
             <span style="left:6%;top:80%;animation-delay:0.6s;"></span>
           </div>
           <div class="cta-copy">
-            <span class="eyebrow">Alfa Creative Agency</span>
-            <h2>Pronti a dare vita<br>alla tua visione?</h2>
-            <p>Raccontaci cosa stai immaginando: ti rispondiamo con una proposta su misura.</p>
-            <div style="margin-top:8px;"><a href="mailto:contact@alfacreative.eu" class="btn btn-primary">Inizia un progetto <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-          </div>
-        </div>
+  <span class="eyebrow">Alfa Creative Agency</span>
+
+  <h2>Pronti a dare vita<br>alla tua visione?</h2>
+
+  <p>
+    Raccontaci il tuo progetto: ti risponderemo con una proposta su misura.
+  </p>
+
+  <form
+    class="contact-form"
+    action="https://formsubmit.co/contact@alfacreative.eu"
+    method="POST"
+  >
+    <input type="hidden" name="_subject" value="Nuova richiesta dal sito Alfa Creative Agency">
+    <input type="hidden" name="_captcha" value="true">
+    <input type="hidden" name="_template" value="table">
+
+    <div class="contact-form-row">
+      <div class="form-field">
+        <label for="nome">Nome e Cognome</label>
+        <input
+          type="text"
+          id="nome"
+          name="nome"
+          placeholder="Il tuo nome"
+          required
+        >
       </div>
-    </section>
-  </div>
+
+      <div class="form-field">
+        <label for="azienda">Azienda</label>
+        <input
+          type="text"
+          id="azienda"
+          name="azienda"
+          placeholder="Nome dell'azienda"
+        >
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="La tua email"
+        required
+      >
+    </div>
+
+    <div class="form-field">
+      <label for="servizio">Servizio</label>
+      <select id="servizio" name="servizio" required>
+        <option value="" disabled selected>Seleziona un servizio</option>
+        <option value="Produzione Video">Produzione Video</option>
+        <option value="Video Corporate">Video Corporate</option>
+        <option value="Video Pubblicitari">Video Pubblicitari</option>
+        <option value="CGI 3D">CGI 3D</option>
+        <option value="VFX">VFX</option>
+        <option value="Motion Design">Motion Design</option>
+        <option value="Video Eventi / Aftermovie">Video Eventi / Aftermovie</option>
+        <option value="Altro">Altro</option>
+      </select>
+    </div>
+
+    <div class="form-field">
+      <label for="messaggio">Messaggio</label>
+      <textarea
+        id="messaggio"
+        name="messaggio"
+        rows="4"
+        placeholder="Raccontaci brevemente il tuo progetto..."
+        required
+      ></textarea>
+    </div>
+
+    <label class="form-consent">
+      <input type="checkbox" name="privacy" required>
+      <span>Ho letto e accetto la Privacy Policy.</span>
+    </label>
+
+    <button type="submit" class="btn btn-primary contact-submit">
+      Invia richiesta
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M5 12h14M13 6l6 6-6 6"/>
+      </svg>
+    </button>
+  </form>
+</div>
 
 </main>
 
