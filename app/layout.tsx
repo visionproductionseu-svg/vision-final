@@ -78,6 +78,22 @@ export default function RootLayout({
             gtag('config', 'G-PMLD438SR2');
           `}
         </Script>
+        <Script id="organization-schema" type="application/ld+json">
+  {JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Alfa Creative Agency",
+    url: "https://alfacreative.eu",
+    email: "contact@alfacreative.eu",
+    description:
+      "Alfa Creative Agency — produzione video, CGI, VFX, motion design e contenuti creativi per brand e aziende.",
+    sameAs: [
+      "https://www.instagram.com/alfa.creative.agency/",
+      "https://www.facebook.com/profile.php?id=61593653235825",
+      "https://www.youtube.com/channel/UCkNu2YfEOeRge6cb28iAVKw/",
+    ],
+  })}
+</Script>
       </body>
     </html>
   );
