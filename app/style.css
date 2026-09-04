@@ -1108,3 +1108,29 @@ main{position:relative;z-index:1;}
     font-size:15px;
   }
 }
+/* ===== AJUSTE LOGO ALFA ===== */
+
+/* Logo do cabeçalho */
+.navbar .brand img {
+  width: 220px;
+  height: auto;
+  display: block;
+}
+
+/* Logo do rodapé */
+.footer-word img {
+  width: 125px;
+  height: auto;
+  display: block;
+}
+
+/* Mobile */
+@media (max-width: 680px) {
+  .navbar .brand img {
+    width: 175px;
+  }
+
+  .footer-word img {
+    width: 110px;
+  }
+}

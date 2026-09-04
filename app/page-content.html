@@ -1,5 +1,3 @@
-
-
 <!-- filtro SVG usado pelo .glass-liquid (refração) -->
 <svg width="0" height="0" style="position:absolute">
   <filter id="liquid-distort">
@@ -18,17 +16,22 @@
 <header class="navbar">
   <div class="container navbar-inner">
     <a href="#" class="brand" aria-label="Alfa Creative Agency">
-      <img src="/assets/images/logo-mark.webp" alt="">
-      <span class="word">Visi<span style="color:var(--cyan);">on</span> <span class="brand-sub" style="font-weight:500;color:var(--ink-muted);font-size:0.66em;">Productions</span></span>
-    </a>
+  <img
+    src="/assets/images/alfa-logo-horizontal.png"
+    alt="Alfa Creative Agency"
+  >
+</a>
+
     <nav class="nav-links">
       <a href="#hero" class="nav-link active">Home</a>
       <a href="#servizi" class="nav-link">Servizi</a>
-      <a href="#cgi" class="nav-link">CGI / VFX</a>
+      <a href="#cgi" class="nav-link">Web & Digital</a>
+      <a href="#fotografia" class="nav-link">Video & Creative</a>
       <a href="#chi-siamo" class="nav-link">Chi siamo</a>
       <a href="#cta" class="nav-link">Contatti</a>
     </nav>
-    <a href="#cta" class="btn btn-primary">Richiedi un preventivo</a>
+
+    <a href="#cta" class="btn btn-primary">Parliamo</a>
   </div>
 </header>
 
@@ -37,27 +40,47 @@
   <!-- ============ CENA 01 — HERO ============ -->
   <section class="hero" id="hero">
     <div class="container hero-grid">
+
       <div class="hero-copy reveal">
+
         <span class="eyebrow">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.8L21 11l-6.8 2.2L12 20l-2.2-6.8L3 11l6.8-2.2L12 2z"/></svg>
-          Produzione Video · CGI · VFX
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2l2.2 6.8L21 11l-6.8 2.2L12 20l-2.2-6.8L3 11l6.8-2.2L12 2z"/>
+          </svg>
+          Marketing Digital · Web · Video · Creative
         </span>
+
         <h1>
-  Produzione video, CGI e VFX.<br>
-  <span class="grad-text">Creatività completa per il tuo brand.</span>
-</h1>
-        <p class="lead">Video aziendali, eventi dal vivo, CGI 3D e motion design: un unico studio che segue ogni progetto dalla ripresa alla release finale.</p>
+          Facciamo crescere
+          <br>
+          <span class="grad-text">il tuo brand.</span>
+        </h1>
+
+        <p class="lead">
+          Strategie digitali, siti web, SEO, marketing e produzione
+          di contenuti: un unico partner per costruire una presenza
+          forte, coerente e riconoscibile.
+        </p>
+
         <div class="hero-ctas">
           <a href="#cta" class="btn btn-primary">
-            Richiedi un preventivo
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            Parliamo del tuo progetto
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M5 12h14M13 6l6 6-6 6"/>
+            </svg>
           </a>
-          <a href="#servizi-lavori" class="btn btn-ghost">Guarda i nostri lavori</a>
+
+          <a href="#servizi-lavori" class="btn btn-ghost">
+            Guarda i nostri lavori
+          </a>
         </div>
+
       </div>
 
       <div class="hero-stage reveal reveal-delay-1">
+
         <div class="depth-glow" aria-hidden="true"></div>
+
         <div class="hero-particles" aria-hidden="true">
           <span style="left:10%;top:20%;animation-delay:0s;"></span>
           <span style="left:80%;top:15%;animation-delay:1.4s;"></span>
@@ -65,949 +88,1601 @@
           <span style="left:15%;top:78%;animation-delay:0.8s;"></span>
           <span style="left:50%;top:8%;animation-delay:2s;"></span>
         </div>
-        <div class="hero-hud hud glass-soft hud-panel" data-hud-cycle='["render.scene    active","camera.track    on","light.volumetric on"]'>
-          <span class="hud-title">Vision / Render</span>frame <span class="accent">24fps</span><span class="hud-cursor"></span>
+
+        <div
+          class="hero-hud hud glass-soft hud-panel"
+          data-hud-cycle='["strategy.digital   active","web.experience    ready","creative.content  on"]'
+        >
+          <span class="hud-title">Alfa / Creative</span>
+          Agency <span class="accent">360°</span><span class="hud-cursor"></span>
         </div>
-        <!-- Robô animado real (vídeo enviado pelo cliente), fundo removido via matte de luma
-             sobre preto puro (não chroma key tradicional — o fundo do render já era preto
-             sólido) com unpremultiply nas bordas pra eliminar qualquer franja escura de
-             recorte. Vídeo WebM/VP9 com canal alpha, 240 frames a 24fps (mesma fluidez do
-             arquivo original do cliente — nada de subamostragem de frames aqui, é isso que
-             fazia parecer "travado" numa tentativa anterior em WebP animado). O <img> dentro
-             do <video> só entra como conteúdo de fallback nativo do HTML5 se o navegador não
-             conseguir tocar o WebM (ex.: Safari mais antigo) — nunca fica sem imagem, e nunca
-             mostra uma caixa preta sólida. initHeroRobotVideo() em main.js só dá play() se
-             prefers-reduced-motion permitir; caso contrário fica parado no poster (pose
-             estática limpa). -->
+
+        <!-- Robô animado real - Provisório Robot estático -->
         <div class="hero-robot-wrap">
-          <video class="hero-robot-media" id="hero-robot-video" muted loop playsinline
-                 aria-hidden="true" poster="/assets/images/robot-hero-fallback.png">
-            <source src="/assets/video/robot-hero.webm" type="video/webm">
-            <img src="/assets/images/robot-hero-fallback.png" alt="Robot Alfa Creative Agency" class="hero-robot-media">
-          </video>
-        </div>
+  <img
+    class="hero-robot-media"
+    src="/assets/images/robot-hero-static.png"
+    alt="Robot Alfa Creative Agency"
+  >
+</div>
+
         <div class="hero-badge b1 glass">
           <div class="icon-wrap">
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.6-2.4h6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.2" r="3.4"/></svg>
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 8h3l1.6-2.4h6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>
+              <circle cx="12" cy="13.2" r="3.4"/>
+            </svg>
           </div>
-          <p style="font-size:13.5px;font-weight:600;line-height:1.4;margin:0;">Dal concept alla consegna, senza intermediari.</p>
+
+          <p style="font-size:13.5px;font-weight:600;line-height:1.4;margin:0;">
+            Strategia, creatività e produzione in un unico team.
+          </p>
         </div>
+
         <div class="hero-badge b2 glass">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9.5" y="10" width="5" height="4" rx="1"/><line x1="9.5" y1="11" x2="4" y2="6"/><line x1="14.5" y1="11" x2="20" y2="6"/><line x1="9.5" y1="13" x2="4" y2="18"/><line x1="14.5" y1="13" x2="20" y2="18"/><circle cx="4" cy="6" r="2"/><circle cx="20" cy="6" r="2"/><circle cx="4" cy="18" r="2"/><circle cx="20" cy="18" r="2"/></svg>
-          <span style="font-size:13px;font-weight:600;">Riprese anche in drone</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9.5" y="10" width="5" height="4" rx="1"/>
+            <line x1="9.5" y1="11" x2="4" y2="6"/>
+            <line x1="14.5" y1="11" x2="20" y2="6"/>
+            <line x1="9.5" y1="13" x2="4" y2="18"/>
+            <line x1="14.5" y1="13" x2="20" y2="18"/>
+            <circle cx="4" cy="6" r="2"/>
+            <circle cx="20" cy="6" r="2"/>
+            <circle cx="4" cy="18" r="2"/>
+            <circle cx="20" cy="18" r="2"/>
+          </svg>
+
+          <span style="font-size:13px;font-weight:600;">
+            Dalla strategia alla produzione.
+          </span>
         </div>
+
       </div>
     </div>
 
     <div class="container hero-pills reveal reveal-delay-2">
+      <span class="pill glass-soft">Web Design</span>
+      <span class="pill glass-soft">SEO</span>
+      <span class="pill glass-soft">Marketing Digital</span>
       <span class="pill glass-soft">Produzione Video</span>
-      <span class="pill glass-soft">Video Eventi</span>
-      <span class="pill glass-soft">CGI 3D</span>
       <span class="pill glass-soft">Motion Design</span>
-      <span class="pill glass-soft">VFX</span>
-      <span class="pill glass-soft">Aftermovie</span>
+      <span class="pill glass-soft">Branding</span>
     </div>
   </section>
 
-  <!-- ============ CENA 02 — SERVIZI ============
-       .servizi-code-bg é decorativo, puro CSS (sem canvas/JS): colunas de código
-       falso rolando em loop atrás do grid, esmaecidas nas bordas via mask-image
-       (gradiente CSS, não imagem — não sofre do limite de CORS em file:// que
-       afeta mask-image com PNG/WEBP). prefers-reduced-motion já congela a
-       animação via regra global (seção 18 do CSS). -->
+  <!-- ============ CENA 02 — SERVIZI ============ -->
   <section id="servizi" class="servizi-section">
+
     <div class="servizi-code-bg" aria-hidden="true">
-      <div class="code-col code-col-left"><pre><code>timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);
-timeline.<span class="f">addClip</span>(clip01, {in: <span class="n">0</span>, out: <span class="n">240</span>});
-timeline.<span class="f">crossfade</span>(clip01, clip02, <span class="n">12</span>);
-<span class="k">const</span> grade = lut.<span class="f">apply</span>(<span class="s">'filmic_v3'</span>);
-audio.<span class="f">duck</span>(voiceover, <span class="n">-6</span>db);
-export.<span class="f">queue</span>(<span class="s">'master_4k.mov'</span>);</code></pre></div>
-      <div class="code-col code-col-right"><pre><code>drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;
-drone.<span class="f">setFlightPath</span>(waypoints);
-gimbal.<span class="f">stabilize</span>(<span class="n">3</span>_axis);
-<span class="k">await</span> drone.<span class="f">capture</span>({fps: <span class="n">60</span>, res: <span class="s">'4K'</span>});
-telemetry.altitude = <span class="n">42</span>m;</code></pre></div>
+
+      <div class="code-col code-col-left">
+        <pre><code>strategy.<span class="f">define</span>(brand, {goal: <span class="s">'growth'</span>});
+website.<span class="f">optimize</span>({ux: <span class="n">true</span>, seo: <span class="n">true</span>});
+campaign.<span class="f">launch</span>({google: <span class="n">true</span>, meta: <span class="n">true</span>});
+content.<span class="f">publish</span>(calendar);
+analytics.<span class="f">track</span>(<span class="s">'conversion'</span>);
+strategy.<span class="f">define</span>(brand, {goal: <span class="s">'growth'</span>});
+website.<span class="f">optimize</span>({ux: <span class="n">true</span>, seo: <span class="n">true</span>});
+campaign.<span class="f">launch</span>({google: <span class="n">true</span>, meta: <span class="n">true</span>});
+content.<span class="f">publish</span>(calendar);
+analytics.<span class="f">track</span>(<span class="s">'conversion'</span>);
+strategy.<span class="f">define</span>(brand, {goal: <span class="s">'growth'</span>});
+website.<span class="f">optimize</span>({ux: <span class="n">true</span>, seo: <span class="n">true</span>});
+campaign.<span class="f">launch</span>({google: <span class="n">true</span>, meta: <span class="n">true</span>});
+content.<span class="f">publish</span>(calendar);
+analytics.<span class="f">track</span>(<span class="s">'conversion'</span>);</code></pre>
+      </div>
+
+      <div class="code-col code-col-right">
+        <pre><code>creative.<span class="f">concept</span>(idea);
+video.<span class="f">shoot</span>({camera: <span class="s">'4K'</span>});
+motion.<span class="f">animate</span>(story);
+social.<span class="f">schedule</span>(content);
+brand.<span class="f">evolve</span>(identity);
+creative.<span class="f">concept</span>(idea);
+video.<span class="f">shoot</span>({camera: <span class="s">'4K'</span>});
+motion.<span class="f">animate</span>(story);
+social.<span class="f">schedule</span>(content);
+brand.<span class="f">evolve</span>(identity);
+creative.<span class="f">concept</span>(idea);
+video.<span class="f">shoot</span>({camera: <span class="s">'4K'</span>});
+motion.<span class="f">animate</span>(story);
+social.<span class="f">schedule</span>(content);
+brand.<span class="f">evolve</span>(identity);</code></pre>
+      </div>
+
     </div>
+
     <div class="container">
+
       <div class="section-head reveal">
-        <span class="eyebrow">Servizi</span>
-        <h2 style="font-size:40px;line-height:1.15;">Un servizio completo, <span class="grad-text">dall'idea alla release.</span></h2>
-        <p>Nove specializzazioni, un solo studio: dalla ripresa alla computer grafica, fino agli effetti visivi.</p>
+
+        <span class="eyebrow">
+          Servizi
+        </span>
+
+        <h2 style="font-size:40px;line-height:1.15;">
+          Tutto quello che serve per
+          <span class="grad-text">far crescere il tuo brand.</span>
+        </h2>
+
+        <p>
+          Strategia digitale, siti web, SEO, marketing e produzione
+          creativa: competenze diverse, coordinate da un unico partner.
+        </p>
+
       </div>
 
       <div class="servizi-bento reveal reveal-delay-1">
+
         <div class="glass svc-card">
+
           <div class="svc-top">
-            <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.6-2.4h6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.2" r="3.4"/></svg></div>
+
+            <div class="icon-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 8h3l1.6-2.4h6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>
+                <circle cx="12" cy="13.2" r="3.4"/>
+              </svg>
+            </div>
+
             <span class="svc-num">01</span>
+
           </div>
-          <div><h3>Produzione Video</h3><p>Video di ogni formato, dal concept alla ripresa fino al montaggio finale.</p><span class="svc-hint">clip.ready</span></div>
+
+          <div>
+            <h3>Creazione Siti Web</h3>
+            <p>
+              Siti moderni, veloci e pensati per trasformare
+              visite in contatti e opportunità.
+            </p>
+            <span class="svc-hint">web.experience</span>
+          </div>
+
         </div>
+
         <div class="glass svc-card">
+
           <div class="svc-top">
-            <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6"/></svg></div>
+
+            <div class="icon-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7.5" height="7.5" rx="1.6"/>
+                <rect x="13.5" y="3" width="7.5" height="7.5" rx="1.6"/>
+                <rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6"/>
+                <rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6"/>
+              </svg>
+            </div>
+
             <span class="svc-num">02</span>
+
           </div>
-          <div><h3>Video Eventi</h3><p>Copertura completa di conferenze, fiere e lanci di prodotto dal vivo.</p><span class="svc-hint">multicam.sync</span></div>
+
+          <div>
+            <h3>SEO</h3>
+            <p>
+              Ottimizziamo il tuo sito per aumentare visibilità,
+              traffico qualificato e presenza su Google.
+            </p>
+            <span class="svc-hint">search.optimized</span>
+          </div>
+
         </div>
+
         <div class="glass-premium svc-card svc-featured">
+
           <span class="svc-num">07</span>
+
           <div>
-            <h3 class="grad-text">CGI 3D</h3>
-            <p>Rendering 3D fotorealistico per prodotti, spazi e visualizzazioni.</p>
+            <h3 class="grad-text">Marketing Digital</h3>
+            <p>
+              Strategie digitali, campagne e contenuti per
+              raggiungere il pubblico giusto e generare risultati.
+            </p>
           </div>
-          <div class="hud" data-hud-cycle='["render.engine   path-traced","samples          2048","resolution       4K UHD","output           .exr / .mp4"]'>render.engine&nbsp;&nbsp;&nbsp;path-traced<span class="hud-cursor"></span></div>
+
+          <div
+            class="hud"
+            data-hud-cycle='["strategy          digital","campaign         active","audience         targeted","analytics        tracking"]'
+          >
+            strategy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;digital
+            <span class="hud-cursor"></span>
+          </div>
+
         </div>
+
         <div class="glass svc-card">
+
           <div class="svc-top">
-            <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M9 7.5V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5"/><line x1="3" y1="12.5" x2="21" y2="12.5"/></svg></div>
+
+            <div class="icon-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="7.5" width="18" height="12" rx="2"/>
+                <path d="M9 7.5V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5"/>
+                <line x1="3" y1="12.5" x2="21" y2="12.5"/>
+              </svg>
+            </div>
+
             <span class="svc-num">03</span>
+
           </div>
-          <div><h3>Video Aziendali</h3><p>Presentazione di brand, prodotti e cultura aziendale per il tuo pubblico.</p><span class="svc-hint">brand.locked</span></div>
-        </div>
-        <div class="glass svc-card">
-          <div class="svc-top">
-            <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M7 13l3.2-4 2.8 2.5L18 7.5"/><path d="M8 21h8"/></svg></div>
-            <span class="svc-num">04</span>
-          </div>
-          <div><h3>Video Corporate</h3><p>Storytelling istituzionale per stakeholder, investitori e partner.</p><span class="svc-hint">story.arc</span></div>
-        </div>
-        <div class="glass-premium svc-card svc-featured">
-          <span class="svc-num">09</span>
+
           <div>
-            <h3 class="grad-text">VFX</h3>
-            <p>Compositing ed effetti visivi integrati perfettamente nelle riprese.</p>
+            <h3>Google Ads</h3>
+            <p>
+              Campagne pubblicitarie mirate per portare il tuo
+              business davanti alle persone che stanno cercando.
+            </p>
+            <span class="svc-hint">google.performance</span>
           </div>
-          <div class="hud" data-hud-cycle='["compositing      multi-pass","tracking         6DOF","roto             frame-accurate","grade            ACES"]'>compositing&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;multi-pass<span class="hud-cursor"></span></div>
+
         </div>
+
         <div class="glass svc-card">
+
           <div class="svc-top">
-            <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5v3a1 1 0 0 0 1 1h1.6l5.4 3.6V5.9L5.6 9.5H4a1 1 0 0 0-1 1z"/><path d="M15.5 9.2a3 3 0 0 1 0 5.6"/><path d="M18 7a6.5 6.5 0 0 1 0 10"/></svg></div>
+
+            <div class="icon-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="13" rx="2"/>
+                <path d="M7 13l3.2-4 2.8 2.5L18 7.5"/>
+                <path d="M8 21h8"/>
+              </svg>
+            </div>
+
+            <span class="svc-num">04</span>
+
+          </div>
+
+          <div>
+            <h3>Social Media Marketing</h3>
+            <p>
+              Strategia, contenuti e campagne per costruire
+              una presenza social coerente e riconoscibile.
+            </p>
+            <span class="svc-hint">social.content</span>
+          </div>
+
+        </div>
+
+        <div class="glass-premium svc-card svc-featured">
+
+          <span class="svc-num">09</span>
+
+          <div>
+            <h3 class="grad-text">Video Production</h3>
+            <p>
+              Video corporate, pubblicitari, social ed eventi,
+              dalla produzione alla post-produzione.
+            </p>
+          </div>
+
+          <div
+            class="hud"
+            data-hud-cycle='["production        ready","camera           rolling","edit             active","delivery         master"]'
+          >
+            production&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ready
+            <span class="hud-cursor"></span>
+          </div>
+
+        </div>
+
+        <div class="glass svc-card">
+
+          <div class="svc-top">
+
+            <div class="icon-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 10.5v3a1 1 0 0 0 1 1h1.6l5.4 3.6V5.9L5.6 9.5H4a1 1 0 0 0-1 1z"/>
+                <path d="M15.5 9.2a3 3 0 0 1 0 5.6"/>
+                <path d="M18 7a6.5 6.5 0 0 1 0 10"/>
+              </svg>
+            </div>
+
             <span class="svc-num">05</span>
+
           </div>
-          <div><h3>Video Pubblicitari</h3><p>Spot per TV, social e digital ADV pensati per convertire.</p><span class="svc-hint">adv.optimized</span></div>
+
+          <div>
+            <h3>Video Eventi</h3>
+            <p>
+              Conferenze, fiere, convention, lanci e aftermovie
+              per trasformare ogni evento in contenuto.
+            </p>
+            <span class="svc-hint">event.capture</span>
+          </div>
+
         </div>
+
         <div class="glass svc-card">
+
           <div class="svc-top">
-            <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="17" x2="5" y2="9"/><line x1="10" y1="19" x2="10" y2="5"/><line x1="15" y1="15" x2="15" y2="11"/><line x1="19" y1="17.5" x2="19" y2="7.5"/></svg></div>
+
+            <div class="icon-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="17" x2="5" y2="9"/>
+                <line x1="10" y1="19" x2="10" y2="5"/>
+                <line x1="15" y1="15" x2="15" y2="11"/>
+                <line x1="19" y1="17.5" x2="19" y2="7.5"/>
+              </svg>
+            </div>
+
             <span class="svc-num">06</span>
+
           </div>
-          <div><h3>Aftermovie</h3><p>Il racconto emozionale del tuo evento, montato a ritmo di musica.</p><span class="svc-hint">beat.synced</span></div>
+
+          <div>
+            <h3>Motion Design</h3>
+            <p>
+              Grafica animata, motion graphics e contenuti dinamici
+              per social, campagne e comunicazione.
+            </p>
+            <span class="svc-hint">motion.graphics</span>
+          </div>
+
         </div>
+
         <div class="glass svc-card">
+
           <div class="svc-top">
-            <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="11" height="11" rx="2"/><rect x="9" y="9" width="11" height="11" rx="2"/></svg></div>
+
+            <div class="icon-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="4" width="11" height="11" rx="2"/>
+                <rect x="9" y="9" width="11" height="11" rx="2"/>
+              </svg>
+            </div>
+
             <span class="svc-num">08</span>
+
           </div>
-          <div><h3>Motion Design</h3><p>Grafica animata e tipografia cinetica per contenuti che catturano.</p><span class="svc-hint">kinetic.type</span></div>
+
+          <div>
+            <h3>Branding & Design</h3>
+            <p>
+              Identità visiva, materiali e direzione creativa
+              per rendere il brand più forte e coerente.
+            </p>
+            <span class="svc-hint">brand.identity</span>
+          </div>
+
         </div>
+
+        <div class="glass svc-card">
+
+          <div class="svc-top">
+
+            <div class="icon-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 8h18"/>
+                <path d="M5 8l2-4h10l2 4"/>
+                <rect x="4" y="8" width="16" height="12" rx="2"/>
+              </svg>
+            </div>
+
+            <span class="svc-num">10</span>
+
+          </div>
+
+          <div>
+            <h3>Fotografia</h3>
+            <p>
+              Contenuti fotografici per brand, persone, eventi
+              e comunicazione digitale.
+            </p>
+            <span class="svc-hint">visual.content</span>
+          </div>
+
+        </div>
+
         <a href="#cta" class="glass svc-card svc-cta" aria-label="Vai al modulo di contatto">
-          <div class="icon-wrap svc-cta-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M4 12h16"/></svg></div>
+
+          <div class="icon-wrap svc-cta-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 4v16M4 12h16"/>
+            </svg>
+          </div>
+
           <div>
             <h3>Un progetto su misura?</h3>
-            <p>Raccontaci il formato che hai in mente: troviamo insieme la soluzione giusta.</p>
-            <span class="svc-hint">parliamone <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+
+            <p>
+              Raccontaci cosa vuoi ottenere: troviamo insieme
+              la combinazione giusta di strategia, creatività e produzione.
+            </p>
+
+            <span class="svc-hint">
+              parliamone
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                <path d="M5 12h14M13 6l6 6-6 6"/>
+              </svg>
+            </span>
           </div>
+
         </a>
+
       </div>
 
-      <!-- ---- Mostra vídeos interativos (antes vivia na seção Portfolio) ----
-           Mesmo componente .proj-card/.proj-thumb/.proj-video de antes, só realocado aqui:
-           initPortfolioVideo() no main.js já funciona em qualquer .proj-thumb da página,
-           não precisou de nenhuma mudança de JS. -->
+      <!-- ---- I nostri lavori ---- -->
       <div class="proj-grid-head reveal reveal-delay-2" id="servizi-lavori" style="margin-top:64px;">
+
         <div style="display:flex;flex-direction:column;gap:16px;max-width:560px;">
-          <span class="eyebrow">I nostri lavori</span>
-          <h2 style="font-size:32px;line-height:1.15;">Una selezione di produzioni recenti</h2>
-          <p style="font-size:16.5px;color:var(--ink-muted);line-height:1.6;">Le anteprime qui sotto sono segnaposto pronti per essere sostituiti dai video reali di ogni servizio.</p>
+
+          <span class="eyebrow">
+            I nostri lavori
+          </span>
+
+          <h2 style="font-size:32px;line-height:1.15;">
+            Idee, contenuti e produzioni che diventano realtà.
+          </h2>
+
+          <p style="font-size:16.5px;color:var(--ink-muted);line-height:1.6;">
+            Una selezione di progetti che raccontano il nostro
+            approccio a marketing, produzione video e creatività.
+          </p>
+
         </div>
+
       </div>
 
       <div class="proj-grid reveal reveal-delay-2">
 
-  <!-- PROGETTO 01 — TOSCANO RACING -->
-  <div class="proj-card">
+        <!-- PROGETTO 01 — TOSCANO RACING -->
+        <div class="proj-card">
 
-    <div class="proj-thumb proj-youtube" data-video-id="5Pzb9tCqKgA">
+          <div class="proj-thumb proj-youtube" data-video-id="5Pzb9tCqKgA">
 
-      <img
-        class="youtube-bg"
-        src="https://i.ytimg.com/vi/5Pzb9tCqKgA/hqdefault.jpg"
-        alt=""
-        aria-hidden="true"
-      >
+            <img
+              class="youtube-bg"
+              src="https://i.ytimg.com/vi/5Pzb9tCqKgA/hqdefault.jpg"
+              alt=""
+              aria-hidden="true"
+            >
 
-      <img
-        class="youtube-thumb"
-        src="https://i.ytimg.com/vi/5Pzb9tCqKgA/hqdefault.jpg"
-        alt="Toscano Racing — Progetto 01"
-      >
+            <img
+              class="youtube-thumb"
+              src="https://i.ytimg.com/vi/5Pzb9tCqKgA/hqdefault.jpg"
+              alt="Toscano Racing — Progetto 01"
+            >
 
-      <button
-        class="youtube-play"
-        type="button"
-        aria-label="Riproduci Toscano Racing">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
-          <path d="M9 7l9 5-9 5V7z"/>
-        </svg>
-      </button>
+            <button
+              class="youtube-play"
+              type="button"
+              aria-label="Riproduci Toscano Racing"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+                <path d="M9 7l9 5-9 5V7z"/>
+              </svg>
+            </button>
+
+          </div>
+
+          <span class="proj-tag">
+            Video Corporate
+          </span>
+
+          <h3>
+            Toscano Racing
+          </h3>
+
+          <p>
+            Progetto 01 · Marketing
+          </p>
+
+        </div>
+
+        <!-- PROGETTO 02 — COLISEU -->
+        <div class="proj-card">
+
+          <div class="proj-thumb proj-youtube" data-video-id="Z3ZLQJeUPEE">
+
+            <img
+              class="youtube-bg"
+              src="https://i.ytimg.com/vi/Z3ZLQJeUPEE/hqdefault.jpg"
+              alt=""
+              aria-hidden="true"
+            >
+
+            <img
+              class="youtube-thumb"
+              src="https://i.ytimg.com/vi/Z3ZLQJeUPEE/hqdefault.jpg"
+              alt="Coliseu — Progetto 02"
+            >
+
+            <button
+              class="youtube-play"
+              type="button"
+              aria-label="Riproduci Coliseu"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+                <path d="M9 7l9 5-9 5V7z"/>
+              </svg>
+            </button>
+
+          </div>
+
+          <span class="proj-tag">
+            CGI / Creative
+          </span>
+
+          <h3>
+            Coliseu
+          </h3>
+
+          <p>
+            Progetto 02 · SFX
+          </p>
+
+        </div>
+
+        <!-- PROGETTO 03 — ACP -->
+        <div class="proj-card">
+
+          <div class="proj-thumb proj-youtube" data-video-id="-wGUnMmAhQY">
+
+            <img
+              class="youtube-bg"
+              src="https://i.ytimg.com/vi/-wGUnMmAhQY/hqdefault.jpg"
+              alt=""
+              aria-hidden="true"
+            >
+
+            <img
+              class="youtube-thumb"
+              src="https://i.ytimg.com/vi/-wGUnMmAhQY/hqdefault.jpg"
+              alt="ACP — Progetto 03"
+            >
+
+            <button
+              class="youtube-play"
+              type="button"
+              aria-label="Riproduci ACP"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+                <path d="M9 7l9 5-9 5V7z"/>
+              </svg>
+            </button>
+
+          </div>
+
+          <span class="proj-tag">
+            Motion Design
+          </span>
+
+          <h3>
+            ACP
+          </h3>
+
+          <p>
+            Progetto 03 · Animazione
+          </p>
+
+        </div>
+
+      </div>
 
     </div>
+  </section>
 
-    <span class="proj-tag">Video Corporate</span>
-    <h3>Toscano Racing</h3>
-    <p>Progetto 01 · Marketing</p>
-
-  </div>
-
-
-  <!-- PROGETTO 02 — COLISEU -->
-  <div class="proj-card">
-
-    <div class="proj-thumb proj-youtube" data-video-id="Z3ZLQJeUPEE">
-
-      <img
-        class="youtube-bg"
-        src="https://i.ytimg.com/vi/Z3ZLQJeUPEE/hqdefault.jpg"
-        alt=""
-        aria-hidden="true"
-      >
-
-      <img
-        class="youtube-thumb"
-        src="https://i.ytimg.com/vi/Z3ZLQJeUPEE/hqdefault.jpg"
-        alt="Coliseu — Progetto 02"
-      >
-
-      <button
-        class="youtube-play"
-        type="button"
-        aria-label="Riproduci Coliseu">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
-          <path d="M9 7l9 5-9 5V7z"/>
-        </svg>
-      </button>
-
-    </div>
-
-    <span class="proj-tag">CGI 3D</span>
-    <h3>Coliseu</h3>
-    <p>Progetto 02 · SFX</p>
-
-  </div>
-
-
-  <!-- PROGETTO 03 — ACP -->
-  <div class="proj-card">
-
-    <div class="proj-thumb proj-youtube" data-video-id="-wGUnMmAhQY">
-
-      <img
-        class="youtube-bg"
-        src="https://i.ytimg.com/vi/-wGUnMmAhQY/hqdefault.jpg"
-        alt=""
-        aria-hidden="true"
-      >
-
-      <img
-        class="youtube-thumb"
-        src="https://i.ytimg.com/vi/-wGUnMmAhQY/hqdefault.jpg"
-        alt="ACP — Progetto 03"
-      >
-
-      <button
-        class="youtube-play"
-        type="button"
-        aria-label="Riproduci ACP">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
-          <path d="M9 7l9 5-9 5V7z"/>
-        </svg>
-      </button>
-
-    </div>
-
-    <span class="proj-tag">Motion Design</span>
-    <h3>ACP</h3>
-    <p>Progetto 03 · Animazione</p>
-
-  </div>
-
-</div>
-</section>
-
-  <!-- ============ CENA 03 — CGI / VFX ============ -->
+  <!-- ============ CENA 03 — WEB / DIGITAL ============ -->
   <section class="cgi-section" id="cgi">
+
     <div class="container">
+
       <div class="section-head reveal">
-        <span class="eyebrow">Sala di produzione</span>
-        <h2 style="font-size:40px;line-height:1.15;">CGI &amp; VFX, <span class="grad-text">fase per fase.</span></h2>
-        <p>Dal modello grezzo al frame finale: ogni progetto CGI segue un processo tecnico misurabile.</p>
+
+        <span class="eyebrow">
+          Web & Digital
+        </span>
+
+        <h2 style="font-size:40px;line-height:1.15;">
+          Il tuo sito deve
+          <span class="grad-text">lavorare per te.</span>
+        </h2>
+
+        <p>
+          Creiamo siti web e landing page progettati per essere
+          belli, veloci, facili da usare e orientati alla conversione.
+        </p>
+
       </div>
 
       <div class="cgi-grid">
+
         <div class="cgi-steps reveal reveal-delay-1">
+
           <div class="cgi-step">
             <span class="n">01</span>
-            <div><h4>Model</h4><p>Modellazione 3D di prodotti, ambienti e set virtuali su misura.</p></div>
+
+            <div>
+              <h4>Strategia</h4>
+              <p>
+                Analizziamo obiettivi, pubblico, mercato e
+                posizionamento prima di progettare.
+              </p>
+            </div>
           </div>
+
           <div class="cgi-step">
             <span class="n">02</span>
-            <div><h4>Light</h4><p>Illuminazione HDRI e temperatura colore calibrate sul brand.</p></div>
+
+            <div>
+              <h4>UX & Design</h4>
+              <p>
+                Costruiamo una presenza digitale coerente,
+                chiara e riconoscibile.
+              </p>
+            </div>
           </div>
+
           <div class="cgi-step">
             <span class="n">03</span>
-            <div><h4>Animate</h4><p>Animazione di camera, oggetti e particellari con fisica realistica.</p></div>
+
+            <div>
+              <h4>Development</h4>
+              <p>
+                Sviluppiamo esperienze responsive e performanti,
+                pensate per il business.
+              </p>
+            </div>
           </div>
+
           <div class="cgi-step">
             <span class="n">04</span>
-            <div><h4>Composite</h4><p>Compositing multi-pass e color grading fino al file di consegna.</p></div>
+
+            <div>
+              <h4>SEO & Growth</h4>
+              <p>
+                Ottimizziamo il progetto per Google e per
+                trasformare il traffico in opportunità.
+              </p>
+            </div>
           </div>
+
         </div>
 
         <div class="cgi-stage reveal reveal-delay-2">
+
           <div class="cgi-canvas-wrap" id="cgi-stage">
             <div class="cgi-fallback-glow" aria-hidden="true"></div>
           </div>
+
           <div class="cgi-hud-overlay hud glass-soft hud-panel">
-            <span class="hud-title">Camera</span>50mm · f/2.8<br>fps <span class="accent">24</span>
+
+            <span class="hud-title">
+              Digital
+            </span>
+
+            UX · SEO · Performance
+            <br>
+            status <span class="accent">optimized</span>
+
           </div>
+
           <div class="cgi-hud-overlay right hud glass-soft hud-panel">
-            <span class="hud-title">Light</span>3200K<br>samples <span class="accent">2048</span>
+
+            <span class="hud-title">
+              Web
+            </span>
+
+            responsive
+            <br>
+            conversion <span class="accent">ready</span>
+
           </div>
+
         </div>
+
       </div>
+
     </div>
+
   </section>
 
-  <!-- ============ CENA 04 — DRONE ============ -->
-  <!-- LOGO 3D STAGE — palco Three.js. Antes tinha o drone procedural/GLB aqui; a pedido do
-       cliente essa cena virou a logo girando em 3D (o drone real, quando o cliente mandar o
-       .glb, vai para o Hero junto do robô — ver initHeroProducts() em main.js). A logo é
-       construída por código (buildLogo3D em main.js), não por um .glb — dois losangos com
-       ExtrudeGeometry + bisel, replicando a marca em vidro/metal. -->
+  <!-- ============ CENA 04 — DIGITAL STRATEGY ============ -->
   <section class="drone-section" id="drone">
+
     <div class="container drone-grid">
+
       <div class="drone-stage reveal" id="drone-stage">
+
         <div class="cgi-fallback-glow" aria-hidden="true"></div>
         <div class="drone-shadow" aria-hidden="true"></div>
+
         <div class="cgi-hud-overlay hud glass-soft hud-panel" id="drone-hud-left">
-          <span class="hud-title">Vision / Signature</span>
-          mark&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="accent">vision.diamond</span><br>
-          material&nbsp;&nbsp;<span class="accent">glass + metal</span><br>
-          render&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="accent">live 3D</span>
+
+          <span class="hud-title">
+            Alfa / Strategy
+          </span>
+
+          focus&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span class="accent">growth</span>
+          <br>
+
+          channels&nbsp;&nbsp;
+          <span class="accent">digital</span>
+          <br>
+
+          status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span class="accent">live</span>
+
         </div>
+
         <div class="cgi-hud-overlay right hud glass-soft hud-panel">
-          <span class="hud-title">Render</span>
-          rotation&nbsp;&nbsp;<span class="accent" style="display:inline-flex;align-items:center;gap:5px;"><span class="signal-dot"></span>live</span>
+
+          <span class="hud-title">
+            Digital
+          </span>
+
+          strategy&nbsp;&nbsp;
+          <span class="accent" style="display:inline-flex;align-items:center;gap:5px;">
+            <span class="signal-dot"></span>
+            active
+          </span>
+
         </div>
+
       </div>
+
       <div class="drone-copy reveal reveal-delay-1">
-        <span class="eyebrow">Riprese aeree</span>
-        <h2>Un altro punto di vista, in volo.</h2>
-        <p>Drone professionale per riprese aeree stabili: eventi, cantieri, immobiliare e produzioni corporate che hanno bisogno di scala e prospettiva.</p>
-        <p class="drone-tag-line">"Riprese aeree che cambiano il punto di vista."</p>
-        <div style="margin-top:8px;"><a href="#servizi" class="btn btn-ghost">Scopri i servizi video</a></div>
+
+        <span class="eyebrow">
+          Digital Strategy
+        </span>
+
+        <h2>
+          Più visibilità.
+          <br>
+          Più attenzione.
+          <br>
+          <span class="grad-text">Più opportunità.</span>
+        </h2>
+
+        <p>
+          SEO, Google Ads, social media e contenuti lavorano
+          insieme quando esiste una strategia chiara.
+          Costruiamo un ecosistema digitale pensato per il tuo business.
+        </p>
+
+        <p class="drone-tag-line">
+          "Non basta essere online. Bisogna essere trovati."
+        </p>
+
+        <div style="margin-top:8px;">
+          <a href="#servizi" class="btn btn-ghost">
+            Scopri i servizi digitali
+          </a>
+        </div>
+
       </div>
+
     </div>
+
   </section>
 
-  <!-- ============ CENA 04.5 — FOTOGRAFIA ============
-       Nova área de negócio, separada de vídeo/CGI: fotografia profissional (retratos,
-       casais, eventos corporate). Grid simples com 4 fotos reais enviadas pelo cliente —
-       mesmo padrão visual do resto do site (glass, grad-text, reveal on scroll). -->
+  <!-- ============ CENA 04.5 — FOTOGRAFIA / CREATIVE ============ -->
   <section class="foto-section" id="fotografia">
+
     <div class="container">
+
       <div class="section-head reveal">
-        <span class="eyebrow">Fotografia</span>
-        <h2 style="font-size:40px;line-height:1.15;">Anche fotografia professionale.</h2>
-        <p style="font-size:16.5px;color:var(--ink-muted);line-height:1.6;">Un'altra area di Alfa Creative Agency, con lo stesso standard di cura riservato ai video: ritratti, coppie ed eventi, curati dallo scatto alla post-produzione.</p>
+
+        <span class="eyebrow">
+          Video · Motion · Creative
+        </span>
+
+        <h2 style="font-size:40px;line-height:1.15;">
+          Quando il brand ha
+          <span class="grad-text">qualcosa da raccontare.</span>
+        </h2>
+
+        <p style="font-size:16.5px;color:var(--ink-muted);line-height:1.6;">
+          Produzione video, eventi, fotografia, motion design e
+          contenuti creativi per dare forma alla comunicazione
+          del tuo brand.
+        </p>
+
       </div>
 
       <div class="foto-grid reveal reveal-delay-1">
+
         <div class="foto-card">
-          <img src="/assets/images/photo-couple-kiss.webp" alt="Servizio fotografico di coppia in centro città" loading="lazy">
-          <span class="foto-card-tag">Coppie</span>
+          <img
+            src="/assets/images/photo-couple-kiss.webp"
+            alt="Servizio fotografico professionale"
+            loading="lazy"
+          >
+          <span class="foto-card-tag">Fotografia</span>
         </div>
+
         <div class="foto-card">
-          <img src="/assets/images/photo-portrait-polo.webp" alt="Ritratto fotografico professionale in esterna" loading="lazy">
-          <span class="foto-card-tag">Ritratti</span>
+          <img
+            src="/assets/images/photo-portrait-polo.webp"
+            alt="Ritratto fotografico professionale"
+            loading="lazy"
+          >
+          <span class="foto-card-tag">Portrait</span>
         </div>
+
         <div class="foto-card">
-          <img src="/assets/images/photo-couple-scarves.webp" alt="Servizio fotografico di coppia in piazza" loading="lazy">
-          <span class="foto-card-tag">Coppie</span>
+          <img
+            src="/assets/images/photo-couple-scarves.webp"
+            alt="Servizio fotografico lifestyle"
+            loading="lazy"
+          >
+          <span class="foto-card-tag">Content</span>
         </div>
+
         <div class="foto-card">
-          <img src="/assets/images/photo-portrait-courtyard.webp" alt="Ritratto fotografico in un cortile storico" loading="lazy">
-          <span class="foto-card-tag">Ritratti</span>
+          <img
+            src="/assets/images/photo-portrait-courtyard.webp"
+            alt="Ritratto fotografico professionale"
+            loading="lazy"
+          >
+          <span class="foto-card-tag">Creative</span>
         </div>
+
       </div>
 
       <div class="foto-cta reveal reveal-delay-2">
-        <a href="mailto:contact@alfacreative.eu" class="btn btn-ghost">Richiedi un servizio fotografico</a>
+        <a href="mailto:contact@alfacreative.eu" class="btn btn-ghost">
+          Richiedi un progetto creativo
+        </a>
       </div>
+
     </div>
+
   </section>
 
-  <!-- ============ CENA 05 — PERCHÉ (cena limpa) ============ -->
+  <!-- ============ CENA 05 — PERCHÉ ============ -->
   <section class="perche-section">
+
     <div class="container">
+
       <div class="section-head reveal">
-        <span class="eyebrow">Perché Alfa Creative Agency</span>
-        <h2 style="font-size:40px;line-height:1.15;">Un partner, non un fornitore.</h2>
+
+        <span class="eyebrow">
+          Perché Alfa Creative Agency
+        </span>
+
+        <h2 style="font-size:40px;line-height:1.15;">
+          Un partner,
+          <span class="grad-text">non un fornitore.</span>
+        </h2>
+
       </div>
+
       <div class="perche-grid reveal reveal-delay-1">
+
         <div class="perche-item">
-          <h3>Team interno completo</h3>
-          <p>Ripresa, montaggio, CGI e VFX sotto lo stesso tetto: zero passaggi di mano.</p>
+
+          <h3>
+            Strategia prima di tutto
+          </h3>
+
+          <p>
+            Prima di creare analizziamo obiettivi, pubblico
+            e posizionamento. La creatività arriva con una direzione.
+          </p>
+
         </div>
+
         <div class="perche-item">
-          <h3>Dal concept alla delivery</h3>
-          <p>Seguiamo ogni fase, fino al file finale pronto per la pubblicazione.</p>
+
+          <h3>
+            Un unico referente
+          </h3>
+
+          <p>
+            Web, marketing, contenuti e produzione coordinati
+            dallo stesso team, senza comunicazioni frammentate.
+          </p>
+
         </div>
+
         <div class="perche-item">
-          <h3>Qualità cinematografica</h3>
-          <p>Attrezzatura professionale, color grading e sound design curati.</p>
+
+          <h3>
+            Creatività che serve
+          </h3>
+
+          <p>
+            Design, video e contenuti non sono decorazione:
+            devono comunicare, differenziare e generare attenzione.
+          </p>
+
         </div>
+
         <div class="perche-item">
-          <h3>Un unico referente</h3>
-          <p>Un project manager dedicato segue il progetto dall'inizio alla fine.</p>
+
+          <h3>
+            Dalla strategia alla produzione
+          </h3>
+
+          <p>
+            Possiamo pensare la strategia, costruire il sito,
+            gestire il marketing e produrre i contenuti necessari.
+          </p>
+
         </div>
+
       </div>
+
     </div>
+
   </section>
 
   <!-- ============ CENA 06 — COME LAVORIAMO ============ -->
   <section class="processo-section">
+
     <div class="container">
+
       <div class="section-head reveal">
-        <span class="eyebrow">Il processo</span>
-        <h2 style="font-size:40px;line-height:1.15;">Come lavoriamo</h2>
+
+        <span class="eyebrow">
+          Il processo
+        </span>
+
+        <h2 style="font-size:40px;line-height:1.15;">
+          Dall'idea
+          <span class="grad-text">al risultato.</span>
+        </h2>
+
       </div>
+
       <div class="processo-grid reveal reveal-delay-1">
+
         <div class="glass step-card">
+
           <span class="num">01</span>
-          <h3>Ideazione e concept</h3>
-          <p>Ascoltiamo l'obiettivo del progetto e costruiamo concept, tono e riferimenti visivi.</p>
+
+          <h3>
+            Analisi
+          </h3>
+
+          <p>
+            Capire il business, il pubblico e gli obiettivi
+            è il primo passo per creare qualcosa che funzioni.
+          </p>
+
         </div>
+
         <div class="glass step-card">
+
           <span class="num">02</span>
-          <h3>Pre-produzione</h3>
-          <p>Sceneggiatura, storyboard, location e pianificazione, drone incluso quando serve.</p>
+
+          <h3>
+            Strategia
+          </h3>
+
+          <p>
+            Definiamo posizionamento, messaggio, canali,
+            priorità e direzione creativa.
+          </p>
+
         </div>
+
         <div class="glass step-card">
+
           <span class="num">03</span>
-          <h3>Produzione</h3>
-          <p>Riprese sul set o in location con attrezzatura professionale e camera in drone.</p>
+
+          <h3>
+            Creazione
+          </h3>
+
+          <p>
+            Design, sviluppo, campagne, contenuti,
+            video e creatività prendono forma.
+          </p>
+
         </div>
+
         <div class="glass step-card">
+
           <span class="num">04</span>
-          <h3>Post-produzione</h3>
-          <p>Montaggio, color grading, CGI, motion design e VFX fino al file pronto.</p>
+
+          <h3>
+            Lancio & Evoluzione
+          </h3>
+
+          <p>
+            Pubblicazione, misurazione e ottimizzazione
+            per continuare a migliorare il progetto.
+          </p>
+
         </div>
+
       </div>
 
       <div class="manifesto reveal reveal-delay-2">
+
         <div class="manifesto-stack s1" aria-hidden="true"></div>
         <div class="manifesto-stack s2" aria-hidden="true"></div>
+
         <div class="glass-premium manifesto-front">
-          <span class="watermark" aria-hidden="true">V</span>
+
+          <span class="watermark" aria-hidden="true">
+            A
+          </span>
+
           <div class="manifesto-head">
+
             <div style="display:flex;align-items:center;gap:12px;">
+
               <div class="icon-wrap">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.2 6.8L21 11l-6.8 2.2L12 20l-2.2-6.8L3 11l6.8-2.2L12 2z"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2l2.2 6.8L21 11l-6.8 2.2L12 20l-2.2-6.8L3 11l6.8-2.2L12 2z"/>
+                </svg>
               </div>
-              <span style="font-family:var(--font-display);font-weight:700;font-size:15px;">Alfa Creative Agency</span>
+
+              <span style="font-family:var(--font-display);font-weight:700;font-size:15px;">
+                Alfa Creative Agency
+              </span>
+
             </div>
-            <span class="glass" style="padding:8px 16px;font-size:12.5px;font-weight:700;color:var(--cyan);display:inline-flex;align-items:center;gap:6px;">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.8L21 11l-6.8 2.2L12 20l-2.2-6.8L3 11l6.8-2.2L12 2z"/></svg>
+
+            <span
+              class="glass"
+              style="padding:8px 16px;font-size:12.5px;font-weight:700;color:var(--cyan);display:inline-flex;align-items:center;gap:6px;"
+            >
+
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2l2.2 6.8L21 11l-6.8 2.2L12 20l-2.2-6.8L3 11l6.8-2.2L12 2z"/>
+              </svg>
+
               Il nostro approccio
+
             </span>
+
           </div>
-          <p class="quote">"Ogni progetto è un film a sé. Ascoltiamo l'obiettivo, costruiamo il concept giusto e curiamo ogni dettaglio — dalla prima ripresa all'ultima esportazione."</p>
+
+          <p class="quote">
+            "Strategia, creatività e tecnologia devono lavorare
+            nella stessa direzione. È così che trasformiamo
+            un'idea in un progetto che conta."
+          </p>
+
           <div class="manifesto-sig">
+
             <div style="width:38px;height:2px;background:linear-gradient(90deg,#6ae3f0,#2f6fed);"></div>
-            <span style="font-size:13.5px;color:var(--ink-muted);font-weight:600;">Il team creativo di Alfa Creative Agency</span>
+
+            <span style="font-size:13.5px;color:var(--ink-muted);font-weight:600;">
+              Il team creativo di Alfa Creative Agency
+            </span>
+
           </div>
+
         </div>
+
       </div>
+
     </div>
+
   </section>
 
-  <!-- ============ CENA 07 — CHI SIAMO ============
-       Antes era a seção Portfolio (grid de vídeos). A pedido do cliente, os vídeos foram
-       realocados para dentro de Servizi (#servizi-lavori) e este espaço virou "Chi siamo":
-       identidade/missão do estúdio. Os números com [ ] são placeholder — troque pelos
-       dados reais do cliente antes de publicar. -->
+  <!-- ============ CENA 07 — CHI SIAMO ============ -->
   <section class="chisiamo-section" id="chi-siamo">
+
     <div class="container">
+
       <div class="chisiamo-head reveal">
+
         <div style="display:flex;flex-direction:column;gap:16px;max-width:640px;">
-          <span class="eyebrow">Chi siamo</span>
-          <h2 style="font-size:40px;line-height:1.15;">Uno studio, una sola squadra: dalla ripresa alla CGI.</h2>
-          <p style="font-size:16.5px;color:var(--ink-muted);line-height:1.6;">Alfa Creative Agency nasce dall'incontro tra produzione video tradizionale e computer grafica avanzata. Non lavoriamo come fornitori esterni che si passano il progetto: un unico team segue ogni produzione dalla prima ripresa alla resa finale in CGI e VFX.</p>
+
+          <span class="eyebrow">
+            Chi siamo
+          </span>
+
+          <h2 style="font-size:40px;line-height:1.15;">
+            Una squadra creativa
+            <span class="grad-text">per tutto il tuo progetto.</span>
+          </h2>
+
+          <p style="font-size:16.5px;color:var(--ink-muted);line-height:1.6;">
+            Alfa Creative Agency unisce competenze di marketing,
+            digitale, produzione video e creatività. L'obiettivo
+            è semplice: dare alle aziende un unico partner capace
+            di seguire il progetto dalla strategia alla realizzazione.
+          </p>
+
         </div>
+
       </div>
 
       <div class="chisiamo-stats reveal reveal-delay-1">
+
         <div class="glass chisiamo-stat">
-          <span class="chisiamo-stat-num grad-text">[X]+</span>
-          <span class="chisiamo-stat-label">Progetti realizzati</span>
+
+          <span class="chisiamo-stat-num grad-text">
+            360°
+          </span>
+
+          <span class="chisiamo-stat-label">
+            Visione completa
+          </span>
+
         </div>
+
         <div class="glass chisiamo-stat">
-          <span class="chisiamo-stat-num grad-text">[X]</span>
-          <span class="chisiamo-stat-label">Anni di attività</span>
+
+          <span class="chisiamo-stat-num grad-text">
+            01
+          </span>
+
+          <span class="chisiamo-stat-label">
+            Unico referente
+          </span>
+
         </div>
+
         <div class="glass chisiamo-stat">
-          <span class="chisiamo-stat-num grad-text">[X]</span>
-          <span class="chisiamo-stat-label">Persone nel team interno</span>
+
+          <span class="chisiamo-stat-num grad-text">
+            04
+          </span>
+
+          <span class="chisiamo-stat-label">
+            Aree di competenza
+          </span>
+
         </div>
+
         <div class="glass chisiamo-stat">
-          <span class="chisiamo-stat-num grad-text">[X]</span>
-          <span class="chisiamo-stat-label">Settori seguiti</span>
+
+          <span class="chisiamo-stat-num grad-text">
+            01
+          </span>
+
+          <span class="chisiamo-stat-label">
+            Team integrato
+          </span>
+
         </div>
+
       </div>
 
       <div class="chisiamo-mission reveal reveal-delay-2">
+
         <div class="glass-premium chisiamo-mission-card">
-          <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.2 6.8L21 11l-6.8 2.2L12 20l-2.2-6.8L3 11l6.8-2.2L12 2z"/></svg></div>
-          <h3>La nostra missione</h3>
-          <p>Dare corpo a idee complesse — un prodotto, uno spazio, un evento — con lo stesso livello di cura, dalla ripresa dal vivo alla computer grafica più sofisticata.</p>
+
+          <div class="icon-wrap">
+
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2l2.2 6.8L21 11l-6.8 2.2L12 20l-2.2-6.8L3 11l6.8-2.2L12 2z"/>
+            </svg>
+
+          </div>
+
+          <h3>
+            La nostra missione
+          </h3>
+
+          <p>
+            Aiutare aziende e brand a comunicare meglio,
+            costruendo una presenza digitale e creativa
+            coerente con i loro obiettivi.
+          </p>
+
         </div>
+
         <div class="glass-premium chisiamo-mission-card">
-          <div class="icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6"/></svg></div>
-          <h3>Il nostro approccio</h3>
-          <p>Team interno, non una rete di freelance: chi gira la scena è la stessa squadra che poi la monta, la anima e la finalizza in CGI/VFX. Un solo referente, dall'inizio alla fine.</p>
+
+          <div class="icon-wrap">
+
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7.5" height="7.5" rx="1.6"/>
+              <rect x="13.5" y="3" width="7.5" height="7.5" rx="1.6"/>
+              <rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6"/>
+              <rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6"/>
+            </svg>
+
+          </div>
+
+          <h3>
+            Il nostro approccio
+          </h3>
+
+          <p>
+            Uniamo strategia e produzione. Possiamo progettare
+            il sito, sviluppare la comunicazione, gestire il marketing
+            e creare i contenuti necessari a raccontare il brand.
+          </p>
+
         </div>
+
       </div>
 
-      <!-- Founder/CEO spotlight — foto real enviada pelo cliente (Pedro + o robô da marca,
-           mesma linguagem visual do Hero). Fecha a seção "Chi siamo" colocando um rosto real
-           por trás do estúdio, depois da missão/abordagem. -->
       <div class="chisiamo-founder reveal reveal-delay-3">
+
         <div class="chisiamo-founder-photo">
-          <img src="/assets/images/team-pedro-robot.webp" alt="Pedro Brustolin, CEO di Alfa Creative Agency, sul set con il robot del brand">
+
+          <img
+            src="/assets/images/team-pedro-robot.webp"
+            alt="Pedro Brustolin, CEO di Alfa Creative Agency, sul set"
+          >
+
         </div>
+
         <div class="glass-premium chisiamo-founder-copy">
-          <span class="eyebrow">Chi guida lo studio</span>
-          <h3>Pedro Brustolin</h3>
-          <p class="chisiamo-founder-role">CEO &amp; Founder, Alfa Creative Agency</p>
-          <p>Oltre 10 anni di esperienza nel settore audiovisivo, tra riprese sul campo, regia e produzione CGI. Pedro segue personalmente ogni progetto chiave, dal primo brief alla consegna finale: è la garanzia che lo standard raccontato in questa pagina sia quello che il cliente riceve davvero, ogni volta.</p>
+
+          <span class="eyebrow">
+            Chi guida lo studio
+          </span>
+
+          <h3>
+            Pedro Brustolin
+          </h3>
+
+          <p class="chisiamo-founder-role">
+            CEO & Founder, Alfa Creative Agency
+          </p>
+
+          <p>
+            Oltre 10 anni di esperienza nel settore audiovisivo
+            e creativo. Pedro segue personalmente i progetti chiave,
+            unendo visione creativa, produzione e sviluppo di nuove
+            soluzioni per i clienti.
+          </p>
+
         </div>
+
       </div>
+
     </div>
+
   </section>
 
-  <!-- ============ CENA 08/09 — END SCENE (CTA → transição → logo) ============
-       Wrapper .end-scene aplica um gradiente único (::before em style.css) que escurece
-       progressivamente por trás do CTA e da logo, criando a transição contínua pedida —
-       sem precisar de uma seção "de transição" separada. -->
+  <!-- ============ CENA 08/09 — END SCENE ============ -->
   <div class="end-scene">
+
     <section class="cta-section" id="cta">
+
       <div class="container">
+
         <div class="glass-liquid cta-panel reveal">
+
           <div class="cta-glow" aria-hidden="true"></div>
+
           <div class="cta-particles" aria-hidden="true">
             <span style="left:8%;top:22%;animation-delay:0s;"></span>
             <span style="left:92%;top:18%;animation-delay:1.2s;"></span>
             <span style="left:85%;top:76%;animation-delay:2.4s;"></span>
             <span style="left:6%;top:80%;animation-delay:0.6s;"></span>
           </div>
+
           <div class="cta-copy">
-  <span class="eyebrow">Alfa Creative Agency</span>
 
-  <h2>Pronti a dare vita<br>alla tua visione?</h2>
+            <span class="eyebrow">
+              Alfa Creative Agency
+            </span>
 
-  <p>
-    Raccontaci il tuo progetto: ti risponderemo con una proposta su misura.
-  </p>
+            <h2>
+              Hai un progetto?
+              <br>
+              <span class="grad-text">Costruiamolo insieme.</span>
+            </h2>
 
-  <form
-    class="contact-form"
-    action="https://formsubmit.co/contact@alfacreative.eu"
-    method="POST"
-  >
-    <input type="hidden" name="_subject" value="Nuova richiesta dal sito Alfa Creative Agency">
-    <input
-  type="hidden"
-  name="_next"
-  value="https://alfacreative.eu/grazie"
->
-    <input type="hidden" name="_captcha" value="false">
-    <input type="text" name="_honey" style="display:none">
-    <input type="hidden" name="_template" value="table">
+            <p>
+              Raccontaci cosa vuoi realizzare.
+              Ti risponderemo con una proposta su misura,
+              costruita sulle esigenze del tuo business.
+            </p>
 
-    <div class="contact-form-row">
-      <div class="form-field">
-        <label for="nome">Nome e Cognome</label>
-        <input
-          type="text"
-          id="nome"
-          name="nome"
-          placeholder="Il tuo nome"
-          required
-        >
+            <form
+              class="contact-form"
+              action="https://formsubmit.co/contact@alfacreative.eu"
+              method="POST"
+            >
+
+              <input
+                type="hidden"
+                name="_subject"
+                value="Nuova richiesta dal sito Alfa Creative Agency"
+              >
+
+              <input
+                type="hidden"
+                name="_next"
+                value="https://alfacreative.eu/grazie"
+              >
+
+              <input
+                type="hidden"
+                name="_captcha"
+                value="false"
+              >
+
+              <input
+                type="text"
+                name="_honey"
+                style="display:none"
+              >
+
+              <input
+                type="hidden"
+                name="_template"
+                value="table"
+              >
+
+              <div class="contact-form-row">
+
+                <div class="form-field">
+
+                  <label for="nome">
+                    Nome e Cognome
+                  </label>
+
+                  <input
+                    type="text"
+                    id="nome"
+                    name="nome"
+                    placeholder="Il tuo nome"
+                    required
+                  >
+
+                </div>
+
+                <div class="form-field">
+
+                  <label for="azienda">
+                    Azienda
+                  </label>
+
+                  <input
+                    type="text"
+                    id="azienda"
+                    name="azienda"
+                    placeholder="Nome dell'azienda"
+                  >
+
+                </div>
+
+              </div>
+
+              <div class="form-field">
+
+                <label for="email">
+                  Email
+                </label>
+
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="La tua email"
+                  required
+                >
+
+              </div>
+
+              <div class="form-field">
+
+                <label for="servizio">
+                  Servizio
+                </label>
+
+                <select id="servizio" name="servizio" required>
+
+                  <option value="" disabled selected>
+                    Seleziona un servizio
+                  </option>
+
+                  <option value="Creazione Siti Web">
+                    Creazione Siti Web
+                  </option>
+
+                  <option value="SEO">
+                    SEO
+                  </option>
+
+                  <option value="Marketing Digital">
+                    Marketing Digital
+                  </option>
+
+                  <option value="Google Ads">
+                    Google Ads
+                  </option>
+
+                  <option value="Social Media Marketing">
+                    Social Media Marketing
+                  </option>
+
+                  <option value="Produzione Video">
+                    Produzione Video
+                  </option>
+
+                  <option value="Video Eventi / Aftermovie">
+                    Video Eventi / Aftermovie
+                  </option>
+
+                  <option value="Motion Design">
+                    Motion Design
+                  </option>
+
+                  <option value="Branding & Design">
+                    Branding & Design
+                  </option>
+
+                  <option value="Fotografia">
+                    Fotografia
+                  </option>
+
+                  <option value="CGI / VFX">
+                    CGI / VFX
+                  </option>
+
+                  <option value="Altro">
+                    Altro
+                  </option>
+
+                </select>
+
+              </div>
+
+              <div class="form-field">
+
+                <label for="messaggio">
+                  Messaggio
+                </label>
+
+                <textarea
+                  id="messaggio"
+                  name="messaggio"
+                  rows="4"
+                  placeholder="Raccontaci brevemente il tuo progetto..."
+                  required
+                ></textarea>
+
+              </div>
+
+              <label class="form-consent">
+
+                <input
+                  type="checkbox"
+                  name="privacy"
+                  required
+                >
+
+                <span>
+                  Ho letto e accetto la Privacy Policy.
+                </span>
+
+              </label>
+
+              <button
+                type="submit"
+                class="btn btn-primary contact-submit"
+              >
+
+                Invia richiesta
+
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6"/>
+                </svg>
+
+              </button>
+
+            </form>
+
+          </div>
+
+        </div>
+
       </div>
 
-      <div class="form-field">
-        <label for="azienda">Azienda</label>
-        <input
-          type="text"
-          id="azienda"
-          name="azienda"
-          placeholder="Nome dell'azienda"
-        >
-      </div>
-    </div>
+    </section>
 
-    <div class="form-field">
-      <label for="email">Email</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        placeholder="La tua email"
-        required
-      >
-    </div>
-
-    <div class="form-field">
-      <label for="servizio">Servizio</label>
-      <select id="servizio" name="servizio" required>
-        <option value="" disabled selected>Seleziona un servizio</option>
-        <option value="Produzione Video">Produzione Video</option>
-        <option value="Video Corporate">Video Corporate</option>
-        <option value="Video Pubblicitari">Video Pubblicitari</option>
-        <option value="CGI 3D">CGI 3D</option>
-        <option value="VFX">VFX</option>
-        <option value="Motion Design">Motion Design</option>
-        <option value="Video Eventi / Aftermovie">Video Eventi / Aftermovie</option>
-        <option value="Altro">Altro</option>
-      </select>
-    </div>
-
-    <div class="form-field">
-      <label for="messaggio">Messaggio</label>
-      <textarea
-        id="messaggio"
-        name="messaggio"
-        rows="4"
-        placeholder="Raccontaci brevemente il tuo progetto..."
-        required
-      ></textarea>
-    </div>
-
-    <label class="form-consent">
-      <input type="checkbox" name="privacy" required>
-      <span>Ho letto e accetto la Privacy Policy.</span>
-    </label>
-
-    <button type="submit" class="btn btn-primary contact-submit">
-      Invia richiesta
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <path d="M5 12h14M13 6l6 6-6 6"/>
-      </svg>
-    </button>
-  </form>
-</div>
+  </div>
 
 </main>
 
-<!-- ============ FOOTER (minimalista) ============ -->
+<!-- ============ FOOTER ============ -->
 <footer class="site-footer">
+
   <div class="container footer-minimal">
-    <a href="#hero" class="footer-word" aria-label="Alfa Creative Agency — torna all'inizio">Visi<span class="cyan">on</span><span class="sub">Productions</span></a>
-    <p class="footer-tagline">Completa per te.</p>
-    <p class="footer-services">Video&nbsp;·&nbsp;CGI&nbsp;·&nbsp;VFX&nbsp;·&nbsp;Motion&nbsp;·&nbsp;Drone</p>
+
+    <a
+  href="#hero"
+  class="footer-word"
+  aria-label="Alfa Creative Agency — torna all'inizio"
+>
+  <img
+    src="/assets/images/alfa-logo-horizontal.png"
+    alt="Alfa Creative Agency"
+  >
+</a>
+
+    <p class="footer-tagline">
+      Strategy · Digital · Video · Creative
+    </p>
+
+    <p class="footer-services">
+      Web · SEO · Marketing · Video · Motion · Branding
+    </p>
+
     <div class="social-row">
 
-  <!-- Instagram -->
-  <a
-    href="https://www.instagram.com/alfa.creative.agency/"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Instagram"
-    class="social-btn glass-soft">
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" stroke-width="1.6">
-      <rect x="3" y="3" width="18" height="18" rx="5"/>
-      <circle cx="12" cy="12" r="4"/>
-      <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor"/>
-    </svg>
-  </a>
+      <!-- Instagram -->
+      <a
+        href="https://www.instagram.com/alfa.creative.agency/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Instagram"
+        class="social-btn glass-soft"
+      >
 
-  <!-- Facebook -->
-  <a
-    href="https://www.facebook.com/profile.php?id=61593653235825"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Facebook"
-    class="social-btn glass-soft">
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M14 8h3V4h-3c-2.8 0-5 2.2-5 5v2H6v4h3v5h4v-5h3l1-4h-4V9c0-.6.4-1 1-1z"/>
-    </svg>
-  </a>
+        <svg
+          width="17"
+          height="17"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+        >
+          <rect x="3" y="3" width="18" height="18" rx="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor"/>
+        </svg>
 
-  <!-- YouTube -->
-  <a
-    href="https://www.youtube.com/channel/UCkNu2YfEOeRge6cb28iAVKw/"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="YouTube"
-    class="social-btn glass-soft">
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" stroke-width="1.6">
-      <rect x="2.5" y="6" width="19" height="12" rx="4"/>
-      <path d="M10.5 9.5l5 2.5-5 2.5z"
-        fill="currentColor" stroke="none"/>
-    </svg>
-  </a>
+      </a>
 
-</div>
+      <!-- Facebook -->
+      <a
+        href="https://www.facebook.com/profile.php?id=61593653235825"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Facebook"
+        class="social-btn glass-soft"
+      >
+
+        <svg
+          width="17"
+          height="17"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path d="M14 8h3V4h-3c-2.8 0-5 2.2-5 5v2H6v4h3v5h4v-5h3l1-4h-4V9c0-.6.4-1 1-1z"/>
+        </svg>
+
+      </a>
+
+      <!-- YouTube -->
+      <a
+        href="https://www.youtube.com/channel/UCkNu2YfEOeRge6cb28iAVKw/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="YouTube"
+        class="social-btn glass-soft"
+      >
+
+        <svg
+          width="17"
+          height="17"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+        >
+          <rect x="2.5" y="6" width="19" height="12" rx="4"/>
+          <path
+            d="M10.5 9.5l5 2.5-5 2.5z"
+            fill="currentColor"
+            stroke="none"
+          />
+        </svg>
+
+      </a>
+
+    </div>
+
+  </div>
+
 </footer>
-
-
-
-
