@@ -601,30 +601,31 @@ main{position:relative;z-index:1;}
 .cta-copy h2{font-size:34px;line-height:1.2;}
 .cta-copy p{font-size:16px;color:var(--ink-muted);line-height:1.6;}
 
-/* ---------- Contact Form ---------- */
+/* ---------- Contact Form — compacto ---------- */
+
 .contact-form{
   width:100%;
-  margin-top:18px;
+  margin-top:14px;
   display:flex;
   flex-direction:column;
-  gap:16px;
+  gap:11px;
   text-align:left;
 }
 
 .contact-form-row{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:16px;
+  gap:12px;
 }
 
 .form-field{
   display:flex;
   flex-direction:column;
-  gap:7px;
+  gap:5px;
 }
 
 .form-field label{
-  font-size:12px;
+  font-size:11px;
   font-weight:600;
   letter-spacing:.04em;
   color:var(--ink);
@@ -635,12 +636,12 @@ main{position:relative;z-index:1;}
 .form-field textarea{
   width:100%;
   border:1px solid rgba(255,255,255,.12);
-  border-radius:10px;
+  border-radius:9px;
   background:rgba(255,255,255,.045);
   color:var(--ink);
   font:inherit;
-  font-size:14px;
-  padding:13px 14px;
+  font-size:13px;
+  padding:10px 12px;
   outline:none;
   transition:border-color .2s ease, background .2s ease, box-shadow .2s ease;
   box-sizing:border-box;
@@ -663,54 +664,39 @@ main{position:relative;z-index:1;}
 }
 
 .form-field textarea{
-  min-height:110px;
+  min-height:85px;
   resize:vertical;
 }
 
 .form-field input:focus,
 .form-field select:focus,
 .form-field textarea:focus{
-  border-color:rgba(106,227,240,.65);
+  border-color:rgba(255,255,255,.35);
   background:rgba(255,255,255,.065);
-  box-shadow:0 0 0 3px rgba(106,227,240,.08);
+  box-shadow:0 0 0 3px rgba(255,255,255,.06);
 }
 
 .form-consent{
   display:flex;
   align-items:flex-start;
-  gap:9px;
-  font-size:12px;
-  line-height:1.5;
+  gap:8px;
+  font-size:11px;
+  line-height:1.45;
   color:var(--ink-muted);
   cursor:pointer;
 }
 
 .form-consent input{
   margin-top:2px;
-  accent-color:var(--cyan);
+  accent-color:#fff;
   cursor:pointer;
 }
 
 .contact-submit{
   align-self:center;
-  margin-top:4px;
+  margin-top:2px;
   border:0;
   cursor:pointer;
-}
-
-/* Mobile */
-@media (max-width:700px){
-  .contact-form-row{
-    grid-template-columns:1fr;
-  }
-
-  .cta-panel{
-    padding:48px 24px;
-  }
-
-  .cta-copy{
-    width:100%;
-  }
 }
 
 /* ---------- 15b. END SCENE — transição CTA → logo ----------
@@ -1132,5 +1118,1256 @@ main{position:relative;z-index:1;}
 
   .footer-word img {
     width: 110px;
+  }
+}
+/* ============================================================
+   ALFA BLACK & WHITE — ETAPA 2A
+   FUNDO GERAL
+   ============================================================ */
+
+#bg-layer{
+  background:
+    radial-gradient(
+      1000px 700px at 15% -10%,
+      rgba(255,255,255,0.055),
+      transparent 58%
+    ),
+    radial-gradient(
+      1100px 850px at 85% 5%,
+      rgba(255,255,255,0.035),
+      transparent 62%
+    ),
+    radial-gradient(
+      1000px 800px at 100% 95%,
+      rgba(255,255,255,0.025),
+      transparent 65%
+    ),
+    linear-gradient(
+      180deg,
+      #080808 0%,
+      #040404 55%,
+      #020202 100%
+    );
+}
+
+/* Remove qualquer aparência azulada do canvas atmosférico */
+#bg-canvas{
+  filter:blur(2px) grayscale(1);
+}
+
+/* Granulação continua existindo, mas neutra */
+#bg-grain{
+  opacity:0.035;
+  mix-blend-mode:overlay;
+}
+
+/* Atmosfera das seções */
+.end-scene::before{
+  background:linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(3,3,3,0.50) 32%,
+    rgba(2,2,2,0.86) 58%,
+    #030303 80%,
+    #010101 100%
+  );
+}
+
+/* Footer totalmente neutro */
+.site-footer{
+  background:#020202;
+}
+
+/* Seleção de texto monocromática */
+::selection{
+  background:rgba(255,255,255,0.20);
+  color:#ffffff;
+}
+/* ============================================================
+   ALFA BLACK & WHITE — ETAPA 2B
+   GLASSMORPHISM
+   ============================================================ */
+
+/* Navbar */
+.navbar{
+  background:rgba(5,5,5,0.72);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  backdrop-filter:blur(18px) saturate(0);
+  -webkit-backdrop-filter:blur(18px) saturate(0);
+}
+
+/* Cards e superfícies */
+.service-card,
+.portfolio-card,
+.process-card,
+.about-card,
+.contact-card{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.055),
+      rgba(255,255,255,0.018)
+    );
+
+  border:1px solid rgba(255,255,255,0.10);
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(255,255,255,0.055);
+
+  backdrop-filter:blur(18px) saturate(0);
+  -webkit-backdrop-filter:blur(18px) saturate(0);
+}
+
+/* Hover dos cards */
+.service-card:hover,
+.portfolio-card:hover,
+.process-card:hover,
+.about-card:hover,
+.contact-card:hover{
+  border-color:rgba(255,255,255,0.20);
+
+  box-shadow:
+    0 28px 80px rgba(0,0,0,0.58),
+    inset 0 1px 0 rgba(255,255,255,0.09);
+}
+
+/* Pequeno brilho superior do vidro */
+.service-card::before,
+.portfolio-card::before,
+.process-card::before,
+.about-card::before,
+.contact-card::before{
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.10),
+    transparent
+  );
+}
+
+/* Pills */
+.hero-pill,
+.service-pill,
+.tag,
+.badge{
+  background:rgba(255,255,255,0.045);
+  border:1px solid rgba(255,255,255,0.10);
+  color:#e8e8e8;
+
+  backdrop-filter:blur(12px) saturate(0);
+  -webkit-backdrop-filter:blur(12px) saturate(0);
+}
+
+/* Botões secundários */
+.btn-secondary{
+  background:rgba(255,255,255,0.055);
+  border:1px solid rgba(255,255,255,0.14);
+  color:#ffffff;
+
+  backdrop-filter:blur(12px) saturate(0);
+  -webkit-backdrop-filter:blur(12px) saturate(0);
+}
+
+.btn-secondary:hover{
+  background:rgba(255,255,255,0.10);
+  border-color:rgba(255,255,255,0.24);
+}
+
+/* Painel principal de CTA */
+.cta-panel{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.075),
+      rgba(255,255,255,0.025)
+    );
+
+  border:1px solid rgba(255,255,255,0.13);
+
+  box-shadow:
+    0 35px 100px rgba(0,0,0,0.60),
+    inset 0 1px 0 rgba(255,255,255,0.07);
+
+  backdrop-filter:blur(24px) saturate(0);
+  -webkit-backdrop-filter:blur(24px) saturate(0);
+}
+
+/* Formulário */
+.contact-form input,
+.contact-form textarea,
+.contact-form select{
+  background:rgba(255,255,255,0.035);
+  border:1px solid rgba(255,255,255,0.10);
+  color:#ffffff;
+
+  backdrop-filter:blur(10px) saturate(0);
+  -webkit-backdrop-filter:blur(10px) saturate(0);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form select:focus{
+  background:rgba(255,255,255,0.055);
+  border-color:rgba(255,255,255,0.28);
+
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,0.045);
+}
+
+/* Divisores internos */
+.card-divider,
+.section-divider{
+  background:rgba(255,255,255,0.08);
+}
+
+/* Texto secundário */
+.service-card p,
+.portfolio-card p,
+.process-card p,
+.about-card p{
+  color:rgba(255,255,255,0.62);
+}
+/* ============================================================
+   ALFA BLACK & WHITE — ETAPA 2C
+   ELEMENTOS ESPECIAIS
+   ============================================================ */
+
+/* ============================================================
+   TEXTOS DE DESTAQUE
+   ============================================================ */
+
+.hero h1,
+.section-title,
+.cta-title,
+.manifesto-title{
+  color:#ffffff;
+}
+
+/* Textos grandes com gradiente agora monocromático */
+.gradient-text,
+.text-gradient,
+.hero-title span{
+  background:linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #d8d8d8 50%,
+    #ffffff 100%
+  );
+
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  color:transparent;
+}
+
+
+/* ============================================================
+   LINHAS E DETALHES
+   ============================================================ */
+
+.section-line,
+.decor-line,
+.hero-line{
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.75),
+    transparent
+  );
+}
+
+.section-number,
+.project-number,
+.process-number{
+  color:rgba(255,255,255,0.75);
+}
+
+
+/* ============================================================
+   BOTÃO PRINCIPAL
+   ============================================================ */
+
+.btn-primary{
+  background:#ffffff;
+  border-color:#ffffff;
+  color:#050505;
+
+  box-shadow:
+    0 10px 35px rgba(255,255,255,0.08);
+}
+
+.btn-primary:hover{
+  background:#e8e8e8;
+  border-color:#e8e8e8;
+  color:#000000;
+
+  box-shadow:
+    0 14px 45px rgba(255,255,255,0.14);
+}
+
+
+/* ============================================================
+   ÍCONES
+   ============================================================ */
+
+.service-icon,
+.process-icon,
+.feature-icon{
+  color:#ffffff;
+  border-color:rgba(255,255,255,0.16);
+  background:rgba(255,255,255,0.045);
+}
+
+
+/* ============================================================
+   PORTFÓLIO
+   ============================================================ */
+
+.portfolio-card .project-label,
+.portfolio-card .project-meta{
+  color:rgba(255,255,255,0.58);
+}
+
+.portfolio-card .project-title{
+  color:#ffffff;
+}
+
+
+/* ============================================================
+   HOVER DOS LINKS
+   ============================================================ */
+
+a:hover{
+  color:#ffffff;
+}
+
+
+/* ============================================================
+   PEQUENOS GLOWs — AGORA BRANCOS
+   ============================================================ */
+
+.glow,
+.glow-effect{
+  box-shadow:
+    0 0 35px rgba(255,255,255,0.06);
+}
+
+
+/* ============================================================
+   INPUT / FORMULÁRIO
+   ============================================================ */
+
+.contact-form label{
+  color:rgba(255,255,255,0.72);
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder{
+  color:rgba(255,255,255,0.35);
+}
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.site-footer a{
+  color:rgba(255,255,255,0.65);
+}
+
+.site-footer a:hover{
+  color:#ffffff;
+}
+
+
+/* ============================================================
+   SEPARADORES
+   ============================================================ */
+
+hr{
+  border-color:rgba(255,255,255,0.10);
+}
+
+
+/* ============================================================
+   REMOVE QUALQUER COLORAÇÃO RESIDUAL DE GRADIENTES
+   ============================================================ */
+
+.text-cyan,
+.text-blue,
+.text-primary{
+  color:#ffffff;
+}
+/* ============================================================
+   ALFA BLACK & WHITE — ETAPA 2D
+   REVISÃO FINAL / ACABAMENTO
+   ============================================================ */
+
+/* Remove qualquer resíduo visual de azul/ciano */
+*{
+  scrollbar-color:#555 #050505;
+}
+
+/* Links e textos interativos */
+.nav-links a,
+.footer-links a,
+.social-links a{
+  color:rgba(255,255,255,0.72);
+}
+
+.nav-links a:hover,
+.footer-links a:hover,
+.social-links a:hover{
+  color:#ffffff;
+}
+
+/* Pequenos textos técnicos / labels */
+.eyebrow,
+.kicker,
+.label,
+.meta,
+.project-label,
+.project-meta{
+  color:rgba(255,255,255,0.55);
+}
+
+/* Números e marcadores */
+.number,
+.index,
+.step-number{
+  color:rgba(255,255,255,0.42);
+}
+
+/* Bordas decorativas */
+.decorative-border{
+  border-color:rgba(255,255,255,0.10);
+}
+
+/* Hover geral dos elementos interativos */
+button:hover,
+.btn:hover{
+  filter:brightness(1.05);
+}
+
+/* Foco acessível */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible{
+  outline:2px solid rgba(255,255,255,0.75);
+  outline-offset:4px;
+}
+
+/* ============================================================
+   MOBILE — GARANTIR A MESMA IDENTIDADE VISUAL
+   ============================================================ */
+
+@media (max-width:680px){
+
+  .navbar{
+    background:rgba(4,4,4,0.88);
+    backdrop-filter:blur(16px) saturate(0);
+    -webkit-backdrop-filter:blur(16px) saturate(0);
+  }
+
+  .cta-panel{
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255,255,255,0.065),
+        rgba(255,255,255,0.018)
+      );
+  }
+
+  .service-card,
+  .portfolio-card,
+  .process-card,
+  .about-card{
+    box-shadow:
+      0 18px 50px rgba(0,0,0,0.42),
+      inset 0 1px 0 rgba(255,255,255,0.045);
+  }
+}
+/* ============================================================
+   ALFA BLACK & WHITE — CORREÇÃO DA SEÇÃO "PERCHÉ ALFA"
+   ============================================================ */
+
+/* Título da seção */
+.perche-section h2,
+.perche-section .section-title,
+.perche-section .gradient-text,
+.perche-section .text-gradient{
+  background:linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #dcdcdc 50%,
+    #ffffff 100%
+  ) !important;
+
+  -webkit-background-clip:text !important;
+  background-clip:text !important;
+  -webkit-text-fill-color:transparent !important;
+  color:transparent !important;
+}
+
+
+/* Texto pequeno acima do título */
+.perche-section .eyebrow,
+.perche-section .kicker{
+  color:rgba(255,255,255,0.55) !important;
+}
+
+
+/* ============================================================
+   CARDS DA SEÇÃO
+   ============================================================ */
+
+.perche-section .manifesto > *{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.055),
+      rgba(255,255,255,0.018)
+    ) !important;
+
+  border-color:rgba(255,255,255,0.10) !important;
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(255,255,255,0.045) !important;
+}
+
+
+/* Hover dos cards */
+.perche-section .manifesto > *:hover{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.075),
+      rgba(255,255,255,0.025)
+    ) !important;
+
+  border-color:rgba(255,255,255,0.20) !important;
+}
+
+
+/* Títulos dos cards */
+.perche-section .manifesto > * h3,
+.perche-section .manifesto > * h4{
+  color:#ffffff !important;
+}
+
+
+/* Textos dos cards */
+.perche-section .manifesto > * p{
+  color:rgba(255,255,255,0.62) !important;
+}
+
+
+/* Linhas divisórias entre os cards */
+.perche-section .manifesto > * + *{
+  border-left-color:rgba(255,255,255,0.08) !important;
+}
+/* ============================================================
+   ALFA BLACK & WHITE — CORREÇÃO REAL DA SEÇÃO PERCHÉ
+   ============================================================ */
+
+/* Título "Un partner, non un fornitore." */
+.perche-section .grad-text{
+  background:linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #d8d8d8 50%,
+    #ffffff 100%
+  ) !important;
+
+  -webkit-background-clip:text !important;
+  background-clip:text !important;
+  -webkit-text-fill-color:transparent !important;
+  color:transparent !important;
+}
+
+
+/* Container dos quatro cards */
+.perche-section .perche-grid{
+  background:rgba(255,255,255,0.08) !important;
+  border-color:rgba(255,255,255,0.10) !important;
+}
+
+
+/* Os quatro cards */
+.perche-section .perche-item{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.055),
+      rgba(255,255,255,0.015)
+    ) !important;
+
+  border:0 !important;
+}
+
+
+/* Títulos dos cards */
+.perche-section .perche-item h3{
+  color:#ffffff !important;
+}
+
+
+/* Texto dos cards */
+.perche-section .perche-item p{
+  color:rgba(255,255,255,0.62) !important;
+}
+/* ============================================================
+   ALFA BLACK & WHITE — ETAPA 2E
+   LIMPEZA DE AZUL / CIANO — CSS
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   CORES PRINCIPAIS
+   ------------------------------------------------------------ */
+
+:root{
+  --cyan:#ffffff !important;
+  --cyan-deep:#d0d0d0 !important;
+  --blue:#ffffff !important;
+  --blue-deep:#a8a8a8 !important;
+}
+
+
+/* ------------------------------------------------------------
+   LINKS
+   ------------------------------------------------------------ */
+
+a{
+  color:#ffffff;
+}
+
+a:hover{
+  color:#dcdcdc;
+}
+
+
+/* ------------------------------------------------------------
+   EYEBROWS / LABELS
+   ------------------------------------------------------------ */
+
+.eyebrow,
+.kicker,
+.label{
+  color:rgba(255,255,255,0.60) !important;
+  text-shadow:none !important;
+}
+
+
+/* ------------------------------------------------------------
+   GRADIENTES DE TEXTO
+   ------------------------------------------------------------ */
+
+.grad-text{
+  background:linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #dedede 45%,
+    #ffffff 75%,
+    #c8c8c8 100%
+  ) !important;
+
+  -webkit-background-clip:text !important;
+  background-clip:text !important;
+  -webkit-text-fill-color:transparent !important;
+
+  filter:none !important;
+}
+
+
+/* ------------------------------------------------------------
+   NAVBAR
+   ------------------------------------------------------------ */
+
+.nav-link::after{
+  background:linear-gradient(
+    90deg,
+    #ffffff,
+    #8f8f8f
+  ) !important;
+}
+
+
+/* ------------------------------------------------------------
+   HUD / CÓDIGO
+   ------------------------------------------------------------ */
+
+.hud .hud-title,
+.hud .accent{
+  color:#ffffff !important;
+}
+
+.hud .hl{
+  color:#e5e5e5 !important;
+}
+
+.hud-cursor{
+  background:#ffffff !important;
+}
+
+
+/* ------------------------------------------------------------
+   ÍCONES / QUADRADOS
+   ------------------------------------------------------------ */
+
+.icon-wrap{
+  background:linear-gradient(
+    155deg,
+    rgba(255,255,255,0.12),
+    rgba(255,255,255,0.035)
+  ) !important;
+
+  color:#ffffff !important;
+  box-shadow:0 0 20px rgba(255,255,255,0.08) !important;
+}
+
+
+/* ------------------------------------------------------------
+   PARTÍCULAS CSS
+   ------------------------------------------------------------ */
+
+.hero-particles span,
+.cta-particles span{
+  background:#ffffff !important;
+  box-shadow:0 0 8px rgba(255,255,255,0.45) !important;
+}
+
+
+/* ------------------------------------------------------------
+   BOTÕES
+   ------------------------------------------------------------ */
+
+.btn-ghost{
+  color:#ffffff !important;
+  border-color:rgba(255,255,255,0.18) !important;
+}
+
+.btn-ghost:hover{
+  border-color:rgba(255,255,255,0.45) !important;
+  background:rgba(255,255,255,0.05) !important;
+}
+
+
+/* ------------------------------------------------------------
+   CODE BACKGROUND DA SEÇÃO SERVIÇOS
+   ------------------------------------------------------------ */
+
+.code-col .k{
+  color:rgba(255,255,255,0.50) !important;
+}
+
+.code-col .f{
+  color:rgba(255,255,255,0.40) !important;
+}
+
+.code-col .n{
+  color:rgba(255,255,255,0.42) !important;
+}
+
+
+/* ------------------------------------------------------------
+   PORTFÓLIO / PLAY
+   ------------------------------------------------------------ */
+
+.youtube-play:hover{
+  box-shadow:0 0 35px rgba(255,255,255,0.16) !important;
+}
+
+
+/* ------------------------------------------------------------
+   ELEMENTOS DE DESTAQUE
+   ------------------------------------------------------------ */
+
+.service-icon,
+.process-icon,
+.feature-icon{
+  color:#ffffff !important;
+  border-color:rgba(255,255,255,0.16) !important;
+}
+
+
+/* ------------------------------------------------------------
+   FOCOS / SELEÇÃO
+   ------------------------------------------------------------ */
+
+::selection{
+  background:rgba(255,255,255,0.20) !important;
+  color:#ffffff !important;
+}
+
+/* ============================================================
+   ALFA — HUD FINAL v2
+   Maior + mais próximo do elemento 3D
+   ============================================================ */
+
+
+/* ============================================================
+   1. WEB / DIGITAL — ELEMENTO 3D
+   ============================================================ */
+
+.cgi-stage .hud-panel{
+  min-width:205px !important;
+  width:205px !important;
+  max-width:205px !important;
+
+  padding:16px 17px !important;
+}
+
+.cgi-stage .hud{
+  font-size:11px !important;
+  line-height:1.7 !important;
+  white-space:nowrap !important;
+}
+
+.cgi-stage .hud-title{
+  font-size:10.5px !important;
+  line-height:1.2 !important;
+  margin-bottom:7px !important;
+}
+
+
+/* Quadro DIGITAL — traz para dentro */
+.cgi-stage > .cgi-hud-overlay:not(.right){
+  left:55px !important;
+  bottom:18px !important;
+
+  transform:none !important;
+}
+
+
+/* Quadro WEB — traz para dentro */
+.cgi-stage > .cgi-hud-overlay.right{
+  right:55px !important;
+  top:18px !important;
+  bottom:auto !important;
+
+  transform:none !important;
+}
+
+
+/* ============================================================
+   2. DRONE
+   ============================================================ */
+
+.drone-stage .hud-panel{
+  min-width:205px !important;
+  width:205px !important;
+  max-width:205px !important;
+
+  padding:16px 17px !important;
+}
+
+.drone-stage .hud{
+  font-size:11px !important;
+  line-height:1.7 !important;
+  white-space:nowrap !important;
+}
+
+.drone-stage .hud-title{
+  font-size:10.5px !important;
+  line-height:1.2 !important;
+  margin-bottom:7px !important;
+}
+
+
+/* Quadro esquerdo do drone */
+#drone-hud-left{
+  left:55px !important;
+  top:18px !important;
+  bottom:auto !important;
+
+  transform:none !important;
+}
+
+
+/* Quadro direito do drone */
+.drone-stage > .cgi-hud-overlay.right{
+  right:55px !important;
+  top:18px !important;
+  bottom:auto !important;
+
+  transform:none !important;
+}
+
+
+/* ============================================================
+   3. MOBILE
+   ============================================================ */
+
+@media (max-width:712px){
+
+  .cgi-stage .hud-panel,
+  .drone-stage .hud-panel{
+    width:185px !important;
+    min-width:185px !important;
+    max-width:185px !important;
+
+    padding:13px 14px !important;
+  }
+
+}
+
+
+/* ============================================================
+   4. TELAS MUITO PEQUENAS
+   ============================================================ */
+
+@media (max-width:420px){
+
+  .drone-stage #drone-hud-left,
+  .drone-stage .cgi-hud-overlay.right{
+    display:none !important;
+  }
+
+}
+/* ============================================================
+   ALFA — WEB & DIGITAL
+   BLACK & WHITE
+   ============================================================ */
+
+/* Títulos e textos de destaque */
+.cgi-section .grad-text{
+  background:none !important;
+  -webkit-background-clip:initial !important;
+  background-clip:initial !important;
+  -webkit-text-fill-color:#ffffff !important;
+  color:#ffffff !important;
+}
+
+
+/* EYEBROW */
+.cgi-section .eyebrow{
+  color:#ffffff !important;
+}
+
+
+/* NÚMEROS 01 / 02 / 03 / 04 */
+.cgi-section .cgi-step .n{
+  color:#ffffff !important;
+}
+
+
+/* LINHA / ESTADO ATIVO */
+.cgi-section .cgi-step.is-active{
+  border-left-color:#ffffff !important;
+  background:linear-gradient(
+    90deg,
+    rgba(255,255,255,0.055),
+    transparent 70%
+  ) !important;
+}
+
+
+/* HUD DIGITAL / WEB */
+.cgi-section .hud .hud-title{
+  color:#ffffff !important;
+}
+
+.cgi-section .hud .accent{
+  color:#ffffff !important;
+}
+
+.cgi-section .hud .hl{
+  color:#eeeeee !important;
+}
+
+
+/* BRILHO ATRÁS DO 3D */
+.cgi-section .cgi-fallback-glow{
+  background:radial-gradient(
+    circle,
+    rgba(255,255,255,0.16),
+    rgba(255,255,255,0.05) 55%,
+    transparent 75%
+  ) !important;
+}
+
+
+/* LINKS / HOVERS DA SEÇÃO */
+.cgi-section a{
+  color:#ffffff !important;
+}
+
+.cgi-section a:hover{
+  color:#d8d8d8 !important;
+}
+
+
+/* BORDAS MAIS MONOCROMÁTICAS */
+.cgi-section .cgi-step{
+  border-bottom-color:rgba(255,255,255,0.09) !important;
+}
+
+
+/* ============================================================
+   WEB & DIGITAL — 3D
+   ============================================================ */
+
+/* Remove qualquer sensação de neon azul do palco */
+.cgi-section .cgi-stage{
+  filter:none !important;
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width:712px){
+
+  .cgi-section .cgi-step.is-active{
+    border-left-color:#ffffff !important;
+  }
+
+}
+/* ============================================================
+   CTA — AJUSTE FINAL DE TAMANHO
+   ============================================================ */
+
+.cta-panel{
+  max-width:760px;
+  padding:40px 42px;
+}
+
+.cta-copy{
+  max-width:520px;
+}
+
+.cta-copy h2{
+  font-size:29px;
+  line-height:1.18;
+}
+
+.cta-copy p{
+  font-size:14px;
+  line-height:1.5;
+}
+
+.contact-form{
+  margin-top:10px;
+}
+/* =========================================
+   GRAZIE — ALFA BLACK & WHITE
+========================================= */
+
+.thank-you-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(255, 255, 255, 0.07),
+      transparent 38%
+    ),
+    #050505;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.thank-you-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.14;
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 1px
+    );
+  background-size: 70px 70px;
+}
+
+.thank-you-page .container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.thank-you-panel {
+  position: relative;
+  overflow: hidden;
+  padding: 75px 50px;
+  box-sizing: border-box;
+  text-align: center;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(255, 255, 255, 0.08),
+      transparent 48%
+    ),
+    rgba(255, 255, 255, 0.035);
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+
+  box-shadow:
+    0 30px 100px rgba(0, 0, 0, 0.55),
+    inset 0 0 60px rgba(255, 255, 255, 0.018);
+
+  backdrop-filter: blur(18px);
+}
+
+.thank-you-panel .cta-glow {
+  position: absolute;
+  top: -180px;
+  left: 50%;
+  width: 420px;
+  height: 420px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.09),
+    transparent 68%
+  );
+
+  pointer-events: none;
+}
+
+.thank-you-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.thank-you-content .eyebrow {
+  color: #a0a0a0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.thank-you-icon {
+  width: 76px;
+  height: 76px;
+  margin: 30px 0 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.045);
+
+  color: #fff;
+  font-size: 30px;
+  font-weight: 400;
+
+  box-shadow:
+    0 0 50px rgba(255, 255, 255, 0.06),
+    inset 0 0 25px rgba(255, 255, 255, 0.025);
+}
+
+.thank-you-content h1 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(52px, 7vw, 82px);
+  line-height: 0.95;
+  font-weight: 500;
+  letter-spacing: -0.055em;
+}
+
+.thank-you-content p {
+  max-width: 500px;
+  margin: 22px 0 32px;
+
+  color: #929292;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.thank-you-content .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-height: 46px;
+  padding: 0 22px;
+
+  border: 1px solid #fff;
+  border-radius: 999px;
+
+  background: #fff;
+  color: #000;
+
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+.thank-you-content .btn-primary:hover {
+  transform: translateY(-2px);
+  background: #eeeeee;
+}
+
+@media (max-width: 700px) {
+  .thank-you-page {
+    padding: 25px 16px;
+  }
+
+  .thank-you-panel {
+    padding: 60px 24px;
+    border-radius: 20px;
+  }
+
+  .thank-you-icon {
+    width: 68px;
+    height: 68px;
+    margin-top: 25px;
+  }
+
+  .thank-you-content h1 {
+    font-size: 52px;
+  }
+
+  .thank-you-content p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 420px) {
+  .thank-you-panel {
+    padding: 50px 18px;
+  }
+
+  .thank-you-content h1 {
+    font-size: 46px;
+  }
+
+  .thank-you-content p {
+    font-size: 12px;
   }
 }

@@ -645,106 +645,285 @@ const ALLOW_3D =
   // mesmo motor de câmera/luz/partículas/easing de mouse que o drone usava (createScene +
   // o mesmo padrão de mouseTarget/mouseEased), só trocando o que é construído e animado.
   function initLogoScene3D() {
-    const container = document.getElementById("drone-stage");
-    if (!container) return;
-    if (!ALLOW_3D) return; // fallback CSS glow já está no markup
-    container.classList.add("has-3d");
-    const glow = container.querySelector(".cgi-fallback-glow");
-    if (glow) glow.style.display = "none";
-    const shadow = container.querySelector(".drone-shadow");
+  const container = document.getElementById("drone-stage");
+  if (!container) return;
+  if (!ALLOW_3D) return;
 
-    const { THREE, scene, camera, renderer, isVisible } = createScene(container);
+  container.classList.add("has-3d");
 
-    const target = buildLogo3D(THREE);
-    target.rotation.x = -0.16;
-    target.rotation.y = 0.32;
-    target.position.x = 0.35; // afasta um pouco do canto onde fica o painel HUD esquerdo
-    scene.add(target);
+  const glow = container.querySelector(".cgi-fallback-glow");
+  if (glow) glow.style.display = "none";
 
-    // partículas discretas ao redor da logo (mesma técnica do drone)
-    const particleGeo = new THREE.BufferGeometry();
-    const particleCount = 16;
-    const positions = new Float32Array(particleCount * 3);
-    for (let i = 0; i < particleCount; i++) {
-      const a = (i / particleCount) * Math.PI * 2;
-      const r = 1.6 + Math.random() * 0.6;
-      positions[i * 3] = Math.cos(a) * r;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 1.2;
-      positions[i * 3 + 2] = Math.sin(a) * r;
-    }
-    particleGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-    const particles = new THREE.Points(
-      particleGeo,
-      new THREE.PointsMaterial({ color: 0x6ae3f0, size: 0.028, transparent: true, opacity: 0.4 })
-    );
-    scene.add(particles);
+  const shadow = container.querySelector(".drone-shadow");
 
-    // mouse com atraso (easing) — nunca acompanha bruscamente.
-    // Posição relativa ao PRÓPRIO palco da logo (não à janela inteira): o efeito responde
-    // a "passar o mouse ali" como pedido, ficando mais forte perto do centro do elemento
-    // e no máximo (clampado) quando o cursor está fora dele.
-    const mouseTarget = { x: 0, y: 0 };
-    const mouseEased = { x: 0, y: 0 };
-    window.addEventListener(
-      "pointermove",
-      (e) => {
-        const r = container.getBoundingClientRect();
-        const cx = r.left + r.width / 2;
-        const cy = r.top + r.height / 2;
-        mouseTarget.x = Math.min(1, Math.max(-1, (e.clientX - cx) / (r.width / 2)));
-        mouseTarget.y = Math.min(1, Math.max(-1, (e.clientY - cy) / (r.height / 2)));
-      },
-      { passive: true }
-    );
+  const { THREE, scene, camera, renderer, isVisible } = createScene(container);
 
-    // aumenta o glow/luz quando o mouse está exatamente sobre o palco da logo
-    let hovered = false;
-    container.addEventListener("pointerenter", () => (hovered = true), { passive: true });
-    container.addEventListener("pointerleave", () => (hovered = false), { passive: true });
-    const key = scene.children.find((c) => c.isPointLight && c.color.getHex() === 0x6ae3f0);
-    let glowBoost = 0;
+  /*
+   * ALFA CREATIVE AGENCY — LOGO 3D REAL
+   * Carrega o GLB criado para a nova identidade visual.
+   */
+  const loader = new THREE.GLTFLoader();
 
-    let t = 0;
-    function animate() {
-      requestAnimationFrame(animate);
-      if (!isVisible()) return;
-      t += 0.008;
+  loader.load(
+    "/assets/models/ALFA CREATIVE 3D WHITE.glb",
 
-      // easing: a rotação "sentida" pela logo persegue o mouse com atraso (lerp lento = flutuação)
-      mouseEased.x += (mouseTarget.x - mouseEased.x) * 0.045;
-      mouseEased.y += (mouseTarget.y - mouseEased.y) * 0.045;
+    (gltf) => {
+      const target = gltf.scene;
 
-      const bob = Math.sin(t * 1.1) * 0.14;
-      target.position.y = bob;
-      // rotação contínua e constante (não para nunca, nunca inverte) + o mouse acelera/desacelera
-      // o giro e inclina/rola o objeto — resposta bem mais perceptível que antes.
-      target.rotation.y += 0.0034 + mouseEased.x * 0.0027;
-      target.rotation.x = -0.16 + Math.sin(t * 0.5) * 0.03 - mouseEased.y * 0.38;
-      target.rotation.z = mouseEased.x * 0.16;
-      // leve "aproximação" ao passar o mouse — reforça a sensação de resposta direta
-      const mouseMag = Math.min(1, Math.hypot(mouseEased.x, mouseEased.y));
-      target.scale.setScalar(1.05 + mouseMag * 0.05);
+      /*
+       * Centraliza o modelo e calcula o tamanho real.
+       */
+      const box = new THREE.Box3().setFromObject(target);
+      const size = new THREE.Vector3();
+      const center = new THREE.Vector3();
 
-      particles.rotation.y += 0.0009;
-      particles.position.y = bob * 0.6;
+      box.getSize(size);
+      box.getCenter(center);
 
-      glowBoost += ((hovered ? 1 : 0) - glowBoost) * 0.08;
-      if (key) key.intensity = 3.2 + glowBoost * 2.2;
-      if (shadow) {
-        const s = 1 - Math.abs(bob) * 0.4 + glowBoost * 0.15;
-        shadow.style.transform = `translateX(-50%) scale(${s.toFixed(3)})`;
-        shadow.style.opacity = String(0.7 + glowBoost * 0.3);
+      target.position.sub(center);
+
+      /*
+       * Normaliza o tamanho para o palco.
+       */
+      const maxDim = Math.max(size.x, size.y, size.z) || 1;
+      const targetSize = 2.8;
+
+      target.scale.setScalar(targetSize / maxDim);
+
+      /*
+       * Mantém o material branco do novo logo.
+       * Também garante que o GLB responda bem às luzes da cena.
+       */
+      target.traverse((child) => {
+        if (!child.isMesh || !child.material) return;
+
+        const materials = Array.isArray(child.material)
+          ? child.material
+          : [child.material];
+
+        materials.forEach((material) => {
+          material.transparent = true;
+
+          if (material.color) {
+            material.color.set(0xffffff);
+          }
+
+          if ("metalness" in material) {
+            material.metalness = 0.35;
+          }
+
+          if ("roughness" in material) {
+            material.roughness = 0.18;
+          }
+
+          if ("clearcoat" in material) {
+            material.clearcoat = 1;
+          }
+
+          if ("clearcoatRoughness" in material) {
+            material.clearcoatRoughness = 0.12;
+          }
+        });
+      });
+
+      /*
+       * Posição inicial.
+       */
+      target.rotation.x = -0.16;
+      target.rotation.y = 0.32;
+      target.position.x = 0.35;
+
+      scene.add(target);
+
+      /*
+       * Partículas ao redor do logo.
+       */
+      const particleGeo = new THREE.BufferGeometry();
+      const particleCount = 16;
+      const positions = new Float32Array(particleCount * 3);
+
+      for (let i = 0; i < particleCount; i++) {
+        const a = (i / particleCount) * Math.PI * 2;
+        const r = 1.8 + Math.random() * 0.7;
+
+        positions[i * 3] = Math.cos(a) * r;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 1.4;
+        positions[i * 3 + 2] = Math.sin(a) * r;
       }
 
-      renderer.render(scene, camera);
-    }
-    animate();
-  }
+      particleGeo.setAttribute(
+        "position",
+        new THREE.BufferAttribute(positions, 3)
+      );
 
-  function smoothstep(a, b, x) {
-    const v = Math.min(1, Math.max(0, (x - a) / (b - a)));
-    return v * v * (3 - 2 * v);
-  }
+      const particles = new THREE.Points(
+        particleGeo,
+        new THREE.PointsMaterial({
+          color: 0xffffff,
+          size: 0.028,
+          transparent: true,
+          opacity: 0.38
+        })
+      );
+
+      scene.add(particles);
+
+      /*
+       * Mouse.
+       */
+      const mouseTarget = { x: 0, y: 0 };
+      const mouseEased = { x: 0, y: 0 };
+
+      window.addEventListener(
+        "pointermove",
+        (e) => {
+          const r = container.getBoundingClientRect();
+
+          const cx = r.left + r.width / 2;
+          const cy = r.top + r.height / 2;
+
+          mouseTarget.x = Math.min(
+            1,
+            Math.max(-1, (e.clientX - cx) / (r.width / 2))
+          );
+
+          mouseTarget.y = Math.min(
+            1,
+            Math.max(-1, (e.clientY - cy) / (r.height / 2))
+          );
+        },
+        { passive: true }
+      );
+
+      let hovered = false;
+
+      container.addEventListener(
+        "pointerenter",
+        () => {
+          hovered = true;
+        },
+        { passive: true }
+      );
+
+      container.addEventListener(
+        "pointerleave",
+        () => {
+          hovered = false;
+        },
+        { passive: true }
+      );
+
+      /*
+       * Luz principal.
+       */
+      const key = scene.children.find(
+        (c) =>
+          c.isPointLight &&
+          c.color &&
+          c.color.getHex() === 0x6ae3f0
+      );
+
+      let glowBoost = 0;
+      let t = 0;
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        if (!isVisible()) return;
+
+        t += 0.008;
+
+        /*
+         * Movimento suave do mouse.
+         */
+        mouseEased.x +=
+          (mouseTarget.x - mouseEased.x) * 0.045;
+
+        mouseEased.y +=
+          (mouseTarget.y - mouseEased.y) * 0.045;
+
+        /*
+         * Flutuação vertical.
+         */
+        const bob = Math.sin(t * 1.1) * 0.10;
+        target.position.y = bob;
+
+        /*
+         * Giro contínuo.
+         */
+        target.rotation.y +=
+          0.0034 + mouseEased.x * 0.0027;
+
+        target.rotation.x =
+          -0.16 +
+          Math.sin(t * 0.5) * 0.03 -
+          mouseEased.y * 0.30;
+
+        target.rotation.z =
+          mouseEased.x * 0.14;
+
+        /*
+         * Pequena aproximação quando o mouse chega.
+         */
+        const mouseMag = Math.min(
+          1,
+          Math.hypot(mouseEased.x, mouseEased.y)
+        );
+
+        const baseScale = targetSize / maxDim;
+
+        target.scale.setScalar(
+          baseScale * (1 + mouseMag * 0.045)
+        );
+
+        /*
+         * Partículas.
+         */
+        particles.rotation.y += 0.0009;
+        particles.position.y = bob * 0.6;
+
+        /*
+         * Intensidade da luz ao passar o mouse.
+         */
+        glowBoost +=
+          ((hovered ? 1 : 0) - glowBoost) * 0.08;
+
+        if (key) {
+          key.intensity = 3.2 + glowBoost * 1.8;
+        }
+
+        /*
+         * Sombra/halo inferior.
+         */
+        if (shadow) {
+          const s =
+            1 -
+            Math.abs(bob) * 0.4 +
+            glowBoost * 0.15;
+
+          shadow.style.transform =
+            `translateX(-50%) scale(${s.toFixed(3)})`;
+
+          shadow.style.opacity =
+            String(0.7 + glowBoost * 0.3);
+        }
+
+        renderer.render(scene, camera);
+      }
+
+      animate();
+    },
+
+    undefined,
+
+    (error) => {
+      console.error(
+        "Erro ao carregar o logo Alfa 3D:",
+        error
+      );
+    }
+  );
+}
 
   // Progresso de leitura da seção CGI/VFX (0 = ainda não entrou, 1 = já passou) — usado para
   // fazer o objeto 3D evoluir de wireframe cru até totalmente "renderizado" junto com o scroll.
@@ -801,7 +980,10 @@ const ALLOW_3D =
     }
     animate();
   }
-
+function smoothstep(a, b, x) {
+  const v = Math.min(1, Math.max(0, (x - a) / (b - a)));
+  return v * v * (3 - 2 * v);
+}
   function initCgiSceneFallback(sceneCtx) {
     const { THREE, scene, section, steps } = sceneCtx;
     const obj = buildCgiObject(THREE);
