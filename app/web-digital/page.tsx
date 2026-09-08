@@ -72,18 +72,30 @@ export default function WebDigitalPage() {
             />
           </Link>
 
-          <nav
-            className={styles.navLinks}
-            aria-label="Navigazione principale"
-          >
-            <Link href="/">Home</Link>
-            <Link href="/#servizi">Servizi</Link>
-            <Link href="/web-digital" className={styles.active}>
-              Web & Digital
-            </Link>
-            <Link href="/#fotografia">Video & Creative</Link>
-            <Link href="/#chi-siamo">Chi siamo</Link>
-          </nav>
+          <nav className={styles.navLinks}>
+  <Link href="/" className={styles.navLink}>
+    Home
+  </Link>
+
+  <Link href="/eventi" className={styles.navLink}>
+    Eventi
+  </Link>
+
+  <Link
+    href="/web-digital"
+    className={`${styles.navLink} ${styles.active}`}
+  >
+    Web &amp; Digital
+  </Link>
+
+  <Link href="/#fotografia" className={styles.navLink}>
+    Video &amp; Creative
+  </Link>
+
+  <Link href="/#chi-siamo" className={styles.navLink}>
+    Chi siamo
+  </Link>
+</nav>
 
           <Link href="/#cta" className={styles.navButton}>
             Parliamo <span>↗</span>

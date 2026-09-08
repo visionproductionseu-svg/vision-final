@@ -1820,3 +1820,26 @@
   color: #000 !important;
   border-color: #f2f2f2 !important;
 }
+/* =========================================
+   ALFA — BOTÕES BRANCOS COM TEXTO PRETO
+========================================= */
+
+.navButton {
+  background: #fff !important;
+  color: #000 !important;
+  border-color: #fff !important;
+}
+
+.navButton:hover {
+  background: #f2f2f2 !important;
+  color: #000 !important;
+  border-color: #f2f2f2 !important;
+}
+
+.primaryButton {
+  color: #000 !important;
+}
+
+.primaryButton:hover {
+  color: #000 !important;
+}
