@@ -1,5 +1,7 @@
 import Link from "next/link";
 import styles from "./Eventi.module.css";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const eventTypes = [
   {
@@ -82,46 +84,7 @@ export default function EventiPage() {
       <div className={styles.background} aria-hidden="true" />
 
       {/* NAVBAR */}
-      <header className={styles.navbar}>
-        <div className={styles.navbarInner}>
-          <Link
-            href="/"
-            className={styles.brand}
-            aria-label="Alfa Creative Agency"
-          >
-            <img
-              src="/assets/images/alfa-logo-horizontal.png"
-              alt="Alfa Creative Agency"
-            />
-          </Link>
-
-          <nav className={styles.navLinks}>
-            <Link href="/" className={styles.navLink}>
-              Home
-            </Link>
-
-            <Link href="/eventi" className={`${styles.navLink} ${styles.active}`}>
-              Eventi
-            </Link>
-
-            <Link href="/web-digital" className={styles.navLink}>
-              Web &amp; Digital
-            </Link>
-
-            <Link href="/#fotografia" className={styles.navLink}>
-              Video &amp; Creative
-            </Link>
-
-            <Link href="/#chi-siamo" className={styles.navLink}>
-              Chi siamo
-            </Link>
-          </nav>
-
-          <Link href="#contatti" className={styles.navButton}>
-            Parliamo
-          </Link>
-        </div>
-      </header>
+      <Navbar active="eventi" />
 
       {/* HERO */}
       <section className={styles.hero}>
@@ -569,25 +532,9 @@ export default function EventiPage() {
             Invia richiesta <span>→</span>
           </button>
         </form>
-      </section>
+       </section>
 
-      {/* FOOTER */}
-      <footer className={styles.footer}>
-        <div className={styles.footerInner}>
-          <Link href="/" className={styles.footerLogo}>
-            <img
-              src="/assets/images/alfa-logo-horizontal.png"
-              alt="Alfa Creative Agency"
-            />
-          </Link>
-
-          <span>EVENT PRODUCTION · CREATIVE STUDIO</span>
-
-          <Link href="/" className={styles.footerBack}>
-            Torna alla home ↑
-          </Link>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }

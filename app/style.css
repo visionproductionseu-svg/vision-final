@@ -2371,3 +2371,376 @@ a:hover{
     font-size: 12px;
   }
 }
+/* =========================================================
+   ALFA — HOME EVENTI OVERVIEW
+   ========================================================= */
+
+.eventi-overview-section{
+  position:relative;
+  padding:95px 0 80px;
+  overflow:hidden;
+}
+
+.eventi-overview-section::before{
+  content:"";
+  position:absolute;
+  inset:15% -10% auto;
+  height:420px;
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(255,255,255,.045),
+      transparent 65%
+    );
+  pointer-events:none;
+}
+
+.eventi-overview-section .container{
+  position:relative;
+  z-index:1;
+}
+
+.eventi-overview-section .section-head{
+  max-width:720px;
+  margin-bottom:42px;
+}
+
+.eventi-overview-section .section-head p{
+  max-width:650px;
+}
+
+.eventi-overview-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+
+.eventi-overview-card{
+  position:relative;
+  min-height:220px;
+  padding:26px 24px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  overflow:hidden;
+  transition:
+    transform .3s ease,
+    border-color .3s ease,
+    background .3s ease;
+}
+
+.eventi-overview-card::before{
+  content:"";
+  position:absolute;
+  width:150px;
+  height:150px;
+  top:-70px;
+  right:-60px;
+  border-radius:50%;
+  background:rgba(255,255,255,.035);
+  filter:blur(2px);
+  pointer-events:none;
+}
+
+.eventi-overview-card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(255,255,255,.25);
+  background:rgba(255,255,255,.065);
+}
+
+.eventi-overview-card .svc-num{
+  position:absolute;
+  top:20px;
+  right:20px;
+  font-family:var(--font-display);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.12em;
+  color:rgba(255,255,255,.42);
+}
+
+.eventi-overview-card h3{
+  position:relative;
+  margin:0 0 10px;
+  font-size:20px;
+  line-height:1.2;
+}
+
+.eventi-overview-card p{
+  position:relative;
+  margin:0;
+  color:var(--ink-muted);
+  font-size:13.5px;
+  line-height:1.55;
+}
+
+.eventi-overview-footer{
+  margin-top:28px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  padding-top:24px;
+  border-top:1px solid rgba(255,255,255,.09);
+}
+
+.eventi-overview-footer p{
+  margin:0;
+  max-width:600px;
+  color:var(--ink-muted);
+  font-size:14px;
+  line-height:1.5;
+}
+
+.eventi-overview-footer .btn{
+  flex-shrink:0;
+}
+
+
+/* =========================================================
+   EVENTI — RESPONSIVE
+   ========================================================= */
+
+@media (max-width:1000px){
+
+  .eventi-overview-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media (max-width:700px){
+
+  .eventi-overview-section{
+    padding:75px 0 65px;
+  }
+
+  .eventi-overview-section .section-head{
+    margin-bottom:30px;
+  }
+
+  .eventi-overview-grid{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  .eventi-overview-card{
+    min-height:185px;
+    padding:24px 21px;
+  }
+
+  .eventi-overview-footer{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:18px;
+    margin-top:22px;
+  }
+
+  .eventi-overview-footer .btn{
+    width:auto;
+  }
+
+}
+
+@media (max-width:420px){
+
+  .eventi-overview-section{
+    padding:65px 0 55px;
+  }
+
+  .eventi-overview-card{
+    min-height:170px;
+  }
+
+}
+/* ============ I NOSTRI LAVORI — ALIGNMENT ============ */
+
+#servizi-lavori{
+  width:100%;
+  max-width:1200px;
+  margin:80px auto 0 !important;
+  padding:0;
+}
+
+#servizi-lavori > div{
+  max-width:680px !important;
+}
+
+#servizi-lavori h2{
+  margin:0;
+}
+
+#servizi-lavori + .proj-grid{
+  width:100%;
+  max-width:1200px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+@media (max-width:700px){
+  #servizi-lavori{
+    margin-top:60px !important;
+  }
+
+  #servizi-lavori > div{
+    max-width:100% !important;
+  }
+}
+/* =========================================================
+   VIDEO & CREATIVE — ALFA
+   ========================================================= */
+
+.video-creative-section{
+  position:relative;
+  padding:75px 0 65px;
+  overflow:hidden;
+}
+
+.video-creative-section .section-head{
+  max-width:760px;
+  margin-bottom:32px;
+}
+
+.video-creative-section .section-head h2{
+  font-size:40px;
+  line-height:1.15;
+  margin-top:14px;
+}
+
+.video-creative-section .section-head p{
+  max-width:680px;
+  margin-top:18px;
+  color:var(--ink-muted);
+  font-size:16px;
+  line-height:1.65;
+}
+
+
+/* ---------- SERVIÇOS CRIATIVOS ---------- */
+
+.video-creative-services{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin:0 0 30px;
+}
+
+.video-creative-services span{
+  display:inline-flex;
+  align-items:center;
+  min-height:34px;
+  padding:8px 13px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:999px;
+  color:rgba(255,255,255,.78);
+  font-size:11.5px;
+  font-weight:600;
+  letter-spacing:.03em;
+}
+
+
+/* ---------- GALERIA ---------- */
+
+.video-creative-gallery{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:16px;
+  margin-top:30px;
+  align-items:start;
+}
+
+.video-creative-gallery .foto-card{
+  position:relative;
+  aspect-ratio:3 / 4;
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid var(--border-soft);
+}
+
+.video-creative-gallery .foto-card img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  transition:transform .6s ease;
+}
+
+.video-creative-gallery .foto-card:hover img{
+  transform:scale(1.06);
+}
+
+
+/* ---------- CTA ---------- */
+
+.video-creative-section .foto-cta{
+  margin-top:30px;
+  text-align:center;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width:1000px){
+
+  .video-creative-gallery{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+}
+
+
+@media (max-width:700px){
+
+  .video-creative-section{
+    padding:65px 0 55px;
+  }
+
+  .video-creative-section .section-head h2{
+    font-size:36px;
+  }
+
+  .video-creative-section .section-head p{
+    font-size:15px;
+  }
+
+  .video-creative-services{
+    gap:7px;
+    margin-bottom:25px;
+  }
+
+  .video-creative-services span{
+    font-size:10.5px;
+    padding:7px 11px;
+  }
+
+  .video-creative-gallery{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:25px;
+  }
+
+  .video-creative-gallery .foto-card{
+    border-radius:14px;
+  }
+
+}
+
+
+@media (max-width:420px){
+
+  .video-creative-section{
+    padding:55px 0 50px;
+  }
+
+  .video-creative-section .section-head h2{
+    font-size:32px;
+  }
+
+  .video-creative-gallery{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+}

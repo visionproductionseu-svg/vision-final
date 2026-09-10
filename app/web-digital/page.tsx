@@ -1,5 +1,7 @@
 import Link from "next/link";
+import Navbar from "../components/Navbar";
 import styles from "./WebDigital.module.css";
+import Footer from "../components/Footer";
 
 const services = [
   {
@@ -59,49 +61,7 @@ export default function WebDigitalPage() {
         <div className={styles.scanline} />
       </div>
 
-      <header className={styles.navbar}>
-        <div className={styles.navInner}>
-          <Link
-            href="/"
-            className={styles.logo}
-            aria-label="Alfa Creative Agency"
-          >
-            <img
-              src="/assets/images/alfa-logo-horizontal.png"
-              alt="Alfa Creative Agency"
-            />
-          </Link>
-
-          <nav className={styles.navLinks}>
-  <Link href="/" className={styles.navLink}>
-    Home
-  </Link>
-
-  <Link href="/eventi" className={styles.navLink}>
-    Eventi
-  </Link>
-
-  <Link
-    href="/web-digital"
-    className={`${styles.navLink} ${styles.active}`}
-  >
-    Web &amp; Digital
-  </Link>
-
-  <Link href="/#fotografia" className={styles.navLink}>
-    Video &amp; Creative
-  </Link>
-
-  <Link href="/#chi-siamo" className={styles.navLink}>
-    Chi siamo
-  </Link>
-</nav>
-
-          <Link href="/#cta" className={styles.navButton}>
-            Parliamo <span>↗</span>
-          </Link>
-        </div>
-      </header>
+      <Navbar active="web-digital" />
 
       <main>
         <section className={styles.hero}>
@@ -439,18 +399,7 @@ export default function WebDigitalPage() {
         </section>
       </main>
 
-      <footer className={styles.footer}>
-        <Link href="/" className={styles.footerLogo}>
-          <img
-            src="/assets/images/alfa-logo-horizontal.png"
-            alt="Alfa Creative Agency"
-          />
-        </Link>
-
-        <span>Strategy · Digital · Video · Creative</span>
-
-        <Link href="/">← Torna al sito</Link>
-      </footer>
+      <Footer />
     </div>
   );
 }

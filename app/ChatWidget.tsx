@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./ChatWidget.module.css";
 
 const services = [
@@ -14,6 +14,17 @@ const services = [
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Evita hydration mismatch:
+  // o servidor e o primeiro render do cliente não renderizam o widget.
+  if (!mounted) {
+    return null;
+  }
 
   function handleService(service: string) {
     setSelected(service);
@@ -96,9 +107,7 @@ export default function ChatWidget() {
             )}
           </div>
 
-          <div className={styles.footer}>
-            Alfa Creative Agency
-          </div>
+          <div className={styles.footer}>Alfa Creative Agency</div>
         </div>
       )}
 
